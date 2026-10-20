@@ -3,7 +3,12 @@ import Base from "../../layouts/Base.astro";
 import Icon from "../../components/Icon.astro";
 import { Image } from "astro:assets";
 import { photo } from "../../data/images";
-import { PACKAGES, ADDONS, RUNDOWN, estimate, type Package, type AddonId } from "../../data/packages";
+import UstadzCard from "../../components/UstadzCard.astro";
+import VenueCard from "../../components/VenueCard.astro";
+import PackageCard from "../../components/PackageCard.astro";
+import { PACKAGES, ADDONS, RUNDOWN, estimate, itemsFor, needLabel, type Package, type AddonId } from "../../data/packages";
+import { VENUES } from "../../data/venues";
+import { ASATIDZ } from "../../data/people";
 import { WA, waLink, rupiah, rupiahShort, url } from "../../data/site";
 
 export function getStaticPaths() {
@@ -17,7 +22,11 @@ const { pkg } = Astro.props;
 const v0 = pkg.variants[0];
 const multi = pkg.variants.length > 1;
 const addonIds = [...new Set(pkg.variants.flatMap((v) => v.addons))] as AddonId[];
-const others = PACKAGES.filter((p) => p.slug !== pkg.slug);
+const others = [
+  ...PACKAGES.filter((p) => p.slug !== pkg.slug && p.need === pkg.need),
+  ...PACKAGES.filter((p) => p.slug !== pkg.slug && p.need !== pkg.need && p.featured),
+].slice(0, 3);
+const venues = VENUES.filter((v) => v.needs.includes(pkg.need)).slice(0, 3);
 const firstTotal = estimate(v0, v0.guests.included);
 const waText = (variantName: string, guests: number, total: number) =>
   `Assalamu'alaikum, Tim WO Mahabbati. Saya tertarik dengan paket ${pkg.name}${multi ? ` (${variantName})` : ""}.\n` +
@@ -52,13 +61,14 @@ const offer = {
 <Base
   title={`${pkg.name} | Wedding Organizer Mahabbati`}
   description={`${pkg.promise} ${pkg.forWho} Mulai ${rupiahShort(pkg.priceFrom)}.`}
-  current="wo"
+  current="layanan"
   ogImage={pkg.photo}
   jsonLd={[offer]}
 >
   <nav class="crumbs wrap" aria-label="Breadcrumb">
     <ol>
-      <li><a href={url("/wedding-organizer/")}>Wedding Organizer</a></li>
+      <li><a href={url("/layanan/")}>Layanan</a></li>
+      <li><a href={url(`/layanan/?kebutuhan=${pkg.need}`)}>{needLabel(pkg.need)}</a></li>
       <li aria-current="page">{pkg.name}</li>
     </ol>
   </nav>
@@ -67,6 +77,14 @@ const offer = {
     <div class="pd-hero__copy">
       <h1 id="pd-title" class="t-display">{pkg.name}</h1>
       <p class="pd-hero__promise">{pkg.promise}</p>
+      {
+        pkg.placeholder && (
+          <p class="sample-note pd-hero__note">
+            <Icon name="info" size={20} />
+            Harga dan rincian paket ini masih contoh dan akan diperbarui.
+          </p>
+        )
+      }
       <p class="t-lead">{pkg.summary}</p>
       <p class="pd-hero__price">
         <span>mulai</span>
@@ -109,7 +127,7 @@ const offer = {
             <div class="pd-items" data-variant-panel={v.id} hidden={i > 0 ? true : undefined}>
               {multi && <h3 class="pd-items__variant">Varian {v.name}, {rupiah(v.price)}, sudah termasuk {v.guests.included} tamu</h3>}
               <ul>
-                {v.items.map((it) => (
+                {itemsFor(pkg, v).map((it) => (
                   <li class="pd-item">
                     <Icon name={it.icon} size={28} class="pd-item__icon" />
                     <div>
@@ -244,7 +262,7 @@ const offer = {
         <p class="est__label">Estimasi awal</p>
         <p class="est__total num" data-total aria-live="polite">{rupiah(firstTotal)}</p>
         <ul class="est__breakdown" data-breakdown>
-          <li><span>Paket {multi ? v0.name : pkg.name}</span><span class="num">{rupiah(v0.price)}</span></li>
+          <li><span>{multi ? `${pkg.name}, ${v0.name}` : pkg.name}</span><span class="num">{rupiah(v0.price)}</span></li>
         </ul>
       </div>
       <a class="btn btn--wa est__cta" href={waHref} rel="noopener" data-wa data-track={`wa:${pkg.slug}-estimator`}>
@@ -256,23 +274,58 @@ const offer = {
     </aside>
   </div>
 
+  {
+    pkg.includesClass && (
+      <section class="pd-kelas section chapter-night on-dark" aria-labelledby="pdk-title">
+        <div class="wrap pd-kelas__grid">
+          <div class="pd-kelas__copy">
+            <h2 id="pdk-title" class="t-h2">Termasuk kelas pranikah bersama asatidz.</h2>
+            <p class="t-lead">
+              Setelah paket dipesan, kalian mendapat akses kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati di aplikasi
+              Mahabbati.
+            </p>
+            <a class="btn btn--lilac" href={url("/asatidz/")}>Lihat isi kelasnya</a>
+          </div>
+          <ul class="pd-kelas__list">
+            {ASATIDZ.map((u) => (
+              <li>
+                <UstadzCard ustadz={u} compact />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    venues.length > 0 && (
+      <section class="pd-venues section" aria-labelledby="pdv-title">
+        <div class="wrap">
+          <div class="pd-venues__head">
+            <h2 id="pdv-title" class="t-h2">Tempat mitra yang cocok.</h2>
+            <a class="link" href={url("/tempat/")}>Semua tempat mitra</a>
+          </div>
+          <ul class="card-grid">
+            {venues.map((v) => (
+              <li>
+                <VenueCard venue={v} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
   <section class="others section chapter-mist" aria-labelledby="others-title">
     <div class="wrap">
       <h2 id="others-title" class="t-h2">Paket lainnya.</h2>
-      <ul class="others__list">
+      <ul class="card-grid">
         {
           others.map((o) => (
-            <li class="others__item">
-              <figure class="photo others__photo">
-                <Image src={photo(o.photo)} alt="" widths={[480, 720]} sizes="(max-width: 900px) 92vw, 40vw" />
-              </figure>
-              <h3 class="t-h3">
-                <a href={url(`/wedding-organizer/${o.slug}/`)} class="others__link">
-                  {o.name}
-                </a>
-              </h3>
-              <p>{o.promise}</p>
-              <p class="others__price num">mulai {rupiahShort(o.priceFrom)}</p>
+            <li>
+              <PackageCard pkg={o} />
             </li>
           ))
         }
@@ -703,42 +756,59 @@ const offer = {
     color: var(--ink-2);
   }
 
-  .others__list {
+  .card-grid {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--s-6);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-5);
     margin-top: var(--s-7);
   }
-  .others__item {
-    position: relative;
+  .card-grid > li {
+    display: grid;
   }
-  .others__photo {
-    aspect-ratio: 3 / 2;
-  }
-  .others__item h3 {
+  .pd-hero__note {
     margin-top: var(--s-4);
+    max-width: 34rem;
   }
-  .others__link {
-    text-decoration: none;
+  .pd-kelas__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--s-8);
+    align-items: center;
   }
-  .others__link::after {
-    content: "";
-    position: absolute;
-    inset: 0;
+  .pd-kelas__copy {
+    display: grid;
+    gap: var(--s-5);
+    justify-items: start;
   }
-  .others__item:hover .others__link {
-    text-decoration: underline;
-    text-underline-offset: 0.18em;
-    text-decoration-thickness: 1px;
+  .pd-kelas__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--s-4);
   }
-  .others__item p {
-    margin-top: var(--s-2);
-    color: var(--ink-2);
+  .pd-venues__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
   }
-  .others__price {
-    font-weight: 600;
-    color: var(--ink) !important;
+  @media (max-width: 1100px) {
+    .card-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .pd-kelas__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .card-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .pd-kelas__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   .sticky-est {

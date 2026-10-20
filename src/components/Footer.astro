@@ -21,31 +21,39 @@ const year = new Date().getFullYear();
     <div class="site-footer__top">
       <div class="site-footer__brand">
         <Logo part="lockup" class="site-footer__logo" />
-        <p>Menuju janji suci. Ta'aruf, persiapan pranikah, sampai walimah.</p>
+        <p>Wedding organizer syar'i dan aplikasi ta'aruf. Menemani sebelum, saat, dan setelah akad.</p>
       </div>
 
       <nav aria-label="Tautan footer" class="site-footer__nav">
         <div>
-          <h2>Ta'aruf</h2>
+          <h2>Layanan</h2>
           <ul>
-            <li><a href={url("/taaruf/")}>Cara kerja</a></li>
-            <li><a href={url("/taaruf/#panduan")}>Panduan ta'aruf</a></li>
-            <li><a href={url("/taaruf/#membership")}>Membership</a></li>
-            <li><a href={url("/taaruf/#faq")}>Tanya jawab</a></li>
+            <li><a href={url("/layanan/?kebutuhan=lengkap")}>Paket lengkap</a></li>
+            <li><a href={url("/layanan/?kebutuhan=akad")}>Akad nikah</a></li>
+            <li><a href={url("/layanan/?kebutuhan=masjid")}>Akad di masjid</a></li>
+            <li><a href={url("/layanan/?kebutuhan=walimah")}>Walimah</a></li>
+            <li><a href={url("/layanan/?kebutuhan=khitbah")}>Khitbah</a></li>
+            <li><a href={url("/tempat/")}>Tempat mitra</a></li>
           </ul>
         </div>
         <div>
-          <h2>Wedding Organizer</h2>
+          <h2>Mahabbati</h2>
           <ul>
-            <li><a href={url("/wedding-organizer/")}>Semua paket</a></li>
-            <li><a href={url("/wedding-organizer/wedding-planner/")}>Wedding Planner</a></li>
-            <li><a href={url("/wedding-organizer/intimate-wedding/")}>Intimate Wedding</a></li>
-            <li><a href={url("/wedding-organizer/full-package/")}>Full Package</a></li>
+            <li><a href={url("/asatidz/")}>Asatidz & kelas pranikah</a></li>
+            <li><a href={url("/cerita/")}>Cerita pasangan</a></li>
+            <li><a href={url("/aplikasi/")}>Aplikasi ta'aruf</a></li>
+            <li><a href={url("/aplikasi/#membership")}>Membership</a></li>
+            <li><a href={url("/tentang/")}>Tentang & standar syar'i</a></li>
           </ul>
         </div>
         <div>
           <h2>Hubungi kami</h2>
           <ul class="site-footer__contact">
+            <li>
+              <a href={waLink(WA.wo.number, WO_GREETING)} rel="noopener">
+                <Icon name="whatsapp" size={18} /><span>Wedding Organizer <span class="num">{WA.wo.label}</span></span>
+              </a>
+            </li>
             <li>
               <a href={waLink(WA.ikhwan.number)} rel="noopener">
                 <Icon name="whatsapp" size={18} /><span>Ta'aruf ikhwan <span class="num">{WA.ikhwan.label}</span></span>
@@ -54,11 +62,6 @@ const year = new Date().getFullYear();
             <li>
               <a href={waLink(WA.akhwat.number)} rel="noopener">
                 <Icon name="whatsapp" size={18} /><span>Ta'aruf akhwat <span class="num">{WA.akhwat.label}</span></span>
-              </a>
-            </li>
-            <li>
-              <a href={waLink(WA.wo.number, WO_GREETING)} rel="noopener">
-                <Icon name="whatsapp" size={18} /><span>Wedding Organizer <span class="num">{WA.wo.label}</span></span>
               </a>
             </li>
             <li>

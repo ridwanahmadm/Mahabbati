@@ -75,7 +75,7 @@ if (root && raw) {
         ? `Sudah termasuk ${v.guests.included} tamu. Tambahan ${over} tamu dihitung per ${v.extra.per} tamu.`
         : `Sudah termasuk ${v.guests.included} tamu.`;
 
-    const rows: [string, number][] = [[`Paket ${data.multi ? v.name : data.name}`, v.price]];
+    const rows: [string, number][] = [[data.multi ? `${data.name}, ${v.name}` : data.name, v.price]];
     if (extra) rows.push([`Tambahan ${over} tamu`, extra]);
     picked.forEach((id) => rows.push([data.addons[id].label, data.addons[id].price]));
     breakdown.innerHTML = "";

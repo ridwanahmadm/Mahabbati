@@ -2,6 +2,7 @@
 import { url } from "../data/site";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
+import type { NavKey } from "../data/site";
 import Footer from "../components/Footer.astro";
 import { getImage } from "astro:assets";
 import { photo } from "../data/images";
@@ -12,11 +13,11 @@ import sansWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.
 interface Props {
   title: string;
   description: string;
-  current?: "home" | "taaruf" | "wo";
+  current?: NavKey;
   ogImage?: string;
   jsonLd?: Record<string, unknown>[];
 }
-const { title, description, current = "home", ogImage = "hero-walimah", jsonLd = [] } = Astro.props;
+const { title, description, current = "home", ogImage = "hero-akad", jsonLd = [] } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const og = await getImage({ src: photo(ogImage), width: 1200, height: 630, fit: "cover", format: "jpg" });
 const ogUrl = new URL(og.src, Astro.site);

@@ -50,3 +50,5 @@ export const rupiahShort = (n: number) => {
 /** Base-aware internal link. The site can live at a domain root or a sub-path (GitHub Pages). */
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 export const url = (path: string) => (path.startsWith("/") ? `${BASE}${path}` : path);
+
+export type NavKey = "home" | "layanan" | "tempat" | "asatidz" | "cerita" | "aplikasi" | "tentang";

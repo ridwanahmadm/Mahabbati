@@ -7,7 +7,8 @@ import Faq from "../components/Faq.astro";
 import DownloadBlock from "../components/DownloadBlock.astro";
 import { Image } from "astro:assets";
 import { photo } from "../data/images";
-import { TAARUF_FAQ, MEMBERSHIP } from "../data/content";
+import { APP_FAQ, MEMBERSHIP, BENEFITS_NOTE } from "../data/content";
+import { url } from "../data/site";
 import { PLAY_STORE_URL } from "../data/site";
 
 const pains = [
@@ -51,10 +52,10 @@ const cell = (v: string | boolean | null) => v;
 ---
 
 <Base
-  title="Ta'aruf yang aman dan terverifikasi | Mahabbati"
+  title="Aplikasi ta'aruf Mahabbati | Aman, terverifikasi, tidak digantung"
   description="Ta'aruf lewat aplikasi Mahabbati: profil terverifikasi, kuota kembali bila tak dibalas 7 hari, foto muslimah hanya ditinjau admin wanita, nadzhor didampingi wali."
-  current="taaruf"
-  ogImage="j-taaruf"
+  current="aplikasi"
+  ogImage="n-khimar-bench"
 >
   <section class="t-hero wrap" aria-labelledby="t-hero-title">
     <div class="t-hero__copy">
@@ -187,8 +188,8 @@ const cell = (v: string | boolean | null) => v;
       <div class="lock" data-photo-demo>
         <figure class="lock__photo">
           <Image
-            src={photo("profile-akhwat")}
-            alt="Contoh foto profil: muslimah berkerudung biru muda."
+            src={photo("n-khimar-purple")}
+            alt="Contoh foto profil: muslimah berkhimar ungu memetik bunga, wajahnya tidak tampak."
             widths={[360, 540, 720]}
             sizes="(max-width: 900px) 80vw, 360px"
             class="lock__img"
@@ -304,6 +305,31 @@ const cell = (v: string | boolean | null) => v;
     </div>
   </section>
 
+  <section class="after section chapter-night on-dark" aria-labelledby="after-title">
+    <div class="wrap after__grid">
+      <div class="after__copy">
+        <h2 id="after-title" class="t-h2">Setelah menikah pun, aplikasinya tetap menemani.</h2>
+        <p class="t-lead">Mahabbati tidak berhenti di hari akad. Pasangan yang menikah tetap bisa belajar dan bertanya ke asatidz.</p>
+        {BENEFITS_NOTE && <p class="after__note">{BENEFITS_NOTE}</p>}
+        <a class="btn btn--lilac" href={url("/asatidz/")}>Kenali asatidz Mahabbati</a>
+      </div>
+      <ul class="after__list">
+        <li><Icon name="menu_book" size={28} /><div><h3>Kajian rumah tangga</h3><p>Akses khusus kajian untuk pengantin baru.</p></div></li>
+        <li><Icon name="calendar_month" size={28} /><div><h3>Seminar rumah tangga</h3><p>Undangan seminar bersama asatidz.</p></div></li>
+        <li><Icon name="forum" size={28} /><div><h3>Konsultasi syariah</h3><p>Tanya langsung ke asatidz kapan pun dibutuhkan.</p></div></li>
+        <li><Icon name="explore" size={28} /><div><h3>Doa harian dan arah kiblat</h3><p>Sudah tersedia untuk semua pengguna.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="to-wo section" aria-labelledby="towo-title">
+    <div class="wrap to-wo__inner">
+      <h2 id="towo-title" class="t-h2">Sudah bertemu calon?</h2>
+      <p class="t-lead">Lanjutkan dengan khitbah, akad, dan walimah bersama Wedding Organizer Mahabbati.</p>
+      <a class="btn" href={url("/layanan/")}>Lihat layanan WO</a>
+    </div>
+  </section>
+
   <section id="membership" class="members section chapter-mist" aria-labelledby="members-title">
     <div class="wrap">
       <div class="members__head">
@@ -355,7 +381,7 @@ const cell = (v: string | boolean | null) => v;
   <section id="faq" class="faq-sec section" aria-labelledby="faq-title">
     <div class="wrap faq-sec__grid">
       <h2 id="faq-title" class="t-h2">Tanya jawab.</h2>
-      <Faq items={TAARUF_FAQ} id="faq-taaruf" />
+      <Faq items={APP_FAQ} id="faq-taaruf" />
     </div>
   </section>
 
@@ -890,6 +916,61 @@ const cell = (v: string | boolean | null) => v;
     margin-top: var(--s-2);
     color: var(--ink-2);
     font-size: var(--t-small);
+  }
+
+  /* ---------- After marriage ---------- */
+  .after__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--s-8);
+    align-items: center;
+  }
+  .after__copy {
+    display: grid;
+    gap: var(--s-5);
+    justify-items: start;
+  }
+  .after__note {
+    font-size: var(--t-small);
+    color: var(--lilac);
+  }
+  .after__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-6);
+  }
+  .after__list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--s-3);
+  }
+  .after__list li > :global(.icon) {
+    color: var(--lilac);
+  }
+  .after__list h3 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  .after__list p {
+    color: var(--lilac);
+    font-size: var(--t-small);
+  }
+  .to-wo__inner {
+    display: grid;
+    gap: var(--s-4);
+    justify-items: start;
+  }
+  @media (max-width: 900px) {
+    .after__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .after__list {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   /* ---------- Membership ---------- */

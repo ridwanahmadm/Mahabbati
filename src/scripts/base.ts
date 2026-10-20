@@ -25,7 +25,7 @@ document.addEventListener("keydown", (e) => {
     toggle.focus();
   }
 });
-window.matchMedia("(min-width: 921px)").addEventListener("change", (e) => e.matches && setMenu(false));
+window.matchMedia("(min-width: 1081px)").addEventListener("change", (e) => e.matches && setMenu(false));
 
 /* Reveal once, when the element's top passes ~88% of the viewport.
    Chrome's IntersectionObserver honours the target's own clip-path, so masked reveals

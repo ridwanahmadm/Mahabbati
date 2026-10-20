@@ -1,18 +1,20 @@
 ---
-import { url } from "../data/site";
+import { url, WA, waLink, WO_GREETING, type NavKey } from "../data/site";
 import Logo from "./Logo.astro";
 import Icon from "./Icon.astro";
-import { PLAY_STORE_URL } from "../data/site";
 
 interface Props {
-  current?: "home" | "taaruf" | "wo";
+  current?: NavKey;
 }
 const { current = "home" } = Astro.props;
-const nav = [
-  { href: "/taaruf/", label: "Ta'aruf", key: "taaruf" },
-  { href: "/wedding-organizer/", label: "Wedding Organizer", key: "wo" },
-  { href: "/taaruf/#panduan", label: "Panduan ta'aruf", key: "panduan" },
+const nav: { href: string; label: string; key: NavKey }[] = [
+  { href: "/layanan/", label: "Layanan", key: "layanan" },
+  { href: "/tempat/", label: "Tempat", key: "tempat" },
+  { href: "/asatidz/", label: "Asatidz & kelas", key: "asatidz" },
+  { href: "/cerita/", label: "Cerita", key: "cerita" },
+  { href: "/aplikasi/", label: "Aplikasi ta'aruf", key: "aplikasi" },
 ];
+const wa = waLink(WA.wo.number, WO_GREETING);
 ---
 
 <header class="site-header" data-header>
@@ -35,8 +37,8 @@ const nav = [
       </ul>
     </nav>
 
-    <a class="btn site-header__cta" href={PLAY_STORE_URL} rel="noopener" data-track="play:header">
-      Unduh aplikasi
+    <a class="btn site-header__cta" href={wa} rel="noopener" data-track="wa:header">
+      <Icon name="whatsapp" size={18} />Konsultasi
     </a>
 
     <button
@@ -66,7 +68,7 @@ const nav = [
           ))
         }
       </ul>
-      <a class="btn" href={PLAY_STORE_URL} rel="noopener" data-track="play:menu">Unduh aplikasi</a>
+      <a class="btn btn--wa" href={wa} rel="noopener" data-track="wa:menu"><Icon name="whatsapp" size={20} />Konsultasi via WhatsApp</a>
     </nav>
   </div>
 </header>
@@ -173,7 +175,7 @@ const nav = [
   .mobile-nav .btn {
     width: 100%;
   }
-  @media (max-width: 920px) {
+  @media (max-width: 1080px) {
     .site-nav,
     .site-header__cta {
       display: none;

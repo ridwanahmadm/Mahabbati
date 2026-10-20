@@ -1,72 +1,83 @@
 # Mahabbati Microsite
 
-Microsite akuisisi Mahabbati untuk dua audiens:
+Website Mahabbati dengan fokus utama **Wedding Organizer syar'i** (WO Mahabbati + tempat mitra), ditambah halaman product knowledge **aplikasi ta'aruf**.
 
-- **Yang masih mencari pasangan.** Mereka diarahkan ke aplikasi, karena pencarian dan pengajuan ta'aruf hanya ada di Google Play dan App Store.
-- **Yang siap menikah.** Mereka diarahkan ke paket Wedding Organizer dan konsultasi lewat WhatsApp.
+Janji utamanya: **"Kami menemani sebelum, saat, dan setelah akad."**
+- **Sebelum akad:** kelas pranikah dan nasihat pernikahan bersama asatidz Mahabbati di aplikasi.
+- **Saat akad:** khitbah, akad, akad di masjid, walimah, atau paket lengkap.
+- **Setelah akad:** kajian dan seminar rumah tangga, serta konsultasi syariah.
 
-Dibangun dengan [Astro](https://astro.build) dan menghasilkan HTML statis, ditambah GSAP (ScrollTrigger) dan Lenis untuk motion.
+Dibangun dengan [Astro](https://astro.build) dan menghasilkan HTML statis, ditambah GSAP (ScrollTrigger) dan Lenis. Live di **https://ridwanahmadm.github.io/Mahabbati/**. Setiap push ke `main` otomatis di-deploy lewat GitHub Pages (`.github/workflows/deploy-pages.yml`).
 
 ## Halaman
 
 | Rute | Isi |
 |---|---|
-| `/` | Hero "Persimpangan" (split ta'aruf / walimah), scroll scene "benang" enam tahap menuju nikah, bukti nyata, unduh aplikasi |
-| `/taaruf/` | Masalah dan jawaban, demo anti-ghosting (kuota kembali setelah 7 hari), demo foto privat 24 jam, verifikasi WNI/WNA, AI Matchmaker, panduan 8 langkah, fitur pranikah (baris geser), tabel membership, FAQ |
-| `/wedding-organizer/` | Hero, alasan memilih WO syar'i, daftar paket dengan pratinjau foto yang mengikuti kursor, tabel perbandingan (pemilih paket di mobile), alur layanan, kisah, FAQ, CTA WhatsApp |
-| `/wedding-organizer/<paket>/` | Detail paket: galeri, isi paket per varian, contoh rundown, galeri geser, estimator (varian, jumlah tamu, tambahan) yang mengisi pesan WhatsApp otomatis |
+| `/` | Hero + pencari kebutuhan, daftar kebutuhan dengan foto mengikuti kursor, benang "sebelum, saat, setelah akad", asatidz, paket pilihan, tempat mitra, standar syar'i, bukti, band "Persimpangan" (WO / aplikasi), FAQ |
+| `/layanan/` | Katalog paket dengan filter kebutuhan, jumlah tamu, dan budget. Filter tersimpan di URL, jadi pencari di beranda langsung mendarat di hasil yang terfilter |
+| `/layanan/<paket>/` | Detail paket: isi per varian, kelas pranikah (bila termasuk), rundown, galeri, tempat yang cocok, estimator yang mengisi pesan WhatsApp |
+| `/tempat/`, `/tempat/<tempat>/` | Tempat mitra (masjid, gedung, taman, villa, restoran) dengan filter jenis/kota/tamu, plus detail dan tombol "Cek ketersediaan tanggal" |
+| `/asatidz/` | Asatidz, isi kelas, dua jalan mendapat akses, benefit sebelum/setelah menikah, paket yang termasuk kelas |
+| `/cerita/` | Cerita pasangan dan ulasan |
+| `/aplikasi/` | Product knowledge aplikasi ta'aruf: demo anti-ghosting, foto privat, verifikasi, AI, panduan, pranikah, setelah menikah, membership |
+| `/tentang/` | Tentang Mahabbati, standar syar'i, kontak |
+
+URL lama (`/taaruf/`, `/wedding-organizer/...`) otomatis diarahkan ke halaman barunya.
 
 ## Menjalankan
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321
-npm run build    # hasil di dist/
-npm run preview
+npm run dev      # http://localhost:4321, slot placeholder ikut tampil (lihat .env.development)
+npm run build    # hasil di dist/, slot placeholder TIDAK tampil
 ```
 
-Untuk hosting di sub-path (misalnya GitHub Pages `https://<user>.github.io/<repo>/`):
+## Mengisi data asli
 
-```bash
-SITE_URL=https://<user>.github.io BASE_PATH=/<repo> npm run build
-```
+Semua data ada di `src/data/`. Cari kata `PLACEHOLDER`, `DUMMY`, dan `GANTI`.
 
-## Yang perlu kamu ganti sebelum rilis
+**`site.ts`**
+- `APP_STORE_URL`: link App Store (GANTI).
+- Kontak, link legal, dan angka bukti (`PROOF`).
 
-1. **Link App Store** ada di `src/data/site.ts`, konstanta `APP_STORE_URL` (bertanda `GANTI`). Satu konstanta ini dipakai semua tombol App Store.
-2. **Data dummy Wedding Organizer.** Cari komentar `DUMMY` di `src/data/packages.ts`, `src/data/content.ts`, dan `src/pages/wedding-organizer/index.astro`:
-   - Rincian isi tiap paket, harga tambahan per tamu, dan harga add-on.
-   - Contoh rundown hari H dan alur 4 langkah layanan.
-   - Klaim "rincian tertulis sebelum DP", "area tamu bisa dipisah", "ustadz pemateri" di paket Intimate.
-   - FAQ: boleh pakai WO tanpa aplikasi? Area layanan di luar Jakarta?
-3. **Foto.** Semua foto adalah ilustrasi dari Unsplash (sumbernya di `src/data/images.ts`, `CREDITS`). Ganti dengan foto acara asli bila ada izin pasangan; cukup timpa file dengan nama yang sama di `src/assets/photos/`.
+**`packages.ts`** (paket WO)
+- `placeholder: true` berarti harga dan rincian masih contoh. Label "Data contoh" tampil di situs sampai diubah ke `false`.
+- `includesClass: true` berarti paket termasuk kelas pranikah dan nasihat di aplikasi. Saat ini: Paket Akad, Akad di Masjid, Intimate, Full Package.
+- Harga asli: Wedding Planner Rp1,5 jt, Intimate Rp15 jt, Full Package Standard Rp75 jt (300 pax) dan Exclusive Rp95 jt (500 pax). Khitbah, Akad, Akad di Masjid, dan Walimah masih contoh.
+- `ADDONS`, harga per tamu tambahan, `RUNDOWN`, dan `WO_STEPS` masih contoh.
 
-Fakta yang **sudah terverifikasi** (dari mahabbati.com, aplikasi, dan materi company profile):
+**`venues.ts`** (tempat mitra)
+- Seluruhnya contoh dengan nama generik. Ganti dengan data mitra resmi lalu set `placeholder: false`.
 
-- Harga mulai Rp1,5 jt / Rp15 jt / Rp75 jt; varian Standard Rp75 jt (300 pax) dan Exclusive Rp95 jt (500 pax).
-- Aturan 7 hari dan kuota kembali; verifikasi maksimal 3×24 jam; foto muslimah ditinjau admin wanita.
-- Foto terbuka 24 jam dan tidak bisa diunduh; batas 1.000 karakter per pesan.
-- Isi membership Free/Silver/Gold.
-- Bukti: 10+ pasangan, rating 4,7, 10,9 rb pengikut Instagram, ulasan Google Play.
-- Kontak WhatsApp dan email.
+**`people.ts`**
+- `ASATIDZ`: nama dan topik kajian. **Foto di `src/assets/asatidz/` sementara diambil dari thumbnail kajian publik di YouTube.** Ganti dengan foto resmi berizin, dengan nama file yang sama.
+- `STORIES`: testimoni. Data asli yang sudah publik: kisah F & N (Instagram) dan ulasan Google Play (M. Dimas Maulana, Afni). Slot `placeholder: true` hanya tampil saat `npm run dev`. Isi `by`, `quote`, `source`, `meta`, lalu set `placeholder: false` agar tampil di situs.
+
+**`content.ts`**
+- `BENEFITS`: benefit sebelum/setelah menikah, masih usulan. Selama `BENEFITS_NOTE` tidak kosong, catatan "sedang disiapkan" ikut tampil.
+- `SYARI_STANDARDS`: standar syar'i, masih usulan (konfirmasi ke tim WO).
+- FAQ aplikasi dan WO.
+
+**Foto lain** ada di `src/assets/photos/` (Unsplash, sumbernya di `src/data/images.ts`). Untuk mengganti, timpa file dengan nama yang sama.
+
+**Aturan foto:** wajah muslimah tidak ditampilkan. Gunakan foto dari belakang, tangan saja, siluet, atau suasana tanpa orang, dengan busana yang longgar dan syar'i.
+
+## Kualitas yang sudah dicek
+
+- axe-core 4.10.3 (WCAG 2.0/2.1/2.2 A dan AA + best-practice): 0 pelanggaran di 15 halaman, pada lebar 390 dan 1440.
+- Kontras teks di atas foto diukur dari piksel, dengan kondisi terburuk: judul minimal 5,26:1 dan paragraf minimal 8,41:1.
+- Tanpa overflow horizontal di 320 sampai 1440 px.
+- 19 uji interaksi lolos: pencari → katalog terfilter, filter budget dan sinkronisasi URL, "Tempat saja" → halaman tempat, filter tempat, estimator dan pesan WhatsApp, demo anti-ghosting, demo foto privat, FAQ, baris geser, lensa hero, band Persimpangan, menu mobile.
+- Reduced motion dihormati. Animasi kursor hanya aktif di pointer presisi.
 
 ## Struktur
 
 ```
 src/
-  data/        site.ts (link, kontak, format rupiah), packages.ts (paket WO + estimator), content.ts (tahapan, FAQ, membership), images.ts
-  components/  Header, Footer, Logo (vektor m♡ dari splash), Icon (Material Symbols + Font Awesome Brands), Phone, StoreBadges, Faq, DownloadBlock
-  layouts/     Base.astro (SEO, OG, JSON-LD, skip link)
-  scripts/     base.ts (menu, reveal, label kursor), cross.ts (hero), journey.ts (benang), ghost.ts, photo-lock.ts, drag-row.ts, preview.ts, estimator.ts
-  pages/       index, taaruf, wedding-organizer/index, wedding-organizer/[slug], 404
+  data/        site, packages, venues, people (asatidz + cerita), content (benang, benefit, standar, FAQ), images
+  components/  Finder, NeedIndex, Journey (benang), CrossBand (persimpangan), PackageCard, VenueCard, UstadzCard,
+               StoryCard, Benefits, Header, Footer, Logo, Icon, Phone, StoreBadges, Faq, DownloadBlock
+  scripts/     motion, base, lens, cross, journey, preview, drag-row, catalog, estimator, ghost, photo-lock
+  pages/       index, layanan/, tempat/, asatidz, cerita, aplikasi, tentang, 404
+legacy/        situs versi 20 September 2026 (tidak di-deploy)
 ```
-
-## Kualitas yang sudah dicek
-
-- **axe-core 4.10.3**, tag WCAG 2.0/2.1/2.2 A dan AA plus best-practice: 0 pelanggaran di semua halaman, pada lebar 390 dan 1440.
-- **Kontras teks di atas foto hero diukur dari piksel**, dengan kondisi terburuk foto berwarna penuh: judul minimal 5,44:1, paragraf minimal 8,14:1.
-- **Responsif:** tanpa overflow horizontal di 320, 390, 768, 1024, dan 1440 px.
-- **Keyboard:** skip link, urutan Tab yang logis, fokus selalu terlihat, Escape menutup menu. Baris geser punya tombol (WCAG 2.5.7).
-- **Reduced motion:** semua animasi berhenti dan menampilkan state final. Label kursor hanya aktif di pointer presisi.
-- **Interaksi:** 14 uji fungsional lolos (demo anti-ghosting, foto privat, FAQ, baris geser, estimator dan pesan WhatsApp, hover hero, menu mobile).
-- **Performa build lokal:** LCP di bawah 150 ms, JS 53 KB, gambar AVIF/WebP responsif.
