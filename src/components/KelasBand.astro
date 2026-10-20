@@ -1,0 +1,98 @@
+---
+// Night band for the pranikah class: what is taught, not who teaches it.
+// Asatidz are named as one group ("asatidz Mahabbati"), so the team can grow without touching the site.
+import Icon from "./Icon.astro";
+import { KELAS_MODULES, KELAS_NOTE } from "../data/content";
+import { url } from "../data/site";
+
+interface Props {
+  id: string;
+  title: string;
+  lead: string;
+  /** Button text; `false` hides the button (on the class page itself). */
+  cta?: string | false;
+}
+const { id, title, lead, cta = "Lihat kelas pranikah" } = Astro.props;
+---
+
+<section class="kband section chapter-night on-dark" aria-labelledby={id}>
+  <div class="wrap kband__grid">
+    <div class="kband__copy">
+      <h2 id={id} class="t-h2">{title}</h2>
+      <p class="t-lead">{lead}</p>
+      {cta && <a class="btn btn--lilac" href={url("/kelas/")}>{cta}</a>}
+      {KELAS_NOTE && <p class="sample-note"><Icon name="info" size={20} />{KELAS_NOTE}</p>}
+    </div>
+    <ol class="kband__list">
+      {
+        KELAS_MODULES.map((m, i) => (
+          <li>
+            <span class="kband__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+            <div>
+              <h3>{m.title}</h3>
+              <p>{m.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .kband__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--s-8);
+    align-items: start;
+  }
+  .kband__copy {
+    display: grid;
+    gap: var(--s-5);
+    justify-items: start;
+  }
+  .kband__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--s-6);
+    margin: 0;
+    padding: 0;
+  }
+  .kband__list li {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: var(--s-3);
+    padding-block: var(--s-5);
+    border-top: 1px solid rgb(255 255 255 / 0.16);
+  }
+  .kband__num {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1.1;
+    color: var(--gold);
+  }
+  .kband__list h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.1875rem;
+    line-height: 1.3;
+    color: #fff;
+  }
+  .kband__list p {
+    margin-top: var(--s-1);
+    font-size: var(--t-small);
+    color: var(--lilac);
+  }
+  @media (max-width: 1000px) {
+    .kband__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--s-6);
+    }
+  }
+  @media (max-width: 640px) {
+    .kband__list {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

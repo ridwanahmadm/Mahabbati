@@ -17,7 +17,7 @@ export const JOURNEY: { id: string; phase: Phase; name: string; line: string; ho
     id: "kelas",
     phase: "Sebelum akad",
     name: "Kelas pranikah",
-    line: "Bekal ilmu bersama asatidz Mahabbati.",
+    line: "Bekal ilmu dari asatidz Mahabbati.",
     how: "Kelas pranikah dan nasihat pernikahan di aplikasi, termasuk dalam Paket Akad dan Paket Lengkap.",
     photo: "j-pranikah",
     alt: "Tangan memegang mushaf Al-Qur'an dan tasbih.",
@@ -66,6 +66,25 @@ export const TAARUF_JOURNEY = [
   { name: "Nadzhor", line: "Bertemu dan melihat calon, didampingi wali atau mahram." },
   { name: "Khitbah", line: "Meminang dengan niat yang sudah mantap." },
 ] as const;
+
+// DATA CONTOH: materi dan format kelas pranikah. Ganti dengan kurikulum resmi.
+// Nama dan foto asatidz sengaja tidak ditampilkan (arahan stakeholder 21 Okt 2026); cukup sebut "asatidz Mahabbati".
+// Selama `KELAS_NOTE` tidak kosong, catatan "data contoh" ikut tampil di situs.
+export const KELAS_NOTE = "Daftar materi dan format kelas ini masih contoh. Kurikulum resminya sedang kami susun.";
+export const KELAS_MODULES: { title: string; body: string }[] = [
+  { title: "Niat dan kesiapan menikah", body: "Meluruskan niat, mengenali kesiapan diri dan keluarga." },
+  { title: "Adab ta'aruf dan khitbah", body: "Batasan, peran wali, dan cara meminang yang baik." },
+  { title: "Fiqih akad nikah", body: "Rukun dan syarat akad, mahar, wali, dan saksi." },
+  { title: "Hak dan kewajiban suami istri", body: "Peran masing-masing, dan cara saling menunaikannya." },
+  { title: "Komunikasi dan mengelola konflik", body: "Berbicara dengan ma'ruf, dan menyelesaikan beda pendapat." },
+  { title: "Keuangan keluarga", body: "Nafkah, perencanaan, dan menjauhi riba." },
+];
+export const KELAS_FACTS: { value: string; label: string }[] = [
+  { value: "6 materi", label: "berurutan, dari niat sampai keuangan" },
+  { value: "± 45 menit", label: "per materi, video dan versi audio" },
+  { value: "Bisa diulang", label: "kapan saja, berdua dari rumah masing-masing" },
+  { value: "Ujian & sertifikat", label: "setelah semua materi selesai" },
+];
 
 // USULAN: benefit sebelum dan sesudah menikah (arahan 20 Okt 2026, menunggu konfirmasi stakeholder).
 // Selama `BENEFITS_NOTE` tidak kosong, catatan ini tampil di situs agar tidak terbaca sebagai janji final.

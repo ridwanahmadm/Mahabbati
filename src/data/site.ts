@@ -51,4 +51,4 @@ export const rupiahShort = (n: number) => {
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 export const url = (path: string) => (path.startsWith("/") ? `${BASE}${path}` : path);
 
-export type NavKey = "home" | "layanan" | "tempat" | "asatidz" | "cerita" | "aplikasi" | "tentang";
+export type NavKey = "home" | "layanan" | "tempat" | "kelas" | "cerita" | "aplikasi" | "tentang";

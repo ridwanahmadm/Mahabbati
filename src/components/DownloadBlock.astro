@@ -35,8 +35,8 @@ const qr = await QRCode.toString(PLAY_STORE_URL, {
       </div>
     </div>
     <div class="download__phones" aria-hidden="true">
-      <Phone src="taarufku" alt="" width={250} class="download__phone download__phone--back" />
-      <Phone src="home" alt="" width={290} class="download__phone download__phone--front" />
+      <Phone src="taarufku" alt="" width={260} class="download__phone download__phone--back" />
+      <Phone src="home" alt="" width={260} class="download__phone download__phone--front" />
     </div>
   </div>
 </section>
@@ -78,21 +78,13 @@ const qr = await QRCode.toString(PLAY_STORE_URL, {
     color: var(--ink-2);
   }
   .download__phones {
-    position: relative;
-    height: 560px;
-  }
-  .download__phones :global(.download__phone) {
-    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--s-5);
   }
   .download__phones :global(.download__phone--back) {
-    left: 4%;
-    top: 40px;
-    rotate: -6deg;
-  }
-  .download__phones :global(.download__phone--front) {
-    right: 6%;
-    top: 0;
-    rotate: 3deg;
+    margin-top: var(--s-8);
   }
   @media (max-width: 900px) {
     .download__grid {
@@ -101,15 +93,9 @@ const qr = await QRCode.toString(PLAY_STORE_URL, {
     .download__qr {
       display: none;
     }
-    .download__phones {
-      height: 440px;
-      max-width: 420px;
-    }
-    .download__phones :global(.download__phone--back) {
-      width: 200px;
-    }
-    .download__phones :global(.download__phone--front) {
-      width: 230px;
+    .download__phones :global(.phone) {
+      width: calc(50% - var(--s-5) / 2);
+      max-width: 230px;
     }
   }
 </style>

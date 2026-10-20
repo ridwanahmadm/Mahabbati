@@ -1,57 +1,6 @@
-// Asatidz Mahabbati and couples' stories.
+// Couples' stories. Asatidz are not listed by name (arahan stakeholder 21 Okt 2026).
 
 import type { NeedId } from "./packages";
-
-export type Ustadz = {
-  id: string;
-  name: string;
-  title: string;
-  photo: string;
-  /** Short line on what they are known for, from their public kajian. */
-  known: string;
-  sample: { label: string; url: string };
-  /** FOTO SEMENTARA: diambil dari thumbnail kajian publik. Ganti dengan foto resmi berizin. */
-  photoSource: string;
-};
-
-export const ASATIDZ: Ustadz[] = [
-  {
-    id: "hamdi",
-    name: "Ustadz Hamdi Solah Al Bakry",
-    title: "Lc.",
-    photo: "hamdi",
-    known: "Kajian tazkiyatun nafs, penyucian jiwa.",
-    sample: { label: "10 Kaidah Pensucian Jiwa", url: "https://www.youtube.com/watch?v=zs3WrcDMmYE" },
-    photoSource: "https://www.youtube.com/watch?v=zs3WrcDMmYE",
-  },
-  {
-    id: "halid",
-    name: "Ustadz Muhammad Halid Syar'ie",
-    title: "Lc.",
-    photo: "halid",
-    known: "Nasihat untuk anak muda, aqidah, dan adab menuntut ilmu.",
-    sample: { label: "3 Nasihat Rasul kepada Anak Muda", url: "https://www.youtube.com/watch?v=eMWnEOqHTSw" },
-    photoSource: "https://www.youtube.com/watch?v=5ecgVM-mPUI",
-  },
-  {
-    id: "aziz",
-    name: "Ustadz Abdul Aziz Al-Owainy",
-    title: "Lc.",
-    photo: "aziz",
-    known: "Tafsir Al-Qur'an, lulusan Fakultas Dakwah dan Ushuluddin, Madinah.",
-    sample: { label: "Tafsir Surat Al-Fatihah", url: "https://www.youtube.com/watch?v=ZpRlTgrpH3o" },
-    photoSource: "https://www.youtube.com/watch?v=S0bwGO5_Yu8",
-  },
-  {
-    id: "mufy",
-    name: "Ustadz Mufy Hanif Thalib",
-    title: "Lc.",
-    photo: "mufy",
-    known: "Kisah nabi dan sahabat, adab, dan akhlak mulia.",
-    sample: { label: "Sudahkah Kita Bertawakkal", url: "https://www.youtube.com/watch?v=ckSr-HaI4fU" },
-    photoSource: "https://www.youtube.com/watch?v=ckSr-HaI4fU",
-  },
-];
 
 export type StoryType = "wo" | "app" | "kelas";
 

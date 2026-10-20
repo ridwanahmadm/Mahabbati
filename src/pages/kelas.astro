@@ -2,33 +2,33 @@
 import Base from "../layouts/Base.astro";
 import Icon from "../components/Icon.astro";
 import Phone from "../components/Phone.astro";
-import UstadzCard from "../components/UstadzCard.astro";
+import KelasBand from "../components/KelasBand.astro";
 import PackageCard from "../components/PackageCard.astro";
 import Benefits from "../components/Benefits.astro";
 import StoreBadges from "../components/StoreBadges.astro";
-import { ASATIDZ } from "../data/people";
+import { KELAS_FACTS } from "../data/content";
 import { PACKAGES } from "../data/packages";
 import { url } from "../data/site";
 
 const withClass = PACKAGES.filter((p) => p.includesClass);
 const contents = [
-  { src: "kajian", title: "Kajian dan e-learning", body: "Materi rumah tangga dari asatidz, bisa diputar ulang kapan saja." },
+  { src: "kajian", title: "Kajian dan e-learning", body: "Materi dari asatidz Mahabbati, bisa diputar ulang kapan saja." },
   { src: "ujian_q", title: "Ujian pranikah", body: "Uji kesiapan diri, keluarga, dan ilmu pernikahan." },
   { src: "ujian_hasil", title: "Sertifikat kelulusan", body: "Lulus ujian, unduh sertifikatnya untuk dibagikan." },
 ];
 ---
 
 <Base
-  title="Asatidz dan kelas pranikah | Mahabbati"
-  description="Kelas pranikah dan nasihat pernikahan bersama asatidz Mahabbati di aplikasi, termasuk untuk klien Paket Akad dan Paket Lengkap."
-  current="asatidz"
+  title="Kelas pranikah dan nasihat pernikahan | Mahabbati"
+  description="Kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati di aplikasi, termasuk untuk klien Paket Akad dan Paket Lengkap."
+  current="kelas"
   ogImage="j-pranikah"
 >
   <section class="ah wrap" aria-labelledby="ah-title">
     <div class="ah__copy">
       <h1 id="ah-title" class="t-display">Bekal ilmu, sebelum dan setelah akad.</h1>
       <p class="t-lead">
-        Kelas pranikah dan nasihat pernikahan bersama asatidz Mahabbati, diakses lewat aplikasi Mahabbati. Termasuk untuk klien Paket
+        Kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati, diakses lewat aplikasi Mahabbati. Termasuk untuk klien Paket
         Akad, Akad di Masjid, dan Paket Lengkap.
       </p>
       <div class="ah__ctas">
@@ -36,19 +36,24 @@ const contents = [
         <a class="btn btn--outline" href="#paket-kelas">Paket yang termasuk kelas</a>
       </div>
     </div>
-    <div class="ah__people">
-    <h2 class="visually-hidden">Asatidz Mahabbati</h2>
-    <ul class="ah__faces">
+    <dl class="ah__facts">
       {
-        ASATIDZ.map((u) => (
-          <li>
-            <UstadzCard ustadz={u} />
-          </li>
+        KELAS_FACTS.map((f) => (
+          <div>
+            <dt>{f.value}</dt>
+            <dd>{f.label}</dd>
+          </div>
         ))
       }
-    </ul>
-    </div>
+    </dl>
   </section>
+
+  <KelasBand
+    id="materi-title"
+    title="Materi kelasnya."
+    lead="Disusun berurutan, dari niat menikah sampai mengelola rumah tangga. Disampaikan oleh asatidz Mahabbati."
+    cta={false}
+  />
 
   <section class="ac section chapter-mist" aria-labelledby="ac-title">
     <div class="wrap">
@@ -124,7 +129,7 @@ const contents = [
     <div class="wrap adl__inner">
       <h2 id="adl-title" class="t-h2">Kelasnya ada di aplikasi Mahabbati.</h2>
       <p class="t-lead">Unduh sekarang, lalu masuk dengan akun yang sama dengan pemesanan WO-mu.</p>
-      <StoreBadges from="asatidz" />
+      <StoreBadges from="kelas" />
     </div>
   </section>
 </Base>
@@ -132,17 +137,14 @@ const contents = [
 <style>
   .ah {
     display: grid;
-    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
     gap: var(--s-8);
-    align-items: start;
+    align-items: center;
     padding-block: clamp(24px, 4vw, 56px) var(--s-9);
   }
   .ah__copy {
-    position: sticky;
-    top: calc(var(--header-h) + var(--s-8));
     display: grid;
     gap: var(--s-5);
-    padding-top: var(--s-8);
   }
   .ah__copy h1 {
     font-size: clamp(2.25rem, 1.2rem + 2.3vw, 3.25rem);
@@ -152,14 +154,30 @@ const contents = [
     flex-wrap: wrap;
     gap: var(--s-3);
   }
-  .ah__faces {
-    list-style: none;
+  .ah__facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--s-6) var(--s-5);
+    gap: var(--s-4);
+    margin: 0;
   }
-  .ah__faces li:nth-child(even) {
-    margin-top: var(--s-8);
+  .ah__facts > div {
+    display: grid;
+    align-content: start;
+    gap: var(--s-2);
+    padding: var(--s-5);
+    border-radius: var(--r-l);
+    background: var(--mist);
+  }
+  .ah__facts dt {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .ah__facts dd {
+    margin: 0;
+    font-size: var(--t-small);
+    color: var(--ink-2);
   }
   .ac__head {
     display: grid;
@@ -223,7 +241,7 @@ const contents = [
   .card-grid {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--s-5);
     margin-top: var(--s-7);
   }
@@ -247,10 +265,6 @@ const contents = [
       grid-template-columns: minmax(0, 1fr);
       gap: var(--s-6);
     }
-    .ah__copy {
-      position: static;
-      padding-top: 0;
-    }
     .ac__list {
       grid-template-columns: minmax(0, 1fr);
       justify-items: center;
@@ -264,9 +278,6 @@ const contents = [
     .aa__paths,
     .card-grid {
       grid-template-columns: minmax(0, 1fr);
-    }
-    .ah__faces li:nth-child(even) {
-      margin-top: var(--s-6);
     }
   }
 </style>

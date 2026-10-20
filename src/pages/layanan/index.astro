@@ -3,12 +3,11 @@ import Base from "../../layouts/Base.astro";
 import Icon from "../../components/Icon.astro";
 import Faq from "../../components/Faq.astro";
 import PackageCard from "../../components/PackageCard.astro";
-import UstadzCard from "../../components/UstadzCard.astro";
+import KelasBand from "../../components/KelasBand.astro";
 import { Image } from "astro:assets";
 import { photo } from "../../data/images";
 import { PACKAGES, NEEDS, WO_STEPS, GUEST_RANGES, BUDGETS } from "../../data/packages";
 import { WO_FAQ } from "../../data/content";
-import { ASATIDZ } from "../../data/people";
 import { WA, waLink, WO_GREETING, url } from "../../data/site";
 
 const wa = waLink(WA.wo.number, WO_GREETING);
@@ -101,27 +100,12 @@ const service = {
     </div>
   </section>
 
-  <section class="kelas section chapter-night on-dark" aria-labelledby="kelas-title">
-    <div class="wrap kelas__grid">
-      <div class="kelas__copy">
-        <h2 id="kelas-title" class="t-h2">Kelas pranikah, sudah termasuk.</h2>
-        <p class="t-lead">
-          Paket Akad, Akad di Masjid, dan Paket Lengkap memberi akses kelas pranikah dan nasihat pernikahan bersama asatidz Mahabbati di
-          aplikasi.
-        </p>
-        <a class="btn btn--lilac" href={url("/asatidz/")}>Lihat isi kelasnya</a>
-      </div>
-      <ul class="kelas__list">
-        {
-          ASATIDZ.map((u) => (
-            <li>
-              <UstadzCard ustadz={u} compact />
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+  <KelasBand
+    id="kelas-title"
+    title="Kelas pranikah, sudah termasuk."
+    lead="Paket Akad, Akad di Masjid, dan Paket Lengkap memberi akses kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati, langsung di aplikasi."
+    cta="Lihat isi kelasnya"
+  />
 
   <section class="flow section" aria-labelledby="flow-title">
     <div class="wrap flow__grid">
@@ -281,23 +265,6 @@ const service = {
     margin-top: var(--s-3);
   }
 
-  .kelas__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-    gap: var(--s-8);
-    align-items: center;
-  }
-  .kelas__copy {
-    display: grid;
-    gap: var(--s-5);
-    justify-items: start;
-  }
-  .kelas__list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--s-4);
-  }
 
   .flow__grid {
     display: grid;
@@ -347,9 +314,6 @@ const service = {
     .cat__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .kelas__grid {
-      grid-template-columns: minmax(0, 1fr);
-    }
   }
   @media (max-width: 900px) {
     .cat-hero,
@@ -368,9 +332,6 @@ const service = {
   @media (max-width: 640px) {
     .cat__grid {
       grid-template-columns: minmax(0, 1fr);
-    }
-    .kelas__list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .filters__needs {
       flex-wrap: nowrap;

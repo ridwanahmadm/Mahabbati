@@ -1,5 +1,6 @@
 ---
 // A real app screen in a light device frame. Screens come from the Mahabbati Figma file.
+// The frame follows each screenshot's own aspect ratio, so nothing is cropped or stretched.
 import { Image } from "astro:assets";
 import { screen } from "../data/images";
 
@@ -12,9 +13,13 @@ interface Props {
 }
 const { src, alt, class: cls, width = 320, loading = "lazy" } = Astro.props;
 const img = screen(src);
+const ratio = img.width / img.height;
+// Corner radius as a share of the width, converted for the height so the corner stays round.
+// 14% covers the device corners baked into the screenshots (up to 13.4% on kandidat and ai).
+const corner = (pct: number) => `${pct}% / ${(pct * ratio).toFixed(2)}%`;
 ---
 
-<figure class:list={["phone", cls]} style={`--w:${width}px`}>
+<figure class:list={["phone", cls]} style={`--w:${width}px; --ar:${img.width} / ${img.height}; --r-outer:${corner(16)}; --r-inner:${corner(14)}`}>
   <Image
     src={img}
     alt={alt}
@@ -27,18 +32,20 @@ const img = screen(src);
 
 <style>
   .phone {
+    flex: 0 1 auto;
+    align-self: start;
+    min-width: 0;
     width: min(var(--w), 100%);
-    aspect-ratio: 1206 / 2625;
-    padding: 10px;
-    border-radius: 46px;
+    padding: 8px;
+    border-radius: var(--r-outer);
     background: #fff;
     box-shadow: var(--shadow-phone), inset 0 0 0 1px var(--line);
   }
   .phone :global(img) {
+    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    border-radius: 36px;
+    height: auto;
+    aspect-ratio: var(--ar);
+    border-radius: var(--r-inner);
   }
 </style>

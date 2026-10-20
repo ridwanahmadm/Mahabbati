@@ -13,16 +13,16 @@ Dibangun dengan [Astro](https://astro.build) dan menghasilkan HTML statis, ditam
 
 | Rute | Isi |
 |---|---|
-| `/` | Hero + pencari kebutuhan, daftar kebutuhan dengan foto mengikuti kursor, benang "sebelum, saat, setelah akad", asatidz, paket pilihan, tempat mitra, standar syar'i, bukti, band "Persimpangan" (WO / aplikasi), FAQ |
+| `/` | Hero + pencari kebutuhan, daftar kebutuhan dengan foto mengikuti kursor, benang "sebelum, saat, setelah akad", band kelas pranikah, paket pilihan, tempat mitra, standar syar'i, bukti, band "Persimpangan" (WO / aplikasi), FAQ |
 | `/layanan/` | Katalog paket dengan filter kebutuhan, jumlah tamu, dan budget. Filter tersimpan di URL, jadi pencari di beranda langsung mendarat di hasil yang terfilter |
 | `/layanan/<paket>/` | Detail paket: isi per varian, kelas pranikah (bila termasuk), rundown, galeri, tempat yang cocok, estimator yang mengisi pesan WhatsApp |
 | `/tempat/`, `/tempat/<tempat>/` | Tempat mitra (masjid, gedung, taman, villa, restoran) dengan filter jenis/kota/tamu, plus detail dan tombol "Cek ketersediaan tanggal" |
-| `/asatidz/` | Asatidz, isi kelas, dua jalan mendapat akses, benefit sebelum/setelah menikah, paket yang termasuk kelas |
+| `/kelas/` | Kelas pranikah: format kelas, daftar materi, isi kelas di aplikasi, dua jalan mendapat akses, benefit sebelum/setelah menikah, paket yang termasuk kelas |
 | `/cerita/` | Cerita pasangan dan ulasan |
 | `/aplikasi/` | Product knowledge aplikasi ta'aruf: demo anti-ghosting, foto privat, verifikasi, AI, panduan, pranikah, setelah menikah, membership |
 | `/tentang/` | Tentang Mahabbati, standar syar'i, kontak |
 
-URL lama (`/taaruf/`, `/wedding-organizer/...`) otomatis diarahkan ke halaman barunya.
+URL lama (`/taaruf/`, `/asatidz/`, `/wedding-organizer/...`) otomatis diarahkan ke halaman barunya.
 
 ## Menjalankan
 
@@ -50,10 +50,10 @@ Semua data ada di `src/data/`. Cari kata `PLACEHOLDER`, `DUMMY`, dan `GANTI`.
 - Seluruhnya contoh dengan nama generik. Ganti dengan data mitra resmi lalu set `placeholder: false`.
 
 **`people.ts`**
-- `ASATIDZ`: nama dan topik kajian. **Foto di `src/assets/asatidz/` sementara diambil dari thumbnail kajian publik di YouTube.** Ganti dengan foto resmi berizin, dengan nama file yang sama.
 - `STORIES`: testimoni. Data asli yang sudah publik: kisah F & N (Instagram) dan ulasan Google Play (M. Dimas Maulana, Afni). Slot `placeholder: true` hanya tampil saat `npm run dev`. Isi `by`, `quote`, `source`, `meta`, lalu set `placeholder: false` agar tampil di situs.
 
 **`content.ts`**
+- `KELAS_MODULES` dan `KELAS_FACTS`: daftar materi dan format kelas pranikah, masih contoh. Selama `KELAS_NOTE` tidak kosong, catatan "masih contoh" ikut tampil. Nama dan foto asatidz sengaja tidak ditampilkan, cukup disebut "asatidz Mahabbati".
 - `BENEFITS`: benefit sebelum/setelah menikah, masih usulan. Selama `BENEFITS_NOTE` tidak kosong, catatan "sedang disiapkan" ikut tampil.
 - `SYARI_STANDARDS`: standar syar'i, masih usulan (konfirmasi ke tim WO).
 - FAQ aplikasi dan WO.
@@ -74,10 +74,10 @@ Semua data ada di `src/data/`. Cari kata `PLACEHOLDER`, `DUMMY`, dan `GANTI`.
 
 ```
 src/
-  data/        site, packages, venues, people (asatidz + cerita), content (benang, benefit, standar, FAQ), images
-  components/  Finder, NeedIndex, Journey (benang), CrossBand (persimpangan), PackageCard, VenueCard, UstadzCard,
+  data/        site, packages, venues, people (cerita), content (benang, kelas, benefit, standar, FAQ), images
+  components/  Finder, NeedIndex, Journey (benang), CrossBand (persimpangan), PackageCard, VenueCard, KelasBand,
                StoryCard, Benefits, Header, Footer, Logo, Icon, Phone, StoreBadges, Faq, DownloadBlock
   scripts/     motion, base, lens, cross, journey, preview, drag-row, catalog, estimator, ghost, photo-lock
-  pages/       index, layanan/, tempat/, asatidz, cerita, aplikasi, tentang, 404
+  pages/       index, layanan/, tempat/, kelas, cerita, aplikasi, tentang, 404
 legacy/        situs versi 20 September 2026 (tidak di-deploy)
 ```

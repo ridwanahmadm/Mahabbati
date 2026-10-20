@@ -67,8 +67,8 @@ const cell = (v: string | boolean | null) => v;
       <p class="t-hero__note">Daftar gratis, dengan satu pengajuan ta'aruf pertama tanpa biaya.</p>
     </div>
     <div class="t-hero__phones">
-      <Phone src="kandidat" alt="Layar detail kandidat dengan skor kompatibilitas 89% dari AI Matchmaker." width={260} class="t-hero__phone t-hero__phone--back" loading="eager" />
-      <Phone src="home" alt="Beranda aplikasi Mahabbati: rekomendasi calon, menu Wedding Organizer, kajian, dan ujian pranikah." width={300} class="t-hero__phone t-hero__phone--front" loading="eager" />
+      <Phone src="kandidat" alt="Layar detail kandidat dengan skor kompatibilitas 89% dari AI Matchmaker." width={270} class="t-hero__phone t-hero__phone--back" loading="eager" />
+      <Phone src="home" alt="Beranda aplikasi Mahabbati: rekomendasi calon, menu Wedding Organizer, kajian, dan ujian pranikah." width={270} class="t-hero__phone t-hero__phone--front" loading="eager" />
     </div>
   </section>
 
@@ -311,7 +311,7 @@ const cell = (v: string | boolean | null) => v;
         <h2 id="after-title" class="t-h2">Setelah menikah pun, aplikasinya tetap menemani.</h2>
         <p class="t-lead">Mahabbati tidak berhenti di hari akad. Pasangan yang menikah tetap bisa belajar dan bertanya ke asatidz.</p>
         {BENEFITS_NOTE && <p class="after__note">{BENEFITS_NOTE}</p>}
-        <a class="btn btn--lilac" href={url("/asatidz/")}>Kenali asatidz Mahabbati</a>
+        <a class="btn btn--lilac" href={url("/kelas/")}>Lihat kelas pranikah</a>
       </div>
       <ul class="after__list">
         <li><Icon name="menu_book" size={28} /><div><h3>Kajian rumah tangga</h3><p>Akses khusus kajian untuk pengantin baru.</p></div></li>
@@ -409,19 +409,14 @@ const cell = (v: string | boolean | null) => v;
     color: var(--ink-2);
   }
   .t-hero__phones {
-    position: relative;
-    height: 620px;
-  }
-  .t-hero__phones :global(.t-hero__phone) {
-    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--s-5);
   }
   .t-hero__phones :global(.t-hero__phone--back) {
-    left: 0;
-    top: 70px;
-  }
-  .t-hero__phones :global(.t-hero__phone--front) {
-    right: 0;
-    top: 0;
+    order: 2;
+    margin-top: var(--s-8);
   }
   @media (prefers-reduced-motion: no-preference) {
     .js .t-hero__phones :global(.t-hero__phone--front) {
@@ -742,6 +737,7 @@ const cell = (v: string | boolean | null) => v;
   }
   .verify__phones {
     display: flex;
+    align-items: flex-start;
     gap: var(--s-5);
     justify-content: center;
   }
@@ -1053,16 +1049,9 @@ const cell = (v: string | boolean | null) => v;
       grid-template-columns: minmax(0, 1fr);
       gap: var(--s-6);
     }
-    .t-hero__phones {
-      height: 470px;
-      max-width: 420px;
-      width: 100%;
-    }
-    .t-hero__phones :global(.t-hero__phone--back) {
-      width: 200px;
-    }
-    .t-hero__phones :global(.t-hero__phone--front) {
-      width: 230px;
+    .t-hero__phones :global(.phone) {
+      width: calc(50% - var(--s-5) / 2);
+      max-width: 230px;
     }
     .pains__title,
     .guide__aside {
@@ -1072,7 +1061,8 @@ const cell = (v: string | boolean | null) => v;
       order: 2;
     }
     .verify__phones :global(.phone) {
-      width: 46%;
+      width: calc(50% - var(--s-5) / 2);
+      max-width: 230px;
     }
     .prep__head {
       grid-template-columns: minmax(0, 1fr);

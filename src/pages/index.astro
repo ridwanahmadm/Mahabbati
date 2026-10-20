@@ -6,7 +6,7 @@ import NeedIndex from "../components/NeedIndex.astro";
 import Journey from "../components/Journey.astro";
 import PackageCard from "../components/PackageCard.astro";
 import VenueCard from "../components/VenueCard.astro";
-import UstadzCard from "../components/UstadzCard.astro";
+import KelasBand from "../components/KelasBand.astro";
 import CrossBand from "../components/CrossBand.astro";
 import Faq from "../components/Faq.astro";
 import { Image } from "astro:assets";
@@ -14,7 +14,7 @@ import { photo } from "../data/images";
 import { JOURNEY, SYARI_STANDARDS, WO_FAQ } from "../data/content";
 import { PACKAGES } from "../data/packages";
 import { VENUES } from "../data/venues";
-import { ASATIDZ, visibleStories } from "../data/people";
+import { visibleStories } from "../data/people";
 import { PROOF, WA, waLink, WO_GREETING, url } from "../data/site";
 
 const featured = PACKAGES.filter((p) => p.featured);
@@ -71,31 +71,15 @@ const wa = waLink(WA.wo.number, WO_GREETING);
     close="Dari khitbah sampai rumah tangga, di satu tempat."
     doors={[
       { href: url("/layanan/"), label: "Lihat semua layanan" },
-      { href: url("/asatidz/"), label: "Kenali asatidz", outline: true },
+      { href: url("/kelas/"), label: "Lihat kelas pranikah", outline: true },
     ]}
   />
 
-  <section class="ust section chapter-night on-dark" aria-labelledby="ust-title">
-    <div class="wrap ust__grid">
-      <div class="ust__copy">
-        <h2 id="ust-title" class="t-h2">Didampingi asatidz Mahabbati.</h2>
-        <p class="t-lead">
-          Klien Paket Akad dan Paket Lengkap mendapat akses kelas pranikah dan nasihat pernikahan bersama asatidz, langsung di
-          aplikasi Mahabbati.
-        </p>
-        <a class="btn btn--lilac" href={url("/asatidz/")}>Kenali asatidz dan kelasnya</a>
-      </div>
-      <ul class="ust__list">
-        {
-          ASATIDZ.map((u) => (
-            <li>
-              <UstadzCard ustadz={u} compact />
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+  <KelasBand
+    id="ust-title"
+    title="Bekal ilmu sebelum akad, dari asatidz Mahabbati."
+    lead="Kelas pranikah dan nasihat pernikahan, disusun berurutan dari niat sampai rumah tangga. Termasuk di Paket Akad dan Paket Lengkap, dan bisa diikuti kapan saja di aplikasi Mahabbati."
+  />
 
   <section class="feat section" aria-labelledby="feat-title">
     <div class="wrap row-head">
@@ -365,23 +349,6 @@ const wa = waLink(WA.wo.number, WO_GREETING);
     margin-top: var(--s-4);
   }
 
-  .ust__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-    gap: var(--s-8);
-    align-items: center;
-  }
-  .ust__copy {
-    display: grid;
-    gap: var(--s-5);
-    justify-items: start;
-  }
-  .ust__list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--s-5);
-  }
 
   .std__grid {
     display: grid;
@@ -508,11 +475,6 @@ const wa = waLink(WA.wo.number, WO_GREETING);
     gap: var(--s-4);
   }
 
-  @media (max-width: 1000px) {
-    .ust__grid {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
   @media (max-width: 900px) {
     .hero,
     .sec-head,
@@ -541,9 +503,6 @@ const wa = waLink(WA.wo.number, WO_GREETING);
     }
   }
   @media (max-width: 640px) {
-    .ust__list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
   }
 </style>
 

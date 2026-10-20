@@ -1,7 +1,6 @@
 import type { ImageMetadata } from "astro";
 
 const photoFiles = import.meta.glob<{ default: ImageMetadata }>("/src/assets/photos/*.jpg", { eager: true });
-const asatidzFiles = import.meta.glob<{ default: ImageMetadata }>("/src/assets/asatidz/*.jpg", { eager: true });
 const screenFiles = import.meta.glob<{ default: ImageMetadata }>("/src/assets/screens/**/*.{png,jpg}", {
   eager: true,
 });
@@ -13,13 +12,6 @@ const byName = (files: Record<string, { default: ImageMetadata }>, base: string)
 
 export const PHOTOS = byName(photoFiles, "/src/assets/photos/");
 export const SCREENS = byName(screenFiles, "/src/assets/screens/");
-export const ASATIDZ_PHOTOS = byName(asatidzFiles, "/src/assets/asatidz/");
-
-export const ustadzPhoto = (name: string) => {
-  const p = ASATIDZ_PHOTOS[name];
-  if (!p) throw new Error(`Ustadz photo not found: ${name}`);
-  return p;
-};
 
 export const photo = (name: string) => {
   const p = PHOTOS[name];

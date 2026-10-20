@@ -15,6 +15,7 @@ export default defineConfig({
   // Old URLs from the first version of the microsite keep working.
   redirects: {
     "/taaruf": to("/aplikasi/"),
+    "/asatidz": to("/kelas/"),
     "/wedding-organizer": to("/layanan/"),
     "/wedding-organizer/wedding-planner": to("/layanan/wedding-planner/"),
     "/wedding-organizer/intimate-wedding": to("/layanan/intimate-wedding/"),

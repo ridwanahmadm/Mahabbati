@@ -3,12 +3,11 @@ import Base from "../../layouts/Base.astro";
 import Icon from "../../components/Icon.astro";
 import { Image } from "astro:assets";
 import { photo } from "../../data/images";
-import UstadzCard from "../../components/UstadzCard.astro";
+import KelasBand from "../../components/KelasBand.astro";
 import VenueCard from "../../components/VenueCard.astro";
 import PackageCard from "../../components/PackageCard.astro";
 import { PACKAGES, ADDONS, RUNDOWN, estimate, itemsFor, needLabel, type Package, type AddonId } from "../../data/packages";
 import { VENUES } from "../../data/venues";
-import { ASATIDZ } from "../../data/people";
 import { WA, waLink, rupiah, rupiahShort, url } from "../../data/site";
 
 export function getStaticPaths() {
@@ -276,25 +275,12 @@ const offer = {
 
   {
     pkg.includesClass && (
-      <section class="pd-kelas section chapter-night on-dark" aria-labelledby="pdk-title">
-        <div class="wrap pd-kelas__grid">
-          <div class="pd-kelas__copy">
-            <h2 id="pdk-title" class="t-h2">Termasuk kelas pranikah bersama asatidz.</h2>
-            <p class="t-lead">
-              Setelah paket dipesan, kalian mendapat akses kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati di aplikasi
-              Mahabbati.
-            </p>
-            <a class="btn btn--lilac" href={url("/asatidz/")}>Lihat isi kelasnya</a>
-          </div>
-          <ul class="pd-kelas__list">
-            {ASATIDZ.map((u) => (
-              <li>
-                <UstadzCard ustadz={u} compact />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      <KelasBand
+        id="pdk-title"
+        title="Termasuk kelas pranikah dari asatidz Mahabbati."
+        lead="Setelah paket dipesan, kalian mendapat akses kelas pranikah dan nasihat pernikahan di aplikasi Mahabbati."
+        cta="Lihat isi kelasnya"
+      />
     )
   }
 
@@ -770,23 +756,6 @@ const offer = {
     margin-top: var(--s-4);
     max-width: 34rem;
   }
-  .pd-kelas__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-    gap: var(--s-8);
-    align-items: center;
-  }
-  .pd-kelas__copy {
-    display: grid;
-    gap: var(--s-5);
-    justify-items: start;
-  }
-  .pd-kelas__list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--s-4);
-  }
   .pd-venues__head {
     display: flex;
     flex-wrap: wrap;
@@ -798,16 +767,10 @@ const offer = {
     .card-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .pd-kelas__grid {
-      grid-template-columns: minmax(0, 1fr);
-    }
   }
   @media (max-width: 640px) {
     .card-grid {
       grid-template-columns: minmax(0, 1fr);
-    }
-    .pd-kelas__list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
