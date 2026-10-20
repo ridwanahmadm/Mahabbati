@@ -22,29 +22,37 @@ document.querySelectorAll<HTMLElement>("[data-row]").forEach((row) => {
     if (e.key === "ArrowLeft") row.scrollBy({ left: -card(), behavior: smooth() });
   });
 
-  // Mouse drag (touch already scrolls natively).
+  // Mouse drag (touch already scrolls natively). The pointer is captured only once
+  // the mouse has really moved, so a plain click still reaches the card link.
   let startX = 0;
   let startLeft = 0;
+  let pressed = false;
   let moved = false;
   row.addEventListener("pointerdown", (e) => {
     if (e.pointerType !== "mouse" || e.button !== 0) return;
     startX = e.clientX;
     startLeft = row.scrollLeft;
+    pressed = true;
     moved = false;
-    row.setPointerCapture(e.pointerId);
-    row.classList.add("is-dragging");
   });
   row.addEventListener("pointermove", (e) => {
-    if (!row.classList.contains("is-dragging")) return;
+    if (!pressed) return;
     const dx = e.clientX - startX;
-    if (Math.abs(dx) > 6) moved = true;
-    row.scrollLeft = startLeft - dx;
+    if (!moved && Math.abs(dx) > 6) {
+      moved = true;
+      row.setPointerCapture(e.pointerId);
+      row.classList.add("is-dragging");
+    }
+    if (moved) row.scrollLeft = startLeft - dx;
   });
   const end = (e: PointerEvent) => {
-    if (!row.classList.contains("is-dragging")) return;
+    if (!pressed) return;
+    pressed = false;
     row.classList.remove("is-dragging");
-    row.releasePointerCapture(e.pointerId);
+    if (row.hasPointerCapture(e.pointerId)) row.releasePointerCapture(e.pointerId);
   };
+  // Links and images inside the row would otherwise start a native drag and cancel ours.
+  row.addEventListener("dragstart", (e) => e.preventDefault());
   row.addEventListener("pointerup", end);
   row.addEventListener("pointercancel", end);
   row.addEventListener("click", (e) => moved && e.preventDefault(), true);
