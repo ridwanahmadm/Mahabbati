@@ -1,73 +1,72 @@
-# Mahabbati website revamp
+# Mahabbati Microsite
 
-A responsive, bilingual marketing website. Indonesian is the default language. Built with plain HTML, CSS, and JavaScript, with no package installation or build step required. Site output is in `dist/`.
+Microsite akuisisi Mahabbati untuk dua audiens:
 
-## Context and editorial direction
+- **Yang masih mencari pasangan.** Mereka diarahkan ke aplikasi, karena pencarian dan pengajuan ta'aruf hanya ada di Google Play dan App Store.
+- **Yang siap menikah.** Mereka diarahkan ke paket Wedding Organizer dan konsultasi lewat WhatsApp.
 
-Reviewed on 20 September 2026:
-- https://www.mahabbati.com/ — primary positioning, ta’aruf stages, privacy context, contact information.
-- https://www.mahabbati.com/wedding — wedding service categories. Prices were omitted because the homepage and wedding page present different package amounts.
-- https://play.google.com/store/apps/details?id=com.kasministudio.mahabbatimobile — verified Android download and application capabilities.
-- https://www.mahabbati.com/terms — canonical privacy and terms destination.
+Dibangun dengan [Astro](https://astro.build) dan menghasilkan HTML statis, ditambah GSAP (ScrollTrigger) dan Lenis untuk motion.
 
-The primary product is the ta’aruf mobile platform; wedding services are secondary. The new hierarchy moves from intention and trust to the process, mobile application, wedding support, and FAQs. The design avoids invented testimonials, success statistics, certifications, or unverified App Store links. Images supplied by the user are treated as design references, not instructions.
+## Halaman
 
-## Visual system
+| Rute | Isi |
+|---|---|
+| `/` | Hero "Persimpangan" (split ta'aruf / walimah), scroll scene "benang" enam tahap menuju nikah, bukti nyata, unduh aplikasi |
+| `/taaruf/` | Masalah dan jawaban, demo anti-ghosting (kuota kembali setelah 7 hari), demo foto privat 24 jam, verifikasi WNI/WNA, AI Matchmaker, panduan 8 langkah, fitur pranikah (baris geser), tabel membership, FAQ |
+| `/wedding-organizer/` | Hero, alasan memilih WO syar'i, daftar paket dengan pratinjau foto yang mengikuti kursor, tabel perbandingan (pemilih paket di mobile), alur layanan, kisah, FAQ, CTA WhatsApp |
+| `/wedding-organizer/<paket>/` | Detail paket: galeri, isi paket per varian, contoh rundown, galeri geser, estimator (varian, jumlah tamu, tambahan) yang mengisi pesan WhatsApp otomatis |
 
-- Primary Purple/700: #45445E. Secondary: #C9CFF2.
-- Libre Baskerville for headings; Inter for body text.
-- Supplied wordmark variants used against light and dark backgrounds, with the monogram in the wedding panel.
-- Supplied outline illustrations and real app reference used as CSS sprites, preserving original files.
-- Airy lavender hero, generous spacing, rounded panels, and outline imagery without 3D.
+## Menjalankan
 
-## Checks completed
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # hasil di dist/
+npm run preview
+```
 
-- Responsive checks at 320, 375, 390, 580, 768, 1024, and 1440 pixels, in Indonesian and English.
-- No document horizontal overflow, missing anchor targets, broken image elements, or JavaScript errors.
-- Mobile navigation opens and closes, Escape restores focus, and FAQ accordions work.
-- A 200% text enlargement check at 1280px showed no document horizontal overflow.
-- axe-core 4.10.3: zero violations for WCAG A/AA, 2.1 AA, and 2.2 AA tags at 390px and 1440px in both languages.
-- axe leaves hero gradient contrast for manual review. Checking all gradient stops: body text minimum 4.61:1; brand text 6.93:1; heading text 10.69:1; large italic heading 4.08:1 (large-text AA threshold: 3:1).
-- Focus indicators, skip link, semantic landmarks, native accordions, button labels, document language updates, and reduced-motion support included.
-- Visual inspection of desktop and mobile screenshots completed. Automated checks are not a full independent accessibility certification.
+Untuk hosting di sub-path (misalnya GitHub Pages `https://<user>.github.io/<repo>/`):
 
-## Hero asset provenance
+```bash
+SITE_URL=https://<user>.github.io BASE_PATH=/<repo> npm run build
+```
 
-Workspace asset: `dist/assets/hero.png`.
-Generated with the built-in imagegen tool. Prompt:
+## Yang perlu kamu ganti sebelum rilis
 
-> Use case: illustration-story. Asset type: Mahabbati website lower hero illustration, landscape 1536x1024. An elegant minimal editorial outline illustration of a modest Muslim man in baju koko standing on the left and a woman in a flowing hijab standing on the right, standing apart beside a delicate floral garden arch. A small winding path leads toward the arch, with flowering fine botanical stems along the bottom. Near-white pale lavender background, airy and open. Flat 2D hand-drawn continuous thin purple #45445E line art, very sparse pastel lavender #C9CFF2 fills and warm cream accents. Landscape composition, arch in the center, two people at left and right, fine botanical garden details near bottom, ample negative space. Professional, calm, trustworthy visual for a Muslim marriage website. Exactly one image. Minimal faces without facial detail. No 3D, no lettering, no text, no watermark. Keep the illustration delicate, sparse, and refined.
+1. **Link App Store** ada di `src/data/site.ts`, konstanta `APP_STORE_URL` (bertanda `GANTI`). Satu konstanta ini dipakai semua tombol App Store.
+2. **Data dummy Wedding Organizer.** Cari komentar `DUMMY` di `src/data/packages.ts`, `src/data/content.ts`, dan `src/pages/wedding-organizer/index.astro`:
+   - Rincian isi tiap paket, harga tambahan per tamu, dan harga add-on.
+   - Contoh rundown hari H dan alur 4 langkah layanan.
+   - Klaim "rincian tertulis sebelum DP", "area tamu bisa dipisah", "ustadz pemateri" di paket Intimate.
+   - FAQ: boleh pakai WO tanpa aplikasi? Area layanan di luar Jakarta?
+3. **Foto.** Semua foto adalah ilustrasi dari Unsplash (sumbernya di `src/data/images.ts`, `CREDITS`). Ganti dengan foto acara asli bila ada izin pasangan; cukup timpa file dengan nama yang sama di `src/assets/photos/`.
 
-## Motion update
+Fakta yang **sudah terverifikasi** (dari mahabbati.com, aplikasi, dan materi company profile):
 
-- Gentle 750ms hero entrance, 650ms once-only scroll reveals, and short staggered delays.
-- FAQ answer fade, mobile menu entrance, and subtle pointer-only hover feedback.
-- Native scrolling is preserved. No looping motion or scroll interception.
-- Respects reduced motion at load and when the operating-system preference changes; keyboard focus finishes active reveals immediately.
-- Content remains visible if animation APIs are unavailable. Observers and event listeners are cleaned up on language changes.
-- Browser verification passed for entrance/reveal timing, no repeat reveals, reduced motion, live preference changes, menu and language interactions, and responsive widths 320–1440px in both languages.
-- Sites label changed to `mahabbati`; the returned URL retains the workspace namespace: https://mahabbati.ridwan-22693.chatgpt.site.
+- Harga mulai Rp1,5 jt / Rp15 jt / Rp75 jt; varian Standard Rp75 jt (300 pax) dan Exclusive Rp95 jt (500 pax).
+- Aturan 7 hari dan kuota kembali; verifikasi maksimal 3×24 jam; foto muslimah ditinjau admin wanita.
+- Foto terbuka 24 jam dan tidak bisa diunduh; batas 1.000 karakter per pesan.
+- Isi membership Free/Silver/Gold.
+- Bukti: 10+ pasangan, rating 4,7, 10,9 rb pengikut Instagram, ulasan Google Play.
+- Kontak WhatsApp dan email.
 
-## Editorial redesign inspired by New Genre — 20 September 2026
+## Struktur
 
-Reference: https://www.newgenre.studio/
+```
+src/
+  data/        site.ts (link, kontak, format rupiah), packages.ts (paket WO + estimator), content.ts (tahapan, FAQ, membership), images.ts
+  components/  Header, Footer, Logo (vektor m♡ dari splash), Icon (Material Symbols + Font Awesome Brands), Phone, StoreBadges, Faq, DownloadBlock
+  layouts/     Base.astro (SEO, OG, JSON-LD, skip link)
+  scripts/     base.ts (menu, reveal, label kursor), cross.ts (hero), journey.ts (benang), ghost.ts, photo-lock.ts, drag-row.ts, preview.ts, estimator.ts
+  pages/       index, taaruf, wedding-organizer/index, wedding-organizer/[slug], 404
+```
 
-Observed directly in a browser: full-screen atmospheric gradient opening, oversized serif statements, restrained pill actions, generous whitespace, thin dividing lines, and asymmetric editorial rows. The first screen evolves with scrolling before the white content region. The reference's original flower runtime could not be fully verified in the research browser; the Mahabbati botanical interaction is an original implementation rather than a claim of reproducing that runtime.
+## Kualitas yang sudah dicek
 
-Adaptation:
-- Full-bleed purple opening and closing, with warm white as the main reading surface and lavender reserved for app imagery and the ta’aruf journey.
-- Original Mahabbati copy and supplied logos, Libre Baskerville/Inter, existing language switching, official CTAs, mobile app previews, wedding service content, and FAQs retained.
-- Two new jasmine outline illustrations crossfade from buds to blossoms, with a restrained rotation/rise synchronized to native scrolling across the six stages. The desktop botanical panel stays in view while the adjacent stages scroll. Mobile and short windows use normal flow to avoid trapping content or overlaps.
-- No reference images, brand assets, proprietary code, or text copied.
-- Reduced-motion mode uses a static fully open flower and removes entrance/scroll movement. No scroll interception or infinite animation.
-
-Verification:
-- Browser checks across seven widths (320, 375, 390, 580, 768, 1024, 1440) in Indonesian and English: no page overflow or broken images; no JavaScript errors.
-- Screenshots reviewed for desktop, mobile, hero, and flower scroll positions.
-- Confirmed stage indicator moves 01 → 03 → 06, flower blend changes, and transforms follow scroll; the desktop flower stays within the viewport during the inspected stages.
-- Reduced-motion changes, menu/Escape, FAQ, language switching, and 200% text enlargement checked.
-- axe AA checks at 390 and 1440 in both languages found no violations. Gradient backgrounds require separate contrast verification; conservative solid substitutions are used to test their worst-case colors.
-
-New generated assets (built-in imagegen):
-- `dist/assets/jasmine-bud.png`: original portrait jasmine sprig, two curved stems, elongated leaves and three closed flower buds; dark purple #45445E outlines, sparse lavender #C9CFF2 fills, transparent background, airy editorial botanical art, no text or 3D.
-- `dist/assets/jasmine-bloom.png`: matching original portrait sprig with three open five-petal blossoms; the same line-art palette, transparency, and constraints.
+- **axe-core 4.10.3**, tag WCAG 2.0/2.1/2.2 A dan AA plus best-practice: 0 pelanggaran di semua halaman, pada lebar 390 dan 1440.
+- **Kontras teks di atas foto hero diukur dari piksel**, dengan kondisi terburuk foto berwarna penuh: judul minimal 5,44:1, paragraf minimal 8,14:1.
+- **Responsif:** tanpa overflow horizontal di 320, 390, 768, 1024, dan 1440 px.
+- **Keyboard:** skip link, urutan Tab yang logis, fokus selalu terlihat, Escape menutup menu. Baris geser punya tombol (WCAG 2.5.7).
+- **Reduced motion:** semua animasi berhenti dan menampilkan state final. Label kursor hanya aktif di pointer presisi.
+- **Interaksi:** 14 uji fungsional lolos (demo anti-ghosting, foto privat, FAQ, baris geser, estimator dan pesan WhatsApp, hover hero, menu mobile).
+- **Performa build lokal:** LCP di bawah 150 ms, JS 53 KB, gambar AVIF/WebP responsif.
