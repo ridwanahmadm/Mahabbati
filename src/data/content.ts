@@ -100,11 +100,11 @@ export const BENEFITS: { phase: "Sebelum" | "Setelah"; icon: string; title: stri
 
 // USULAN: standar syar'i Mahabbati. Konfirmasi ke tim WO sebelum dianggap final.
 export const SYARI_STANDARDS = [
-  { title: "Vendor dikurasi", body: "Setiap vendor melewati kurasi agar akad dan walimah sesuai syariat Islam." },
-  { title: "MUA wanita untuk pengantin wanita", body: "Rias pengantin dan keluarga wanita ditangani perias wanita." },
-  { title: "Area tamu bisa dipisah", body: "Penataan area tamu pria dan wanita bila keluarga menghendaki." },
-  { title: "Waktu sholat dijaga", body: "Rundown selalu memberi jeda sholat, dengan musala yang disiapkan." },
-  { title: "Penawaran tertulis sebelum DP", body: "Rincian item dan harga dalam satu dokumen, jadi kamu tahu persis apa yang dibayar." },
+  { title: "Vendor dikurasi", body: "Setiap vendor kami pilih agar akad dan walimah berjalan sesuai syariat Islam." },
+  { title: "Perias wanita untuk pengantin wanita", body: "Rias pengantin dan keluarga wanita selalu ditangani perias wanita." },
+  { title: "Area tamu bisa dipisah", body: "Area tamu pria dan wanita kami pisahkan bila keluarga menghendaki." },
+  { title: "Waktu sholat dijaga", body: "Setiap rundown memberi jeda sholat, dan musala sudah disiapkan." },
+  { title: "Penawaran tertulis sebelum DP", body: "Semua item dan harga tertulis dalam satu dokumen, jadi kamu tahu persis apa yang dibayar." },
 ];
 
 export const APP_FAQ = [
@@ -154,12 +154,12 @@ export const WO_FAQ = [
   },
   {
     q: "Apakah vendornya sesuai syariat?",
-    a: "Seluruh vendor melewati kurasi agar akad dan walimah berjalan sesuai syariat Islam.",
+    a: "Ya. Setiap vendor kami kurasi agar akad dan walimah berjalan sesuai syariat Islam, termasuk perias wanita untuk pengantin wanita.",
   },
   {
     q: "Harus pakai aplikasi Mahabbati dulu?",
     // DUMMY: konfirmasi kebijakan.
-    a: "Tidak harus. Kamu bisa langsung konsultasi lewat WhatsApp, meskipun bertemu calon pasangan di luar Mahabbati.",
+    a: "Tidak. Kamu bisa langsung konsultasi lewat WhatsApp, meski bertemu calon pasangan di luar Mahabbati.",
   },
   {
     q: "Apakah harga di website sudah final?",
@@ -168,7 +168,7 @@ export const WO_FAQ = [
   {
     q: "Bisa melayani di luar Jakarta?",
     // DUMMY: konfirmasi area layanan.
-    a: "Tanyakan kota dan tanggal acaramu ke tim lewat WhatsApp, kami cek ketersediaannya.",
+    a: "Kirim kota dan tanggal acaramu lewat WhatsApp. Tim kami akan mengecek ketersediaannya.",
   },
 ];
 
@@ -186,3 +186,32 @@ export const MEMBERSHIP = {
     { label: "Jalur prioritas tim admin", values: [false, false, true] },
   ] as { label: string; values: (string | boolean | null)[] }[],
 };
+
+// ---------------------------------------------------------------------------------------------
+// Language-aware views. English text lives in content.en.ts.
+import type { Lang } from "../i18n/lang";
+import { merge } from "../i18n/merge";
+import * as EN from "./content.en";
+
+const en = <T>(lang: Lang, id: T, over: unknown) => (lang === "en" ? merge(id, over as never) : id);
+export const phaseLabel = (phase: string, lang: Lang = "id") => (lang === "en" ? (EN.PHASES_EN[phase] ?? phase) : phase);
+export const journeyFor = (lang: Lang = "id") => en(lang, JOURNEY, EN.JOURNEY_EN);
+export const taarufJourneyFor = (lang: Lang = "id") => en(lang, TAARUF_JOURNEY, EN.TAARUF_JOURNEY_EN);
+export const kelasNoteFor = (lang: Lang = "id") => (lang === "en" ? (KELAS_NOTE && EN.KELAS_NOTE_EN) : KELAS_NOTE);
+export const kelasModulesFor = (lang: Lang = "id") => en(lang, KELAS_MODULES, EN.KELAS_MODULES_EN);
+export const kelasFactsFor = (lang: Lang = "id") => en(lang, KELAS_FACTS, EN.KELAS_FACTS_EN);
+export const benefitsNoteFor = (lang: Lang = "id") => (lang === "en" ? (BENEFITS_NOTE && EN.BENEFITS_NOTE_EN) : BENEFITS_NOTE);
+export const benefitsFor = (lang: Lang = "id") => en(lang, BENEFITS, EN.BENEFITS_EN);
+export const syariFor = (lang: Lang = "id") => en(lang, SYARI_STANDARDS, EN.SYARI_STANDARDS_EN);
+export const appFaqFor = (lang: Lang = "id") => en(lang, APP_FAQ, EN.APP_FAQ_EN);
+export const woFaqFor = (lang: Lang = "id") => en(lang, WO_FAQ, EN.WO_FAQ_EN);
+export const membershipFor = (lang: Lang = "id") =>
+  lang === "en"
+    ? {
+        tiers: MEMBERSHIP.tiers,
+        rows: MEMBERSHIP.rows.map((r, i) => ({
+          label: EN.MEMBERSHIP_EN.rows[i] ?? r.label,
+          values: r.values.map((v) => (typeof v === "string" ? (EN.MEMBERSHIP_EN.values[v] ?? v) : v)),
+        })),
+      }
+    : MEMBERSHIP;

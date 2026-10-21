@@ -2,8 +2,8 @@
 // Night band for the pranikah class: what is taught, not who teaches it.
 // Asatidz are named as one group ("asatidz Mahabbati"), so the team can grow without touching the site.
 import Icon from "./Icon.astro";
-import { KELAS_MODULES, KELAS_NOTE } from "../data/content";
-import { url } from "../data/site";
+import { kelasModulesFor, kelasNoteFor } from "../data/content";
+import { langOf, path } from "../i18n/lang";
 
 interface Props {
   id: string;
@@ -12,7 +12,10 @@ interface Props {
   /** Button text; `false` hides the button (on the class page itself). */
   cta?: string | false;
 }
-const { id, title, lead, cta = "Lihat kelas pranikah" } = Astro.props;
+const lang = langOf(Astro.url);
+const { id, title, lead, cta = lang === "en" ? "See the pre-marriage class" : "Lihat kelas pranikah" } = Astro.props;
+const KELAS_MODULES = kelasModulesFor(lang);
+const KELAS_NOTE = kelasNoteFor(lang);
 ---
 
 <section class="kband section chapter-night on-dark" aria-labelledby={id}>
@@ -20,7 +23,7 @@ const { id, title, lead, cta = "Lihat kelas pranikah" } = Astro.props;
     <div class="kband__copy">
       <h2 id={id} class="t-h2">{title}</h2>
       <p class="t-lead">{lead}</p>
-      {cta && <a class="btn btn--lilac" href={url("/kelas/")}>{cta}</a>}
+      {cta && <a class="btn btn--lilac" href={path(lang, "kelas")}>{cta}</a>}
       {KELAS_NOTE && <p class="sample-note"><Icon name="info" size={20} />{KELAS_NOTE}</p>}
     </div>
     <ol class="kband__list">

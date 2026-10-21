@@ -1,0 +1,575 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import Finder from "../components/Finder.astro";
+import NeedIndex from "../components/NeedIndex.astro";
+import Journey from "../components/Journey.astro";
+import PackageCard from "../components/PackageCard.astro";
+import VenueCard from "../components/VenueCard.astro";
+import KelasBand from "../components/KelasBand.astro";
+import CrossBand from "../components/CrossBand.astro";
+import Faq from "../components/Faq.astro";
+import { Image } from "astro:assets";
+import { photo } from "../data/images";
+import { journeyFor, syariFor, woFaqFor } from "../data/content";
+import { packagesFor } from "../data/packages";
+import { venuesFor } from "../data/venues";
+import { visibleStories } from "../data/people";
+import { PROOF, WA, waLink, woGreeting } from "../data/site";
+import { langOf, path } from "../i18n/lang";
+import { ui } from "../i18n/ui";
+
+const lang = langOf(Astro.url);
+const u = ui(lang);
+const featured = packagesFor(lang).filter((p) => p.featured);
+const VENUES = venuesFor(lang);
+const stories = visibleStories((s) => s.type === "wo" || s.id === "dimas", lang).slice(0, 3);
+const wa = waLink(WA.wo.number, woGreeting(lang));
+const proofRating = lang === "en" ? PROOF.rating.replace(",", ".") : PROOF.rating;
+const proofIg = lang === "en" ? "10.9K" : PROOF.instagram;
+
+const COPY = {
+  id: {
+    title: "Mahabbati | Wedding organizer syar'i, dari khitbah sampai walimah",
+    desc: "Paket khitbah, akad, akad di masjid, walimah, dan tempat mitra, dari tim wedding organizer syar'i dan asatidz Mahabbati.",
+    h1a: "Pernikahan syar'i,",
+    h1b: "disiapkan dengan tenang.",
+    lead: (n: string) => `Dari khitbah sampai walimah, satu tim yang mengurus semuanya, dan asatidz Mahabbati membekali kalian sebelum akad. Sudah ${n} pasangan menikah bersama kami.`,
+    heroAlt: ["Belum bertemu calon?", "Mulai ta'aruf di aplikasi Mahabbati"],
+    heroImg: "Tangan sepasang pengantin bergandengan dalam busana adat: kebaya merah muda dan jas berselempang kain tenun.",
+    needsTitle: "Mulai dari yang kamu butuhkan.",
+    needsLead: "Pesan satu acara, tempatnya saja, atau serahkan semuanya kepada kami.",
+    jTitle: "Kami menemani sebelum, saat, dan setelah akad.",
+    jLead: "Walimah hanya sehari, pernikahan seumur hidup. Karena itu kami tidak hanya menyiapkan acaranya, tapi juga menyiapkan kalian.",
+    jClose: "Dari khitbah sampai rumah tangga, di satu tempat.",
+    allServices: "Lihat semua layanan",
+    seeClass: "Lihat kelas pranikah",
+    kTitle: "Bekal ilmu sebelum akad, dari asatidz Mahabbati.",
+    kLead: "Materi pranikah dan nasihat pernikahan yang berurutan, dari niat sampai keuangan keluarga. Sudah termasuk di Paket Akad dan Paket Lengkap, dan bisa diikuti kapan saja di aplikasi.",
+    featTitle: "Paket pilihan.",
+    featLead: "Harga yang tertera adalah harga mulai. Buka paketnya untuk menghitung estimasi sesuai jumlah tamu.",
+    featRow: "Paket pilihan, geser ke samping",
+    vTitle: "Tempat mitra, siap dipesan.",
+    vLead: "Masjid, gedung, taman, sampai villa keluarga. Pesan tempatnya saja, atau sekalian dengan paket WO.",
+    vRow: "Tempat mitra, geser ke samping",
+    allVenues: "Lihat semua tempat",
+    stdImg: "Tangan perias merapikan hiasan siger keemasan sebelum dipakaikan.",
+    stdTitle: "Standar syar'i yang kami pegang.",
+    stdMore: "Tentang Mahabbati dan standar syar'i kami",
+    proofLabel: "pasangan sudah menikah bersama Wedding Organizer Mahabbati.",
+    rating: "Rating Google Play",
+    ig: "Pengikut Instagram",
+    stories: "Baca cerita pasangan",
+    crossTitle: "Kamu sedang di tahap mana?",
+    left: { title: "Sudah bertemu calon.", body: "Rencanakan khitbah, akad, dan walimah bersama tim kami, lengkap dengan kelas pranikah.", cta: "Lihat layanan", alt: "Pengantin berkerudung panjang dan bercadar tipis, tampak dari belakang menghadap laut." },
+    right: { title: "Belum bertemu calon.", body: "Mulai ta'aruf yang aman: profil terverifikasi, dan kuotamu kembali bila tak dibalas 7 hari.", cta: "Kenali aplikasinya", alt: "Seorang muslimah berkhimar biru panjang, tampak dari belakang di antara bunga putih." },
+    faqTitle: "Tanya jawab.",
+    faqLead: "Belum terjawab? Tanyakan langsung, tim WO membalas lewat WhatsApp.",
+  },
+  en: {
+    title: "Mahabbati | Islamic wedding organizer, from khitbah to walimah",
+    desc: "Khitbah, akad, mosque akad, walimah and partner venues in Jakarta, from a sharia-minded wedding organizer and the asatidz of Mahabbati.",
+    h1a: "An Islamic wedding,",
+    h1b: "planned in peace.",
+    lead: (n: string) => `From khitbah to walimah, one team handles everything, and the asatidz of Mahabbati prepare you both before the akad. ${n} couples have married with us.`,
+    heroAlt: ["Haven't met the one yet?", "Start ta'aruf in the Mahabbati app"],
+    heroImg: "A bride and groom holding hands in traditional dress: a pink kebaya and a jacket with a woven sash.",
+    needsTitle: "Start with what you need.",
+    needsLead: "Book a single event, just a venue, or hand the whole wedding over to us.",
+    jTitle: "With you before, during and after the akad.",
+    jLead: "The walimah lasts a day; the marriage, a lifetime. So we don't only prepare the event. We help prepare the two of you.",
+    jClose: "From khitbah to married life, all in one place.",
+    allServices: "See all services",
+    seeClass: "See the pre-marriage class",
+    kTitle: "Knowledge before the akad, from the asatidz of Mahabbati.",
+    kLead: "Pre-marriage lessons and marriage advice in a clear order, from intention to family finances. Included with the Akad and Full wedding packages, and open anytime in the app.",
+    featTitle: "Featured packages.",
+    featLead: "Prices shown are starting prices. Open a package to estimate the cost for your guest count.",
+    featRow: "Featured packages, scroll sideways",
+    vTitle: "Partner venues, ready to book.",
+    vLead: "Mosques, halls, gardens and family villas. Book just the venue, or pair it with a WO package.",
+    vRow: "Partner venues, scroll sideways",
+    allVenues: "See all venues",
+    stdImg: "A make-up artist's hands adjusting a golden siger headpiece.",
+    stdTitle: "The sharia standards we keep.",
+    stdMore: "About Mahabbati and our sharia standards",
+    proofLabel: "couples have married with the Mahabbati Wedding Organizer.",
+    rating: "Google Play rating",
+    ig: "Instagram followers",
+    stories: "Read couples' stories",
+    crossTitle: "Where are you on your journey?",
+    left: { title: "You've met the one.", body: "Plan your khitbah, akad and walimah with our team, with the pre-marriage class included.", cta: "See services", alt: "A bride in a long veil, seen from behind, facing the sea." },
+    right: { title: "Still looking.", body: "Start a safe ta'aruf: verified profiles, and your quota back if there's no reply in 7 days.", cta: "Explore the app", alt: "A woman in a long blue khimar, seen from behind among white flowers." },
+    faqTitle: "Questions and answers.",
+    faqLead: "Still wondering? Ask us directly. The WO team replies on WhatsApp.",
+  },
+};
+const c = COPY[lang];
+---
+
+<Base
+  title={c.title}
+  description={c.desc}
+  current="home"
+>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero__copy">
+      <h1 id="hero-title" class="t-display hero__title">{c.h1a}<br /> {c.h1b}</h1>
+      <p class="t-lead">{c.lead(PROOF.couples)}</p>
+      <Finder id="hero-finder" class="hero__finder" />
+      <p class="hero__alt">
+        {c.heroAlt[0]} <a class="link" href={path(lang, "aplikasi")}>{c.heroAlt[1]}</a>
+      </p>
+    </div>
+    <figure class="hero__photo lens" data-lens data-lens-rest="50,46,26">
+      <Image
+        class="lens__mono"
+        src={photo("hero-akad")}
+        alt={c.heroImg}
+        widths={[640, 960, 1280, 1600]}
+        sizes="(max-width: 900px) 92vw, 44vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <Image class="lens__color" src={photo("hero-akad")} alt="" widths={[640, 960, 1280, 1600]} sizes="(max-width: 900px) 92vw, 44vw" loading="eager" />
+    </figure>
+  </section>
+
+  <section class="needs section" aria-labelledby="needs-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="needs-title" class="t-h2">{c.needsTitle}</h2>
+        <p class="t-lead">{c.needsLead}</p>
+      </div>
+      <NeedIndex />
+    </div>
+  </section>
+
+  <Journey
+    title={c.jTitle}
+    lead={c.jLead}
+    stages={journeyFor(lang)}
+    tall={["khitbah", "rumah-tangga"]}
+    close={c.jClose}
+    doors={[
+      { href: path(lang, "layanan"), label: c.allServices },
+      { href: path(lang, "kelas"), label: c.seeClass, outline: true },
+    ]}
+  />
+
+  <KelasBand
+    id="ust-title"
+    title={c.kTitle}
+    lead={c.kLead}
+  />
+
+  <section class="feat section" aria-labelledby="feat-title">
+    <div class="wrap row-head">
+      <div>
+        <h2 id="feat-title" class="t-h2">{c.featTitle}</h2>
+        <p class="t-lead">{c.featLead}</p>
+      </div>
+      <div class="row-nav">
+        <button type="button" class="round-btn" data-row-prev aria-controls="feat-row"><Icon name="chevron_left" size={26} /><span class="visually-hidden">{u.prev}</span></button>
+        <button type="button" class="round-btn" data-row-next aria-controls="feat-row"><Icon name="chevron_right" size={26} /><span class="visually-hidden">{u.next}</span></button>
+      </div>
+    </div>
+    <div class="hrow" id="feat-row" data-row data-cursor={u.drag} data-lenis-prevent tabindex="0" role="region" aria-label={c.featRow}>
+      <ul>
+        {
+          featured.map((p) => (
+            <li class="hrow__item">
+              <PackageCard pkg={p} sizes="340px" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="wrap row-foot">
+      <a class="btn btn--outline" href={path(lang, "layanan")}>{c.allServices}</a>
+    </div>
+  </section>
+
+  <section class="venues section chapter-mist" aria-labelledby="venues-title">
+    <div class="wrap row-head">
+      <div>
+        <h2 id="venues-title" class="t-h2">{c.vTitle}</h2>
+        <p class="t-lead">{c.vLead}</p>
+      </div>
+      <div class="row-nav">
+        <button type="button" class="round-btn" data-row-prev aria-controls="venue-row"><Icon name="chevron_left" size={26} /><span class="visually-hidden">{u.prev}</span></button>
+        <button type="button" class="round-btn" data-row-next aria-controls="venue-row"><Icon name="chevron_right" size={26} /><span class="visually-hidden">{u.next}</span></button>
+      </div>
+    </div>
+    <div class="hrow" id="venue-row" data-row data-cursor={u.drag} data-lenis-prevent tabindex="0" role="region" aria-label={c.vRow}>
+      <ul>
+        {
+          VENUES.map((v) => (
+            <li class="hrow__item">
+              <VenueCard venue={v} sizes="340px" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="wrap row-foot">
+      <a class="btn btn--outline" href={path(lang, "tempat")}>{c.allVenues}</a>
+    </div>
+  </section>
+
+  <section class="std section" aria-labelledby="std-title">
+    <div class="wrap std__grid">
+      <figure class="std__photo photo" data-reveal="mask">
+        <Image src={photo("n-siger")} alt={c.stdImg} widths={[480, 720, 960]} sizes="(max-width: 900px) 80vw, 36vw" />
+      </figure>
+      <div>
+        <h2 id="std-title" class="t-h2">{c.stdTitle}</h2>
+        <ol class="std__list">
+          {
+            syariFor(lang).map((s) => (
+              <li>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </li>
+            ))
+          }
+        </ol>
+        <a class="link std__more" href={path(lang, "tentang")}>{c.stdMore}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof section chapter-night on-dark" aria-labelledby="proof-title">
+    <div class="wrap proof__grid">
+      <div class="proof__copy">
+        <h2 id="proof-title" class="proof__big">
+          <span class="num">{PROOF.couples}</span>
+          <span class="proof__big-label">{c.proofLabel}</span>
+        </h2>
+        <dl class="proof__facts">
+          <div>
+            <dt>{c.rating}</dt>
+            <dd><span class="num">{proofRating}</span><Icon name="star" fill size={20} /></dd>
+          </div>
+          <div>
+            <dt>{c.ig}</dt>
+            <dd class="num">{proofIg}</dd>
+          </div>
+        </dl>
+        <a class="btn btn--lilac proof__cta" href={path(lang, "cerita")}>{c.stories}</a>
+      </div>
+      <ul class="proof__stories">
+        {
+          stories.map((s) => (
+            <li>
+              <figure class="proof__story">
+                <blockquote>
+                  <p>"{s.quote}"</p>
+                </blockquote>
+                <figcaption>
+                  {s.by}, {s.source}{s.translated && ` (${u.translated})`}
+                </figcaption>
+              </figure>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CrossBand
+    id="fork"
+    title={c.crossTitle}
+    left={{ ...c.left, href: path(lang, "layanan"), photo: "n-bride-back" }}
+    right={{ ...c.right, href: path(lang, "aplikasi"), photo: "n-khimar-blue", track: "app:home-fork" }}
+  />
+
+  <section class="home-faq section" aria-labelledby="hfaq-title">
+    <div class="wrap home-faq__grid">
+      <div>
+        <h2 id="hfaq-title" class="t-h2">{c.faqTitle}</h2>
+        <p class="t-lead">{c.faqLead}</p>
+        <a class="btn btn--wa" href={wa} rel="noopener" data-track="wa:home-faq"><Icon name="whatsapp" size={20} />{u.consultWa}</a>
+      </div>
+      <Faq items={woFaqFor(lang)} id="faq-home" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--s-8);
+    align-items: center;
+    padding-block: clamp(24px, 4vw, 56px) var(--s-8);
+    min-height: calc(100svh - var(--header-h));
+    max-height: 1000px;
+  }
+  .hero__title {
+    font-size: clamp(2.25rem, 1.1rem + 2.3vw, 3.5rem);
+  }
+  .hero__copy .t-lead {
+    margin-top: var(--s-5);
+  }
+  .hero__copy :global(.hero__finder) {
+    margin-top: var(--s-6);
+  }
+  .hero__alt {
+    margin-top: var(--s-5);
+    color: var(--ink-2);
+  }
+  .hero__photo {
+    height: min(78svh, 760px);
+    min-height: 460px;
+  }
+  .hero__photo :global(img) {
+    object-position: 60% 40%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .js .hero__photo {
+      animation: hero-open 1200ms var(--ease-in-out) 100ms both;
+    }
+  }
+  @keyframes hero-open {
+    from {
+      clip-path: inset(0 0 0 100% round var(--r-l));
+    }
+    to {
+      clip-path: inset(0 0 0 0 round var(--r-l));
+    }
+  }
+
+  .sec-head,
+  .row-head {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--s-5) var(--s-7);
+    align-items: end;
+    margin-bottom: var(--s-7);
+  }
+  .row-head {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .row-head .t-lead {
+    margin-top: var(--s-3);
+  }
+  .row-nav {
+    display: flex;
+    gap: var(--s-2);
+  }
+  .round-btn {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--haze);
+    color: var(--brand);
+    transition: background-color var(--t-hover) ease, opacity var(--t-hover) ease;
+  }
+  .round-btn:hover {
+    background: var(--lilac);
+  }
+  .round-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .hrow {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    cursor: grab;
+  }
+  .hrow::-webkit-scrollbar {
+    display: none;
+  }
+  .hrow:global(.is-dragging) {
+    cursor: grabbing;
+    scroll-snap-type: none;
+  }
+  .hrow ul {
+    display: flex;
+    gap: var(--s-5);
+    list-style: none;
+    padding-inline: max(var(--gutter), calc((100vw - var(--page)) / 2));
+    padding-block: 4px var(--s-6);
+    width: max-content;
+  }
+  .hrow__item {
+    width: 340px;
+    display: grid;
+    scroll-snap-align: start;
+    scroll-margin-left: max(var(--gutter), calc((100vw - var(--page)) / 2));
+    user-select: none;
+  }
+  .hrow__item :global(img) {
+    pointer-events: none;
+  }
+  .row-foot {
+    margin-top: var(--s-4);
+  }
+
+
+  .std__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--s-8);
+    align-items: center;
+  }
+  .std__photo {
+    aspect-ratio: 4 / 5;
+  }
+  .std__list {
+    list-style: none;
+    counter-reset: std;
+    margin-top: var(--s-6);
+    display: grid;
+    gap: var(--s-5);
+  }
+  .std__list li {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    column-gap: var(--s-3);
+    counter-increment: std;
+  }
+  .std__list li::before {
+    content: counter(std);
+    grid-row: span 2;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--accent);
+  }
+  .std__list h3 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+  .std__list p {
+    color: var(--ink-2);
+    max-width: 48ch;
+  }
+  .std__more {
+    display: inline-block;
+    margin-top: var(--s-6);
+  }
+
+  .proof__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--s-8);
+    align-items: start;
+  }
+  .proof__big {
+    display: grid;
+    gap: var(--s-3);
+    font-weight: 400;
+  }
+  .proof__big .num {
+    font-family: var(--serif);
+    font-size: clamp(5rem, 3rem + 8vw, 10rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: #fff;
+  }
+  .proof__big-label {
+    font-family: var(--serif);
+    font-size: var(--t-h3);
+    line-height: 1.3;
+    color: var(--lilac);
+    max-width: 22ch;
+  }
+  .proof__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-5) var(--s-8);
+    margin-top: var(--s-7);
+    padding-top: var(--s-6);
+    border-top: 1px solid rgba(201, 207, 242, 0.24);
+  }
+  .proof__facts dt {
+    font-size: var(--t-small);
+    color: var(--lilac);
+  }
+  .proof__facts dd {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    color: #fff;
+  }
+  .proof__facts dd :global(.icon) {
+    color: var(--gold);
+  }
+  .proof__cta {
+    margin-top: var(--s-7);
+  }
+  .proof__stories {
+    list-style: none;
+    display: grid;
+    gap: var(--s-6);
+  }
+  .proof__story p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: var(--t-lead);
+    line-height: 1.55;
+    color: #fff;
+  }
+  .proof__story figcaption {
+    margin-top: var(--s-3);
+    font-size: var(--t-small);
+    color: var(--lilac);
+  }
+
+  .home-faq__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: var(--s-8);
+  }
+  .home-faq__grid > div:first-child {
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: var(--s-4);
+  }
+
+  @media (max-width: 900px) {
+    .hero,
+    .sec-head,
+    .std__grid,
+    .proof__grid,
+    .home-faq__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--s-6);
+    }
+    .hero {
+      min-height: 0;
+      max-height: none;
+    }
+    .hero__photo {
+      height: 440px;
+      min-height: 0;
+    }
+    .row-head {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .hrow__item {
+      width: min(300px, 82vw);
+    }
+    .std__photo {
+      max-width: 420px;
+    }
+  }
+  @media (max-width: 640px) {
+  }
+</style>
+
+<script>
+  import "../scripts/lens.ts";
+  import "../scripts/drag-row.ts";
+</script>

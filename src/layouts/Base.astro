@@ -1,8 +1,9 @@
 ---
 import { url } from "../data/site";
+import { langOf, path, htmlLang, ogLocale, LANGS, LANG_META, type Route } from "../i18n/lang";
+import { ui } from "../i18n/ui";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
-import type { NavKey } from "../data/site";
 import Footer from "../components/Footer.astro";
 import { getImage } from "astro:assets";
 import { photo } from "../data/images";
@@ -13,11 +14,18 @@ import sansWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.
 interface Props {
   title: string;
   description: string;
-  current?: NavKey;
+  current?: Route;
+  /** Detail pages: the slug shared by both languages. */
+  slug?: string;
   ogImage?: string;
   jsonLd?: Record<string, unknown>[];
 }
-const { title, description, current = "home", ogImage = "hero-akad", jsonLd = [] } = Astro.props;
+const { title, description, current = "home", slug, ogImage = "hero-akad", jsonLd = [] } = Astro.props;
+const lang = langOf(Astro.url);
+const other = lang === "en" ? "id" : "en";
+const alt = { id: new URL(path("id", current, slug), Astro.site), en: new URL(path("en", current, slug), Astro.site) };
+// The 404 page has no twin, so its language menu leads to each home page.
+const alternates = Object.fromEntries(LANGS.map((l) => [l, current === "404" ? path(l, "home") : path(l, current, slug)])) as Record<(typeof LANGS)[number], string>;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const og = await getImage({ src: photo(ogImage), width: 1200, height: 630, fit: "cover", format: "jpg" });
 const ogUrl = new URL(og.src, Astro.site);
@@ -33,20 +41,24 @@ const org = {
 ---
 
 <!doctype html>
-<html lang="id">
+<html lang={htmlLang[lang]} dir={LANG_META[lang].dir}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {current === "404" ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    {current !== "404" && <link rel="alternate" hreflang="id" href={alt.id} />}
+    {current !== "404" && <link rel="alternate" hreflang="en" href={alt.en} />}
+    {current !== "404" && <link rel="alternate" hreflang="x-default" href={alt.id} />}
     <meta name="theme-color" content="#FAFAFC" />
     <link rel="icon" href={url("/favicon.svg")} type="image/svg+xml" />
     <link rel="preload" href={serifWoff2} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={sansWoff2} as="font" type="font/woff2" crossorigin />
 
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="id_ID" />
+    <meta property="og:locale" content={ogLocale[lang]} />
+    <meta property="og:locale:alternate" content={ogLocale[other]} />
     <meta property="og:site_name" content="Mahabbati" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -62,8 +74,8 @@ const org = {
     <script type="application/ld+json" set:html={JSON.stringify([org, ...jsonLd])} />
   </head>
   <body>
-    <a class="skip-link" href="#konten">Langsung ke konten</a>
-    <Header current={current} />
+    <a class="skip-link" href="#konten">{ui(lang).skip}</a>
+    <Header current={current} alternates={alternates} />
     <main id="konten" tabindex="-1">
       <slot />
     </main>

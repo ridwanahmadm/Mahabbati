@@ -1,6 +1,8 @@
 // Couples' stories. Asatidz are not listed by name (arahan stakeholder 21 Okt 2026).
 
 import type { NeedId } from "./packages";
+import type { Lang } from "../i18n/lang";
+import { merge, type Overlay } from "../i18n/merge";
 
 export type StoryType = "wo" | "app" | "kelas";
 
@@ -19,6 +21,8 @@ export type Story = {
    * hanya di `npm run dev` (PUBLIC_SHOW_PLACEHOLDERS=true di .env.development).
    */
   placeholder: boolean;
+  /** Set on the English site: the quote is our translation of an Indonesian original. */
+  translated?: boolean;
 };
 
 export const STORIES: Story[] = [
@@ -60,6 +64,24 @@ export const STORIES: Story[] = [
   { id: "ph-app", type: "app", by: "[Inisial pasangan]", quote: "[Cerita pasangan yang bertemu lewat aplikasi]", source: "[Tanggal dan kanal]", meta: "[Lama proses ta'aruf]", placeholder: true },
 ];
 
+// English: real quotes are translated and marked as such; placeholders stay in brackets.
+const STORIES_EN: Record<string, Overlay<Story>> = {
+  fn: {
+    quote: "Brought together through Mahabbati, now walking side by side in marriage.",
+    source: "Story shared on Instagram @mahabbati_official, October 2026",
+    meta: "Met through the app, married with Mahabbati WO",
+    translated: true,
+  },
+  dimas: {
+    quote: "Great app, with a way to find a spouse online the ta'aruf way. Interesting, and quite different from the usual dating apps.",
+    source: "Google Play review, 5 September 2026",
+    translated: true,
+  },
+  afni: { quote: "An interesting app.", source: "Google Play review, 20 August 2026", translated: true },
+};
+
 export const SHOW_PLACEHOLDERS = import.meta.env.PUBLIC_SHOW_PLACEHOLDERS === "true";
-export const visibleStories = (filter?: (s: Story) => boolean) =>
-  STORIES.filter((s) => (SHOW_PLACEHOLDERS || !s.placeholder) && (!filter || filter(s)));
+export const visibleStories = (filter?: (s: Story) => boolean, lang: Lang = "id") =>
+  STORIES.map((s) => (lang === "en" ? merge(s, STORIES_EN[s.id]) : s)).filter(
+    (s) => (SHOW_PLACEHOLDERS || !s.placeholder) && (!filter || filter(s)),
+  );

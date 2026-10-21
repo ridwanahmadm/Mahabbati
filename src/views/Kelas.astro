@@ -1,0 +1,317 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import Phone from "../components/Phone.astro";
+import KelasBand from "../components/KelasBand.astro";
+import PackageCard from "../components/PackageCard.astro";
+import Benefits from "../components/Benefits.astro";
+import StoreBadges from "../components/StoreBadges.astro";
+import { kelasFactsFor } from "../data/content";
+import { packagesFor } from "../data/packages";
+import { langOf, path } from "../i18n/lang";
+
+const lang = langOf(Astro.url);
+const withClass = packagesFor(lang).filter((p) => p.includesClass);
+const COPY = {
+  id: {
+    title: "Kelas pranikah dan nasihat pernikahan | Mahabbati",
+    desc: "Kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati di aplikasi, termasuk untuk klien Paket Akad dan Paket Lengkap.",
+    h1: "Bekal ilmu, sebelum dan setelah akad.",
+    lead: "Kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati, langsung di aplikasi. Sudah termasuk untuk klien Paket Akad, Akad di Masjid, dan Paket Lengkap.",
+    access: "Cara mendapat akses",
+    pkgs: "Paket yang termasuk kelas",
+    mTitle: "Materi kelasnya.",
+    mLead: "Disusun berurutan, dari niat menikah sampai mengelola rumah tangga. Disampaikan oleh asatidz Mahabbati.",
+    howTitle: "Cara belajarnya.",
+    howLead: "Semuanya ada di aplikasi, jadi bisa kalian ikuti dari rumah masing-masing.",
+    contents: [
+      { src: "kajian", title: "Kajian dan e-learning", body: "Video dan audio dari asatidz Mahabbati, bisa diputar ulang kapan saja.", alt: "Layar kajian di aplikasi Mahabbati: video materi rumah tangga dengan tombol putar versi audio." },
+      { src: "ujian_q", title: "Ujian pranikah", body: "Uji kesiapan diri, keluarga, dan ilmu pernikahan.", alt: "Layar ujian pranikah dengan pertanyaan pilihan ganda." },
+      { src: "ujian_hasil", title: "Sertifikat kelulusan", body: "Lulus ujian, unduh sertifikatnya untuk dibagikan.", alt: "Layar hasil ujian: dinyatakan lulus, dengan tombol unduh sertifikat." },
+    ],
+    aTitle: "Dua jalan untuk mendapat akses.",
+    wo: { title: "Lewat Wedding Organizer", steps: ["Pesan Paket Akad, Akad di Masjid, atau Paket Lengkap.", "Unduh aplikasi Mahabbati dan daftar dengan nomor yang sama.", "Tim kami membuka akses kelas dan nasihat pernikahan di akunmu."], link: "Lihat layanan WO" },
+    app: { title: "Lewat membership aplikasi", steps: ["Unduh aplikasi Mahabbati dan daftar gratis.", "Pilih membership Silver atau Gold.", "Kajian, e-learning, dan ujian pranikah langsung terbuka."], link: "Bandingkan membership" },
+    pkTitle: "Paket yang termasuk kelas pranikah.",
+    dlTitle: "Kelasnya ada di aplikasi Mahabbati.",
+    dlLead: "Unduh aplikasinya, lalu daftar dengan nomor yang sama seperti saat memesan WO.",
+  },
+  en: {
+    title: "Pre-marriage class and marriage advice | Mahabbati",
+    desc: "The pre-marriage class and marriage advice from the asatidz of Mahabbati, in the app. Included for Akad and Full wedding package clients.",
+    h1: "Knowledge for before and after the akad.",
+    lead: "The pre-marriage class and marriage advice from the asatidz of Mahabbati, right in the app. Included for clients of the Akad Package, Akad at a Mosque and the full wedding packages.",
+    access: "How to get access",
+    pkgs: "Packages that include it",
+    mTitle: "What you'll learn.",
+    mLead: "In a clear order, from the intention to marry to running a home together. Taught by the asatidz of Mahabbati.",
+    howTitle: "How you learn.",
+    howLead: "It's all in the app, so you can each follow it from your own home.",
+    contents: [
+      { src: "kajian", title: "Talks and e-learning", body: "Video and audio from the asatidz of Mahabbati, to replay anytime.", alt: "A talk screen in the Mahabbati app: a lesson video on married life with an audio option." },
+      { src: "ujian_q", title: "Pre-marriage test", body: "Check how ready you, your family and your knowledge are.", alt: "A pre-marriage test screen with a multiple-choice question." },
+      { src: "ujian_hasil", title: "Certificate", body: "Pass the test, then download a certificate to share.", alt: "A test result screen: passed, with a button to download the certificate." },
+    ],
+    aTitle: "Two ways to get access.",
+    wo: { title: "Through the Wedding Organizer", steps: ["Book the Akad Package, Akad at a Mosque, or a full wedding package.", "Download the Mahabbati app and sign up with the same phone number.", "Our team unlocks the class and marriage advice on your account."], link: "See WO services" },
+    app: { title: "Through app membership", steps: ["Download the Mahabbati app and sign up for free.", "Choose Silver or Gold membership.", "Talks, e-learning and the pre-marriage test open right away."], link: "Compare membership" },
+    pkTitle: "Packages that include the pre-marriage class.",
+    dlTitle: "The class lives in the Mahabbati app.",
+    dlLead: "Download the app, then sign up with the same phone number you used to book the WO.",
+  },
+};
+const c = COPY[lang];
+---
+
+<Base
+  title={c.title}
+  description={c.desc}
+  current="kelas"
+  ogImage="j-pranikah"
+>
+  <section class="ah wrap" aria-labelledby="ah-title">
+    <div class="ah__copy">
+      <h1 id="ah-title" class="t-display">{c.h1}</h1>
+      <p class="t-lead">{c.lead}</p>
+      <div class="ah__ctas">
+        <a class="btn" href="#akses">{c.access}</a>
+        <a class="btn btn--outline" href="#paket-kelas">{c.pkgs}</a>
+      </div>
+    </div>
+    <dl class="ah__facts">
+      {
+        kelasFactsFor(lang).map((f) => (
+          <div>
+            <dt>{f.value}</dt>
+            <dd>{f.label}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <KelasBand
+    id="materi-title"
+    title={c.mTitle}
+    lead={c.mLead}
+    cta={false}
+  />
+
+  <section class="ac section chapter-mist" aria-labelledby="ac-title">
+    <div class="wrap">
+      <div class="ac__head">
+        <h2 id="ac-title" class="t-h2">{c.howTitle}</h2>
+        <p class="t-lead">{c.howLead}</p>
+      </div>
+      <ul class="ac__list">
+        {
+          c.contents.map((x) => (
+            <li class="ac__item" data-reveal>
+              <Phone src={x.src} alt={x.alt} width={240} />
+              <h3>{x.title}</h3>
+              <p>{x.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section id="akses" class="aa section" aria-labelledby="aa-title">
+    <div class="wrap aa__grid">
+      <h2 id="aa-title" class="t-h2">{c.aTitle}</h2>
+      <div class="aa__paths">
+        <!-- PLACEHOLDER: alur aktivasi akses untuk klien WO, konfirmasi ke tim. -->
+        <article class="aa__path">
+          <Icon name="volunteer_activism" size={32} />
+          <h3 class="t-h3">{c.wo.title}</h3>
+          <ol>{c.wo.steps.map((x) => <li>{x}</li>)}</ol>
+          <a class="link" href={path(lang, "layanan")}>{c.wo.link}</a>
+        </article>
+        <article class="aa__path">
+          <Icon name="mobile" size={32} />
+          <h3 class="t-h3">{c.app.title}</h3>
+          <ol>{c.app.steps.map((x) => <li>{x}</li>)}</ol>
+          <a class="link" href={path(lang, "aplikasi", undefined, "membership")}>{c.app.link}</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab section chapter-night on-dark" aria-labelledby="benefits-title">
+    <div class="wrap">
+      <Benefits />
+    </div>
+  </section>
+
+  <section id="paket-kelas" class="apk section" aria-labelledby="apk-title">
+    <div class="wrap">
+      <h2 id="apk-title" class="t-h2">{c.pkTitle}</h2>
+      <ul class="card-grid">
+        {
+          withClass.map((p) => (
+            <li>
+              <PackageCard pkg={p} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="adl section chapter-mist" aria-labelledby="adl-title">
+    <div class="wrap adl__inner">
+      <h2 id="adl-title" class="t-h2">{c.dlTitle}</h2>
+      <p class="t-lead">{c.dlLead}</p>
+      <StoreBadges from="kelas" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ah {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--s-8);
+    align-items: center;
+    padding-block: clamp(24px, 4vw, 56px) var(--s-9);
+  }
+  .ah__copy {
+    display: grid;
+    gap: var(--s-5);
+  }
+  .ah__copy h1 {
+    font-size: clamp(2.25rem, 1.2rem + 2.3vw, 3.25rem);
+  }
+  .ah__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+  .ah__facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-4);
+    margin: 0;
+  }
+  .ah__facts > div {
+    display: grid;
+    align-content: start;
+    gap: var(--s-2);
+    padding: var(--s-5);
+    border-radius: var(--r-l);
+    background: var(--mist);
+  }
+  .ah__facts dt {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .ah__facts dd {
+    margin: 0;
+    font-size: var(--t-small);
+    color: var(--ink-2);
+  }
+  .ac__head {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--s-5) var(--s-7);
+    align-items: end;
+  }
+  .ac__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-6);
+    margin-top: var(--s-8);
+  }
+  .ac__item {
+    display: grid;
+    justify-items: start;
+    gap: var(--s-2);
+  }
+  .ac__item h3 {
+    margin-top: var(--s-4);
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.375rem;
+  }
+  .ac__item p {
+    color: var(--ink-2);
+    max-width: 30ch;
+  }
+  .aa__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--s-8);
+  }
+  .aa__paths {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-6);
+  }
+  .aa__path {
+    display: grid;
+    align-content: start;
+    gap: var(--s-4);
+    padding: var(--s-6);
+    border-radius: var(--r-l);
+    background: var(--mist);
+  }
+  .aa__path > :global(.icon) {
+    color: var(--accent);
+  }
+  .aa__path ol {
+    display: grid;
+    gap: var(--s-3);
+    padding-left: 1.3em;
+    color: var(--ink-2);
+  }
+  .aa__path ol li::marker {
+    font-family: var(--serif);
+    color: var(--accent-ink);
+  }
+  .card-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--s-5);
+    margin-top: var(--s-7);
+  }
+  .card-grid > li {
+    display: grid;
+  }
+  .adl__inner {
+    display: grid;
+    gap: var(--s-4);
+    justify-items: start;
+  }
+  @media (max-width: 1100px) {
+    .card-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 900px) {
+    .ah,
+    .ac__head,
+    .aa__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--s-6);
+    }
+    .ac__list {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+    }
+    .ac__item {
+      justify-items: center;
+      text-align: center;
+    }
+  }
+  @media (max-width: 640px) {
+    .aa__paths,
+    .card-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

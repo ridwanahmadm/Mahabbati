@@ -1,0 +1,10 @@
+---
+import PackageDetail from "../../../views/PackageDetail.astro";
+import { PACKAGES } from "../../../data/packages";
+
+export function getStaticPaths() {
+  return PACKAGES.map((p) => ({ params: { slug: p.slug } }));
+}
+---
+
+<PackageDetail slug={Astro.params.slug} />

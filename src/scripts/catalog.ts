@@ -40,7 +40,7 @@ if (form) {
       li.hidden = !ok;
       if (ok) shown++;
     }
-    if (count) count.textContent = shown ? `${shown} paket` : "Tidak ada paket";
+    if (count) count.textContent = !shown ? (count.dataset.none ?? "0") : shown === 1 && count.dataset.one ? count.dataset.one : (count.dataset.tpl ?? "{n}").replace("{n}", String(shown));
     if (empty) empty.hidden = shown > 0;
     if (animate && !reducedMotion() && appearing.length) {
       gsap.fromTo(appearing, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.06, clearProps: "all" });

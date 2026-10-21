@@ -10,6 +10,8 @@ if (root) {
   const live = root.querySelector<HTMLElement>("[data-photo-live]")!;
   const badgeHtml = badge.innerHTML;
 
+  const T = JSON.parse(root.dataset.i18n ?? "{}") as Record<string, string>;
+  const f = (k: string) => T[k] ?? k;
   let state: "locked" | "waiting" | "open" = "locked";
   let tick: number | undefined;
 
@@ -24,18 +26,18 @@ if (root) {
     if (state === "locked") {
       state = "waiting";
       btn.disabled = true;
-      say("Permintaan terkirim. Menunggu persetujuan pemilik foto…");
+      say(f("sent"));
       window.setTimeout(() => {
         state = "open";
         root.classList.add("is-open");
-        badge.textContent = "Disetujui pemilik foto";
-        say("Disetujui. Foto terbuka selama 24 jam, lalu terkunci lagi.");
+        badge.textContent = f("approvedBadge");
+        say(f("approved"));
         wrap.hidden = false;
         let left = 24 * 3600;
         timerEl.textContent = fmt(left);
         tick = window.setInterval(() => (timerEl.textContent = fmt(--left)), 1000);
         btn.disabled = false;
-        btn.textContent = "Kunci lagi";
+        btn.textContent = f("lockAgain");
       }, 1100);
     } else if (state === "open") {
       state = "locked";
@@ -43,8 +45,8 @@ if (root) {
       root.classList.remove("is-open");
       badge.innerHTML = badgeHtml;
       wrap.hidden = true;
-      btn.textContent = "Minta lihat foto";
-      say("Foto terkunci kembali.");
+      btn.textContent = f("request");
+      say(f("relocked"));
     }
   });
 }

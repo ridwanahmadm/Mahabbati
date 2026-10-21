@@ -3,6 +3,8 @@
 import { Image } from "astro:assets";
 import Logo from "./Logo.astro";
 import { photo } from "../data/images";
+import { langOf } from "../i18n/lang";
+import { phaseLabel } from "../data/content";
 
 type Stage = { id: string; name: string; line: string; how: string; photo: string; alt: string; phase?: string };
 interface Props {
@@ -14,6 +16,8 @@ interface Props {
   tall?: string[];
 }
 const { title, lead, stages, close, doors, tall = [] } = Astro.props;
+const lang = langOf(Astro.url);
+const step = lang === "en" ? "Step" : "Tahap";
 ---
 
 <section class="journey section" aria-labelledby="journey-title" data-journey>
@@ -38,9 +42,9 @@ const { title, lead, stages, close, doors, tall = [] } = Astro.props;
                 <span class="stage__node" data-node aria-hidden="true">
                   {i + 1}
                 </span>
-                {s.phase && (i === 0 || stages[i - 1].phase !== s.phase) && <p class="stage__phase">{s.phase}</p>}
+                {s.phase && (i === 0 || stages[i - 1].phase !== s.phase) && <p class="stage__phase">{phaseLabel(s.phase, lang)}</p>}
                 <h3 class="t-h3">
-                  <span class="visually-hidden">Tahap {i + 1}: </span>
+                  <span class="visually-hidden">{step} {i + 1}: </span>
                   {s.name}
                 </h3>
                 <p class="stage__line">{s.line}</p>
@@ -175,6 +179,7 @@ const { title, lead, stages, close, doors, tall = [] } = Astro.props;
   .journey__end {
     position: relative;
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     justify-items: center;
     text-align: center;
     padding-top: clamp(96px, 10vw, 160px);
@@ -197,6 +202,11 @@ const { title, lead, stages, close, doors, tall = [] } = Astro.props;
     justify-content: center;
     gap: var(--s-3);
     margin-top: var(--s-6);
+  }
+  .journey__doors .btn {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
   }
 
   @media (max-width: 900px) {

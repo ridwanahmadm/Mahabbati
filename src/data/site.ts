@@ -25,6 +25,9 @@ export const waLink = (number: string, text?: string) =>
 
 export const WO_GREETING =
   "Assalamu'alaikum, Tim Wedding Organizer Mahabbati. Saya ingin konsultasi paket pernikahan.";
+export const WO_GREETING_EN =
+  "Assalamu'alaikum, Mahabbati Wedding Organizer team. I'd like to ask about a wedding package.";
+export const woGreeting = (lang: "id" | "en" = "id") => (lang === "en" ? WO_GREETING_EN : WO_GREETING);
 
 // Proof points with their sources. Keep these in sync with real data before publishing.
 export const PROOF = {
@@ -38,12 +41,13 @@ export const PROOF = {
   },
 };
 
-export const rupiah = (n: number) =>
-  "Rp" + new Intl.NumberFormat("id-ID", { maximumFractionDigits: 0 }).format(n);
+export const rupiah = (n: number, lang: "id" | "en" = "id") =>
+  "Rp" + new Intl.NumberFormat(lang === "en" ? "en-US" : "id-ID", { maximumFractionDigits: 0 }).format(n);
 
-/** Short form: 1.500.000 → "Rp1,5 jt", 1.250.000 → "Rp1,25 jt", 750.000 → "Rp750 rb". */
-export const rupiahShort = (n: number) => {
-  const nf = new Intl.NumberFormat("id-ID", { maximumFractionDigits: 2 });
+/** Short form. id: 1.500.000 → "Rp1,5 jt", 750.000 → "Rp750 rb". en: "Rp1.5M", "Rp750K". */
+export const rupiahShort = (n: number, lang: "id" | "en" = "id") => {
+  const nf = new Intl.NumberFormat(lang === "en" ? "en-US" : "id-ID", { maximumFractionDigits: 2 });
+  if (lang === "en") return n < 1_000_000 ? `Rp${nf.format(n / 1000)}K` : `Rp${nf.format(n / 1_000_000)}M`;
   return n < 1_000_000 ? `Rp${nf.format(n / 1000)} rb` : `Rp${nf.format(n / 1_000_000)} jt`;
 };
 

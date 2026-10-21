@@ -4,6 +4,9 @@
 // sebagai kerja sama dengan tempat sungguhan. Ganti dengan data mitra resmi, lalu set `placeholder: false`.
 
 import type { NeedId } from "./packages";
+import type { Lang } from "../i18n/lang";
+import { merge } from "../i18n/merge";
+import { VENUES_EN, VENUE_TYPES_EN, CITIES_EN } from "./venues.en";
 
 export type VenueType = "masjid" | "gedung" | "taman" | "villa" | "restoran";
 
@@ -139,6 +142,12 @@ export const VENUES: Venue[] = [
   },
 ];
 
-export const findVenue = (slug: string) => VENUES.find((v) => v.slug === slug);
-export const venueTypeLabel = (t: VenueType) => VENUE_TYPES.find((x) => x.id === t)?.label ?? t;
+const VENUES_BY_LANG = { id: VENUES, en: VENUES.map((v) => merge(v, VENUES_EN[v.slug])) } as const;
+export const venuesFor = (lang: Lang = "id") => VENUES_BY_LANG[lang];
+export const findVenue = (slug: string, lang: Lang = "id") => venuesFor(lang).find((v) => v.slug === slug);
+export const venueTypesFor = (lang: Lang = "id") =>
+  lang === "en" ? VENUE_TYPES.map((t) => ({ ...t, label: VENUE_TYPES_EN[t.id] })) : VENUE_TYPES;
+export const venueTypeLabel = (t: VenueType, lang: Lang = "id") => venueTypesFor(lang).find((x) => x.id === t)?.label ?? t;
+/** City ids stay Indonesian (they are filter values); only the label changes. */
 export const VENUE_CITIES = [...new Set(VENUES.map((v) => v.city))];
+export const cityLabel = (city: string, lang: Lang = "id") => (lang === "en" ? (CITIES_EN[city] ?? city) : city);

@@ -15,14 +15,18 @@ type Data = {
   waNumber: string;
   variants: Variant[];
   addons: Record<string, { label: string; price: number }>;
+  /** Number locale and message templates for the page language ({x} placeholders). */
+  locale: string;
+  t: { included: string; over: string; extraRow: string; greet: string; guests: string; addons: string; estimate: string; close: string };
 };
+const fill = (tpl: string, v: Record<string, string | number>) => tpl.replace(/\{(\w+)\}/g, (_, k) => String(v[k] ?? ""));
 
 const root = document.querySelector<HTMLElement>("[data-estimator]");
 const raw = document.getElementById("est-data")?.textContent;
 
 if (root && raw) {
   const data = JSON.parse(raw) as Data;
-  const fmt = (n: number) => "Rp" + new Intl.NumberFormat("id-ID").format(Math.round(n));
+  const fmt = (n: number) => "Rp" + new Intl.NumberFormat(data.locale).format(Math.round(n));
   const variants = [...root.querySelectorAll<HTMLInputElement>("[data-variant]")];
   const range = root.querySelector<HTMLInputElement>("[data-guests-range]")!;
   const number = root.querySelector<HTMLInputElement>("[data-guests]")!;
@@ -70,13 +74,12 @@ if (root && raw) {
     const addonSum = picked.reduce((s, id) => s + data.addons[id].price, 0);
     const total = v.price + extra + addonSum;
 
+    const t = data.t;
     hint.textContent =
-      over > 0
-        ? `Sudah termasuk ${v.guests.included} tamu. Tambahan ${over} tamu dihitung per ${v.extra.per} tamu.`
-        : `Sudah termasuk ${v.guests.included} tamu.`;
+      fill(t.included, { n: v.guests.included }) + (over > 0 ? " " + fill(t.over, { over, per: v.extra.per }) : "");
 
     const rows: [string, number][] = [[data.multi ? `${data.name}, ${v.name}` : data.name, v.price]];
-    if (extra) rows.push([`Tambahan ${over} tamu`, extra]);
+    if (extra) rows.push([fill(t.extraRow, { over }), extra]);
     picked.forEach((id) => rows.push([data.addons[id].label, data.addons[id].price]));
     breakdown.innerHTML = "";
     for (const [label, value] of rows) {
@@ -105,10 +108,10 @@ if (root && raw) {
     if (stickyTotal) stickyTotal.textContent = fmt(total);
 
     const msg =
-      `Assalamu'alaikum, Tim WO Mahabbati. Saya tertarik dengan paket ${data.name}${data.multi ? ` (${v.name})` : ""}.\n` +
-      `Perkiraan tamu: ${guests} orang\n` +
-      (picked.length ? `Tambahan: ${picked.map((id) => data.addons[id].label).join(", ")}\n` : "") +
-      `Estimasi dari website: ${fmt(total)}\nBoleh dibantu jadwal konsultasinya?`;
+      fill(t.greet, { name: data.multi ? `${data.name} (${v.name})` : data.name }) + "\n" +
+      fill(t.guests, { n: guests }) + "\n" +
+      (picked.length ? fill(t.addons, { list: picked.map((id) => data.addons[id].label).join(", ") }) + "\n" : "") +
+      fill(t.estimate, { total: fmt(total) }) + "\n" + t.close;
     const href = `https://wa.me/${data.waNumber}?text=${encodeURIComponent(msg)}`;
     waLinks.forEach((a) => (a.href = href));
   };

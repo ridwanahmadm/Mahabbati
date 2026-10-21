@@ -1,0 +1,10 @@
+---
+import VenueDetail from "../../../views/VenueDetail.astro";
+import { VENUES } from "../../../data/venues";
+
+export function getStaticPaths() {
+  return VENUES.map((v) => ({ params: { slug: v.slug } }));
+}
+---
+
+<VenueDetail slug={Astro.params.slug} />

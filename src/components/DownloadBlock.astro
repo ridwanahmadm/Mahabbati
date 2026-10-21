@@ -4,16 +4,21 @@ import QRCode from "qrcode";
 import StoreBadges from "./StoreBadges.astro";
 import Phone from "./Phone.astro";
 import { PLAY_STORE_URL } from "../data/site";
+import { langOf } from "../i18n/lang";
 
 interface Props {
   from: string;
   title?: string;
   body?: string;
 }
+const lang = langOf(Astro.url);
+const en = lang === "en";
 const {
   from,
-  title = "Ajukan ta'aruf pertamamu gratis.",
-  body = "Pencarian calon, pengajuan ta'aruf, dan chat hanya ada di aplikasi Mahabbati. Daftar gratis, lalu lengkapi biodata pelan-pelan.",
+  title = en ? "Your first ta'aruf request is free." : "Ajukan ta'aruf pertamamu gratis.",
+  body = en
+    ? "Searching, ta'aruf requests and chat happen only in the Mahabbati app. Sign up free, and fill in your profile at your own pace."
+    : "Pencarian calon, pengajuan ta'aruf, dan chat hanya ada di aplikasi Mahabbati. Daftar gratis, lalu lengkapi biodata pelan-pelan.",
 } = Astro.props;
 const qr = await QRCode.toString(PLAY_STORE_URL, {
   type: "svg",
@@ -30,8 +35,8 @@ const qr = await QRCode.toString(PLAY_STORE_URL, {
       <p class="t-lead">{body}</p>
       <StoreBadges from={from} class="download__stores" />
       <div class="download__qr">
-        <div class="download__qr-code" set:html={qr} role="img" aria-label="Kode QR menuju Mahabbati di Google Play" />
-        <p>Buka kamera ponselmu, arahkan ke kode ini untuk langsung ke Google Play.</p>
+        <div class="download__qr-code" set:html={qr} role="img" aria-label={en ? "QR code to Mahabbati on Google Play" : "Kode QR menuju Mahabbati di Google Play"} />
+        <p>{en ? "Point your phone camera at this code to open Google Play." : "Arahkan kamera ponselmu ke kode ini untuk langsung ke Google Play."}</p>
       </div>
     </div>
     <div class="download__phones" aria-hidden="true">

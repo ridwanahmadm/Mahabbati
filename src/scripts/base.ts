@@ -25,7 +25,34 @@ document.addEventListener("keydown", (e) => {
     toggle.focus();
   }
 });
-window.matchMedia("(min-width: 1081px)").addEventListener("change", (e) => e.matches && setMenu(false));
+window.matchMedia("(min-width: 1201px)").addEventListener("change", (e) => e.matches && setMenu(false));
+
+/* Language menu: disclosure button with a short list; closes on Escape, outside click, or focus leaving. */
+const langMenu = document.querySelector<HTMLElement>("[data-lang-menu]");
+const langBtn = langMenu?.querySelector<HTMLButtonElement>("[data-lang-toggle]");
+const langList = langMenu?.querySelector<HTMLElement>("[data-lang-list]");
+const setLang = (open: boolean) => {
+  if (!langBtn || !langList) return;
+  langBtn.setAttribute("aria-expanded", String(open));
+  langList.hidden = !open;
+};
+langBtn?.addEventListener("click", () => {
+  const open = langBtn.getAttribute("aria-expanded") !== "true";
+  setLang(open);
+  if (open) (langList?.querySelector<HTMLAnchorElement>('[aria-current="true"]') ?? langList?.querySelector("a"))?.focus();
+});
+document.addEventListener("click", (e) => {
+  if (langMenu && !langMenu.contains(e.target as Node)) setLang(false);
+});
+langMenu?.addEventListener("focusout", (e) => {
+  if (!langMenu.contains(e.relatedTarget as Node | null)) setLang(false);
+});
+langMenu?.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && langBtn?.getAttribute("aria-expanded") === "true") {
+    setLang(false);
+    langBtn.focus();
+  }
+});
 
 /* Reveal once, when the element's top passes ~88% of the viewport.
    Chrome's IntersectionObserver honours the target's own clip-path, so masked reveals

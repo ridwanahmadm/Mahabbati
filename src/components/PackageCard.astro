@@ -3,7 +3,9 @@ import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import { photo } from "../data/images";
 import { type Package, needLabel, guestRange } from "../data/packages";
-import { rupiahShort, url } from "../data/site";
+import { rupiahShort } from "../data/site";
+import { langOf, path } from "../i18n/lang";
+import { ui, numLocale } from "../i18n/ui";
 
 interface Props {
   pkg: Package;
@@ -13,6 +15,8 @@ interface Props {
 const { pkg, sizes = "(max-width: 720px) 92vw, (max-width: 1100px) 46vw, 30vw", headingLevel = "h3" } = Astro.props;
 const g = guestRange(pkg);
 const H = headingLevel;
+const lang = langOf(Astro.url);
+const u = ui(lang);
 ---
 
 <article
@@ -25,29 +29,29 @@ const H = headingLevel;
 >
   <figure class="pcard__photo photo">
     <Image src={photo(pkg.photo)} alt="" widths={[360, 540, 720, 960]} sizes={sizes} />
-    {pkg.placeholder && <span class="chip chip--sample">Data contoh</span>}
+    {pkg.placeholder && <span class="chip chip--sample">{u.sample}</span>}
   </figure>
   <div class="pcard__body">
-    <p class="pcard__need">{needLabel(pkg.need)}</p>
+    <p class="pcard__need">{needLabel(pkg.need, lang)}</p>
     <H class="pcard__name">
-      <a href={url(`/layanan/${pkg.slug}/`)} class="pcard__link">{pkg.name}</a>
+      <a href={path(lang, "layanan", pkg.slug)} class="pcard__link">{pkg.name}</a>
     </H>
     <p class="pcard__promise">{pkg.promise}</p>
     <dl class="pcard__meta">
       <div>
-        <dt>mulai</dt>
-        <dd class="num pcard__price">{rupiahShort(pkg.priceFrom)}</dd>
+        <dt>{u.from}</dt>
+        <dd class="num pcard__price">{rupiahShort(pkg.priceFrom, lang)}</dd>
       </div>
       <div>
-        <dt>tamu</dt>
-        <dd class="num">{g.min} sampai {g.max.toLocaleString("id-ID")}</dd>
+        <dt>{u.guests}</dt>
+        <dd class="num">{u.range(String(g.min), g.max.toLocaleString(numLocale(lang)))}</dd>
       </div>
     </dl>
     {
       pkg.includesClass && (
         <p class="pcard__class">
           <Icon name="school" size={18} />
-          Termasuk kelas pranikah bersama asatidz
+          {u.classTag}
         </p>
       )
     }

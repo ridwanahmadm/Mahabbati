@@ -1,0 +1,223 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { Image } from "astro:assets";
+import { photo } from "../data/images";
+import { syariFor } from "../data/content";
+import { WA, waLink, woGreeting, EMAIL, ADDRESS, INSTAGRAM_URL } from "../data/site";
+import { langOf, path } from "../i18n/lang";
+import { ui } from "../i18n/ui";
+
+const lang = langOf(Astro.url);
+const u = ui(lang);
+const COPY = {
+  id: {
+    title: "Tentang Mahabbati dan standar syar'i",
+    desc: "Mahabbati: wedding organizer syar'i, kelas pranikah dari asatidz, dan aplikasi ta'aruf dalam satu tempat. Baca standar syar'i kami.",
+    h1: "Menuju janji suci, bersama.",
+    lead: "Mahabbati didirikan oleh para ustadz lulusan universitas Islam. Kami menyatukan tiga hal yang biasanya terpisah: bekal ilmu, pertemuan yang aman, dan acara pernikahan yang tertata.",
+    img: "Siluet pengantin berkerudung panjang di ambang pintu berlengkung.",
+    partsTitle: "Tiga hal, dalam satu tempat.",
+    parts: [
+      { icon: "volunteer_activism", title: "Wedding Organizer syar'i", body: "Paket khitbah, akad, akad di masjid, walimah, sampai koordinasi hari H, dengan tempat mitra yang dikurasi.", route: "layanan", cta: "Lihat layanan" },
+      { icon: "school", title: "Kelas dari asatidz Mahabbati", body: "Kelas pranikah, nasihat pernikahan, dan konsultasi syariah, sebelum sampai setelah menikah.", route: "kelas", cta: "Lihat kelas pranikah" },
+      { icon: "favorite", title: "Aplikasi ta'aruf", body: "Ta'aruf yang aman: profil terverifikasi, kuota kembali bila tak dibalas, dan foto muslimah hanya ditinjau admin wanita.", route: "aplikasi", cta: "Kenali aplikasinya" },
+    ],
+    stdTitle: "Standar syar'i kami.",
+    stdLead: "Yang kami jaga di setiap acara, supaya kamu tahu persis apa yang bisa diharapkan.",
+    contact: "Hubungi kami.",
+  },
+  en: {
+    title: "About Mahabbati and our sharia standards",
+    desc: "Mahabbati: a sharia-minded wedding organizer, a pre-marriage class from our asatidz, and a ta'aruf app in one place. Read our sharia standards.",
+    h1: "Towards a sacred promise, together.",
+    lead: "Mahabbati was founded by ustadz who graduated from Islamic universities. We bring together three things that usually stand apart: knowledge, a safe way to meet, and a well-run wedding.",
+    img: "The silhouette of a bride in a long veil in an arched doorway.",
+    partsTitle: "Three things, in one place.",
+    parts: [
+      { icon: "volunteer_activism", title: "Islamic Wedding Organizer", body: "Khitbah, akad, mosque akad, walimah and wedding-day coordination, with curated partner venues.", route: "layanan", cta: "See services" },
+      { icon: "school", title: "Class from the asatidz of Mahabbati", body: "The pre-marriage class, marriage advice and sharia consultation, from before the wedding to after.", route: "kelas", cta: "See the pre-marriage class" },
+      { icon: "favorite", title: "Ta'aruf app", body: "Safe ta'aruf: verified profiles, your quota back if there's no reply, and women's photos reviewed by female admins only.", route: "aplikasi", cta: "Explore the app" },
+    ],
+    stdTitle: "Our sharia standards.",
+    stdLead: "What we keep to at every event, so you know exactly what to expect.",
+    contact: "Contact us.",
+  },
+} as const;
+const c = COPY[lang];
+---
+
+<Base
+  title={c.title}
+  description={c.desc}
+  current="tentang"
+  ogImage="n-bride-arch"
+>
+  <section class="th wrap" aria-labelledby="th-title">
+    <div>
+      <h1 id="th-title" class="t-display">{c.h1}</h1>
+      <p class="t-lead">{c.lead}</p>
+    </div>
+    <figure class="th__photo photo">
+      <Image src={photo("n-bride-arch")} alt={c.img} widths={[480, 720, 960]} sizes="(max-width: 900px) 92vw, 36vw" loading="eager" />
+    </figure>
+  </section>
+
+  <section class="tp section chapter-mist" aria-labelledby="tp-title">
+    <div class="wrap">
+      <h2 id="tp-title" class="t-h2">{c.partsTitle}</h2>
+      <ul class="tp__list">
+        {
+          c.parts.map((p) => (
+            <li>
+              <Icon name={p.icon} size={32} />
+              <h3 class="t-h3">{p.title}</h3>
+              <p>{p.body}</p>
+              <a class="link" href={path(lang, p.route)}>{p.cta}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section id="standar" class="ts section" aria-labelledby="ts-title">
+    <div class="wrap ts__grid">
+      <div>
+        <h2 id="ts-title" class="t-h2">{c.stdTitle}</h2>
+        <p class="t-lead">{c.stdLead}</p>
+      </div>
+      <ol class="ts__list">
+        {
+          syariFor(lang).map((s) => (
+            <li>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="tc section chapter-night on-dark" aria-labelledby="tc-title">
+    <div class="wrap tc__grid">
+      <h2 id="tc-title" class="t-h2">{c.contact}</h2>
+      <ul class="tc__list">
+        <li><Icon name="whatsapp" size={22} /><a href={waLink(WA.wo.number, woGreeting(lang))} rel="noopener">{u.footer.woLine}, {WA.wo.label}</a></li>
+        <li><Icon name="whatsapp" size={22} /><a href={waLink(WA.ikhwan.number)} rel="noopener">{u.footer.ikhwan}, {WA.ikhwan.label}</a></li>
+        <li><Icon name="whatsapp" size={22} /><a href={waLink(WA.akhwat.number)} rel="noopener">{u.footer.akhwat}, {WA.akhwat.label}</a></li>
+        <li><Icon name="mail" size={22} /><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+        <li><Icon name="instagram" size={22} /><a href={INSTAGRAM_URL} rel="noopener">@mahabbati_official</a></li>
+        <li><Icon name="location_on" size={22} /><span>{ADDRESS}</span></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .th {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: var(--s-8);
+    align-items: center;
+    padding-block: clamp(24px, 4vw, 56px) var(--s-9);
+  }
+  .th .t-lead {
+    margin-top: var(--s-5);
+  }
+  .th__photo {
+    aspect-ratio: 4 / 5;
+  }
+  .tp__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-7);
+    margin-top: var(--s-7);
+  }
+  .tp__list li {
+    display: grid;
+    align-content: start;
+    gap: var(--s-3);
+  }
+  .tp__list li > :global(.icon) {
+    color: var(--accent);
+  }
+  .tp__list p {
+    color: var(--ink-2);
+  }
+  .ts__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--s-8);
+  }
+  .ts__list {
+    list-style: none;
+    counter-reset: ts;
+    display: grid;
+    gap: var(--s-5);
+  }
+  .ts__list li {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    counter-increment: ts;
+    padding-bottom: var(--s-5);
+    border-bottom: 1px solid var(--line);
+  }
+  .ts__list li::before {
+    content: counter(ts);
+    grid-row: span 2;
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    line-height: 1.1;
+    color: var(--accent);
+  }
+  .ts__list h3 {
+    font-weight: 600;
+    font-size: 1.0625rem;
+  }
+  .ts__list p {
+    color: var(--ink-2);
+  }
+  .tc__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: var(--s-8);
+  }
+  .tc__list {
+    list-style: none;
+    display: grid;
+    gap: var(--s-4);
+  }
+  .tc__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-3);
+    color: var(--haze);
+  }
+  .tc__list li :global(.icon) {
+    color: var(--lilac);
+    flex: none;
+    margin-top: 2px;
+  }
+  .tc__list a {
+    color: #fff;
+    text-underline-offset: 0.2em;
+  }
+  @media (max-width: 900px) {
+    .th,
+    .ts__grid,
+    .tc__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--s-6);
+    }
+    .th__photo {
+      max-width: 420px;
+    }
+    .tp__list {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--s-6);
+    }
+  }
+</style>

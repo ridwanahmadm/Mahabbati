@@ -1,0 +1,1272 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import Phone from "../components/Phone.astro";
+import StoreBadges from "../components/StoreBadges.astro";
+import Faq from "../components/Faq.astro";
+import DownloadBlock from "../components/DownloadBlock.astro";
+import { Image } from "astro:assets";
+import { photo } from "../data/images";
+import { appFaqFor, membershipFor, benefitsNoteFor } from "../data/content";
+import { PLAY_STORE_URL } from "../data/site";
+import { langOf, path } from "../i18n/lang";
+import { ui } from "../i18n/ui";
+
+const lang = langOf(Astro.url);
+const u = ui(lang);
+const MEMBERSHIP = membershipFor(lang);
+const BENEFITS_NOTE = benefitsNoteFor(lang);
+const COPY = {
+  id: {
+    title: "Aplikasi ta'aruf Mahabbati | Aman, terverifikasi, tidak digantung",
+    desc: "Ta'aruf lewat aplikasi Mahabbati: profil terverifikasi, kuota kembali bila tak dibalas 7 hari, foto muslimah hanya ditinjau admin wanita, nadzhor didampingi wali.",
+    h1: "Ta'aruf seharusnya menenangkan.",
+    lead: "Profil yang jelas, pengajuan yang tidak digantung, dan pendampingan sampai akad. Semuanya di aplikasi Mahabbati.",
+    heroNote: "Daftar gratis, dan pengajuan ta'aruf pertamamu tanpa biaya.",
+    phoneKandidat: "Layar detail kandidat dengan skor kompatibilitas 89% dari AI Matchmaker.",
+    phoneHome: "Beranda aplikasi Mahabbati: rekomendasi calon, menu Wedding Organizer, kajian, dan ujian pranikah.",
+    painsTitle: "Tiga hal yang membuat ta'aruf melelahkan, dan jawaban kami.",
+    pains: [
+      { pain: "Profil yang tidak jelas siapa di baliknya.", answer: "Setiap akun diverifikasi dengan e-KTP untuk WNI atau paspor untuk WNA, ditambah foto wajah. Paling lama 3×24 jam." },
+      { pain: "Pengajuan yang digantung berminggu-minggu.", answer: "Tidak dibalas dalam 7 hari, pengajuan batal otomatis dan kuotamu kembali.", link: { href: "#anti-ghosting", label: "Coba simulasinya" } },
+      { pain: "Berjalan sendirian tanpa pendamping.", answer: "Nadzhor selalu didampingi wali atau mahram. Ada konsultasi syariah, kajian, dan ujian pranikah di aplikasi." },
+    ],
+    ghostTitle: "Tak dibalas 7 hari? Kuotamu kembali.",
+    ghostLead: "Pengajuan yang tidak direspons dalam 7 hari dibatalkan otomatis, dan kuota yang terpakai dikembalikan. Kamu bisa lanjut mengajukan ke calon lain tanpa kehilangan apa pun.",
+    ghostHint: "Kirim pengajuan di simulasi ini, lalu geser waktunya.",
+    quota: "Sisa kuota pengajuan",
+    who: "AH, 25 tahun",
+    whoMeta: "DKI Jakarta, S1, karyawan swasta",
+    idle: "Belum diajukan",
+    stamp: "Otomatis batal",
+    send: "Kirim pengajuan",
+    slide: "Geser waktu",
+    day0: "Hari ke-0",
+    play: "Putar 7 hari",
+    again: "Ulangi",
+    ghostT: {
+      day: "Hari ke-{d}",
+      cancelled: "Tidak dibalas 7 hari. Pengajuan batal otomatis, kuota dikembalikan.",
+      day7: "Hari ke-7: pengajuan batal otomatis. Kuota dikembalikan, sisa {q}.",
+      waitingN: "Menunggu respons, belum dibalas {d} hari.",
+      waiting: "Menunggu respons.",
+      sent: "Pengajuan terkirim. Sisa kuota {q}. Geser waktu untuk melihat hari berikutnya.",
+      idle: "Belum diajukan",
+      reset: "Simulasi diulang.",
+    },
+    privTitle: "Fotomu tetap milikmu.",
+    priv: [
+      { icon: "verified_user", title: "Ditinjau admin sesama gender", body: "Foto muslimah hanya ditinjau oleh admin wanita." },
+      { icon: "hourglass_top", title: "Terbuka 24 jam setelah kamu setuju", body: "Calon baru bisa melihat fotomu kalau kamu menyetujui permintaannya, dan hanya selama 24 jam." },
+      { icon: "visibility_off", title: "Tidak bisa diunduh", body: "Foto tampil di dalam aplikasi saja, tanpa tombol simpan." },
+    ],
+    lockAlt: "Contoh foto profil: muslimah berkhimar ungu memetik bunga, wajahnya tidak tampak.",
+    locked: "Foto terkunci",
+    lockStatus: "Ini contoh. Di aplikasi, foto asli tidak pernah tampil tanpa izin.",
+    request: "Minta lihat foto",
+    timeLeft: "Sisa waktu",
+    photoT: {
+      sent: "Permintaan terkirim. Menunggu persetujuan pemilik foto…",
+      approvedBadge: "Disetujui pemilik foto",
+      approved: "Disetujui. Foto terbuka selama 24 jam, lalu terkunci lagi.",
+      lockAgain: "Kunci lagi",
+      request: "Minta lihat foto",
+      relocked: "Foto terkunci kembali.",
+    },
+    verifyCapture: "Langkah verifikasi: memotret e-KTP atau paspor.",
+    verifyFinal: "Tinjauan akhir verifikasi identitas.",
+    verifyTitle: "Semua terverifikasi, WNI maupun WNA.",
+    verifyLead: "Setiap pengguna melewati verifikasi yang sama: foto identitas, pemeriksaan wajah, lalu tinjauan akhir oleh admin. Prosesnya paling lama 3×24 jam.",
+    verifySteps: ["e-KTP untuk WNI, paspor untuk WNA", "Pemeriksaan wajah dengan swafoto", "Tinjauan akhir oleh admin"],
+    aiTitle: "Ketik kriteriamu, AI kami carikan yang cocok.",
+    aiLead: "Tulis dengan bahasamu sendiri, misalnya \"penyabar dan rajin sholat 5 waktu, domisili Jawa Barat\". AI Matchmaker mengurutkan calon berdasarkan kecocokan dengan kriteria itu.",
+    aiNote: "Rekomendasi hanya dari profil yang sudah terverifikasi.",
+    aiPhone: "Pencarian kriteria pasangan dengan AI Search: 11 rekomendasi dengan persentase kecocokan.",
+    guideTitle: "Panduan ta'aruf di Mahabbati.",
+    guideLead: "Delapan langkah dari daftar sampai walimah. Setiap langkah punya aturan yang menjaga kedua pihak.",
+    rulesTitle: "Aturan yang perlu kamu tahu",
+    rules: ["Setiap pesan maksimal 1.000 karakter.", "Pengajuan tanpa respons 7 hari batal otomatis, kuota kembali.", "Kuota tidak terbawa saat membership berakhir.", "Pembelian kuota tambahan butuh membership aktif."],
+    steps: [
+      { title: "Daftar", body: "Cukup nama dan email, lalu buat kata sandi. Biodata bisa dilengkapi bertahap." },
+      { title: "Lengkapi profil dan verifikasi", body: "Isi biodata, lalu verifikasi identitas dengan e-KTP atau paspor dan foto wajah." },
+      { title: "Ajukan ta'aruf", body: "Telusuri calon yang sesuai kriteria, atau minta AI mencarikan, lalu kirim pengajuan." },
+      { title: "Berkenalan lewat pesan", body: "Setelah pengajuan diterima, kalian bertukar pesan dengan batas karakter dan jumlah pesan yang jelas." },
+      { title: "Fokus pada satu calon", body: "Kalau sama-sama mantap, akun kalian dikunci dari pengajuan lain selama proses berjalan." },
+      { title: "Nadzhor", body: "Bertemu dan berbincang lebih dalam, didampingi wali atau mahram." },
+      { title: "Khitbah", body: "Meminang secara resmi, tanda kedua pihak siap membangun rumah tangga." },
+      { title: "Walimah", body: "Alhamdulillah, saatnya akad dan walimah. Wedding Organizer Mahabbati siap membantu." },
+    ],
+    prepTitle: "Bekal ilmu sebelum akad.",
+    prepLead: "Kajian, ujian pranikah, sampai jadwal sholat. Tersedia untuk member Silver dan Gold.",
+    prepRow: "Fitur persiapan pranikah, geser ke samping",
+    prep: [
+      { src: "kajian", title: "Kajian dan e-learning", body: "Materi rumah tangga dari asatidz Mahabbati, bisa diputar ulang." },
+      { src: "ujian_q", title: "Ujian pranikah", body: "Uji kesiapanmu: diri, keluarga, dan ilmu pernikahan." },
+      { src: "ujian_hasil", title: "Sertifikat kelulusan", body: "Lulus ujian, unduh sertifikatnya untuk dibagikan." },
+      { src: "doa", title: "Doa harian", body: "Doa memohon pasangan, doa untuk orang tua, dan lainnya." },
+      { src: "kiblat", title: "Arah kiblat dan jadwal sholat", body: "Mengikuti lokasimu, dengan pengingat waktu sholat." },
+      { src: "acara", title: "Acara dan tabligh akbar", body: "Kajian offline dan acara Mahabbati, tiketnya di aplikasi." },
+    ],
+    afterTitle: "Setelah menikah pun, aplikasinya tetap menemani.",
+    afterLead: "Mahabbati tidak berhenti di hari akad. Pasangan yang sudah menikah tetap bisa belajar dan bertanya ke asatidz.",
+    seeClass: "Lihat kelas pranikah",
+    after: [
+      { icon: "menu_book", title: "Kajian rumah tangga", body: "Akses khusus kajian untuk pengantin baru." },
+      { icon: "calendar_month", title: "Seminar rumah tangga", body: "Undangan seminar bersama asatidz." },
+      { icon: "forum", title: "Konsultasi syariah", body: "Tanya langsung ke asatidz kapan pun dibutuhkan." },
+      { icon: "explore", title: "Doa harian dan arah kiblat", body: "Sudah tersedia untuk semua pengguna." },
+    ],
+    woTitle: "Sudah bertemu calon?",
+    woLead: "Lanjutkan dengan khitbah, akad, dan walimah bersama Wedding Organizer Mahabbati.",
+    woCta: "Lihat layanan WO",
+    memTitle: "Mulai gratis, naik saat kamu siap.",
+    memLead: "Harga dan masa aktif terbaru tersedia di aplikasi.",
+    memRegion: "Tabel perbandingan membership",
+    memCaption: "Perbandingan membership Free, Silver, dan Gold",
+    feature: "Fitur",
+    yes: "Termasuk",
+    no: "Tidak termasuk",
+    memCta: "Lihat harga di aplikasi",
+    faqTitle: "Tanya jawab.",
+  },
+  en: {
+    title: "Mahabbati ta'aruf app | Safe, verified, never left hanging",
+    desc: "Ta'aruf in the Mahabbati app: verified profiles, your quota back after 7 days without a reply, women's photos reviewed by female admins only, and nadzhor with a wali present.",
+    h1: "Ta'aruf should bring you peace.",
+    lead: "Clear profiles, requests that aren't left hanging, and guidance all the way to the akad. All in the Mahabbati app.",
+    heroNote: "Sign up free. Your first ta'aruf request costs nothing.",
+    phoneKandidat: "A candidate profile screen with an 89% compatibility score from AI Matchmaker.",
+    phoneHome: "The Mahabbati app home: suggested matches, the Wedding Organizer menu, talks and the pre-marriage test.",
+    painsTitle: "Three things that make ta'aruf exhausting, and how we answer them.",
+    pains: [
+      { pain: "Profiles with no idea who's behind them.", answer: "Every account is verified with an e-KTP for Indonesians or a passport for foreign nationals, plus a face photo. It takes up to 3×24 hours." },
+      { pain: "Requests left hanging for weeks.", answer: "No reply within 7 days, and the request cancels itself and your quota comes back.", link: { href: "#anti-ghosting", label: "Try the simulation" } },
+      { pain: "Going through it alone.", answer: "Nadzhor always happens with a wali or mahram present. Sharia consultation, talks and the pre-marriage test are in the app." },
+    ],
+    ghostTitle: "No reply in 7 days? Your quota comes back.",
+    ghostLead: "A request with no response in 7 days is cancelled automatically, and the quota you used is returned. You can move on to someone else without losing a thing.",
+    ghostHint: "Send a request in this simulation, then move the time forward.",
+    quota: "Requests left",
+    who: "AH, 25 years old",
+    whoMeta: "Jakarta, bachelor's degree, private sector",
+    idle: "Not sent yet",
+    stamp: "Auto-cancelled",
+    send: "Send request",
+    slide: "Move time",
+    day0: "Day 0",
+    play: "Play 7 days",
+    again: "Start over",
+    ghostT: {
+      day: "Day {d}",
+      cancelled: "No reply in 7 days. The request was cancelled and your quota returned.",
+      day7: "Day 7: the request was cancelled automatically. Quota returned, {q} left.",
+      waitingN: "Waiting for a reply, {d} days so far.",
+      waiting: "Waiting for a reply.",
+      sent: "Request sent. {q} requests left. Move the time to see the next days.",
+      idle: "Not sent yet",
+      reset: "Simulation restarted.",
+    },
+    privTitle: "Your photo stays yours.",
+    priv: [
+      { icon: "verified_user", title: "Reviewed by an admin of your gender", body: "Women's photos are reviewed by female admins only." },
+      { icon: "hourglass_top", title: "Open for 24 hours after you agree", body: "A potential match can see your photo only if you approve their request, and only for 24 hours." },
+      { icon: "visibility_off", title: "Can't be downloaded", body: "Photos show inside the app only, with no save button." },
+    ],
+    lockAlt: "A sample profile photo: a woman in a purple khimar picking flowers, her face not visible.",
+    locked: "Photo locked",
+    lockStatus: "This is a demo. In the app, a real photo never shows without permission.",
+    request: "Request to see photo",
+    timeLeft: "Time left",
+    photoT: {
+      sent: "Request sent. Waiting for the owner to approve…",
+      approvedBadge: "Approved by the owner",
+      approved: "Approved. The photo is open for 24 hours, then locks again.",
+      lockAgain: "Lock again",
+      request: "Request to see photo",
+      relocked: "Photo locked again.",
+    },
+    verifyCapture: "Verification step: photographing an e-KTP or passport.",
+    verifyFinal: "Final review of identity verification.",
+    verifyTitle: "Everyone verified, Indonesian or not.",
+    verifyLead: "Every user goes through the same checks: an ID photo, a face check, then a final review by an admin. It takes up to 3×24 hours.",
+    verifySteps: ["e-KTP for Indonesians, passport for foreign nationals", "A face check with a selfie", "Final review by an admin"],
+    aiTitle: "Describe who you're looking for. Our AI finds a fit.",
+    aiLead: "Write it in your own words, for example \"patient, prays five times a day, lives in West Java\". AI Matchmaker ranks candidates by how well they match.",
+    aiNote: "Suggestions come only from verified profiles.",
+    aiPhone: "AI Search for a spouse's criteria: 11 suggestions with match percentages.",
+    guideTitle: "How ta'aruf works at Mahabbati.",
+    guideLead: "Eight steps from sign-up to walimah. Every step has rules that protect you both.",
+    rulesTitle: "Rules worth knowing",
+    rules: ["Each message is up to 1,000 characters.", "Requests with no reply in 7 days cancel automatically, and the quota returns.", "Quota doesn't roll over when membership ends.", "Buying extra quota needs an active membership."],
+    steps: [
+      { title: "Sign up", body: "Just a name and email, then a password. Fill in your profile step by step." },
+      { title: "Complete your profile and verify", body: "Fill in your details, then verify with an e-KTP or passport and a face photo." },
+      { title: "Send a ta'aruf request", body: "Browse candidates who fit your criteria, or let the AI search, then send a request." },
+      { title: "Get to know each other by message", body: "Once accepted, you exchange messages with clear limits on length and number." },
+      { title: "Focus on one person", body: "If you're both sure, your accounts are locked from other requests while the process runs." },
+      { title: "Nadzhor", body: "Meet and talk in more depth, with a wali or mahram present." },
+      { title: "Khitbah", body: "The formal proposal, a sign that both sides are ready to build a home." },
+      { title: "Walimah", body: "Alhamdulillah, it's time for the akad and walimah. The Mahabbati Wedding Organizer is ready to help." },
+    ],
+    prepTitle: "Knowledge before the akad.",
+    prepLead: "Talks, the pre-marriage test, even prayer times. For Silver and Gold members.",
+    prepRow: "Pre-marriage features, scroll sideways",
+    prep: [
+      { src: "kajian", title: "Talks and e-learning", body: "Lessons on married life from the asatidz of Mahabbati, to replay anytime." },
+      { src: "ujian_q", title: "Pre-marriage test", body: "Check how ready you are: yourself, your family, your knowledge." },
+      { src: "ujian_hasil", title: "Certificate", body: "Pass the test, then download a certificate to share." },
+      { src: "doa", title: "Daily du'a", body: "Du'a for a spouse, for your parents, and more." },
+      { src: "kiblat", title: "Qibla and prayer times", body: "Based on your location, with prayer reminders." },
+      { src: "acara", title: "Events and tabligh akbar", body: "Offline talks and Mahabbati events, with tickets in the app." },
+    ],
+    afterTitle: "Even after you marry, the app stays with you.",
+    afterLead: "Mahabbati doesn't stop at the akad. Married couples can keep learning and keep asking the asatidz.",
+    seeClass: "See the pre-marriage class",
+    after: [
+      { icon: "menu_book", title: "Talks on married life", body: "Exclusive talks for newlyweds." },
+      { icon: "calendar_month", title: "Married-life seminars", body: "Invitations to seminars with the asatidz." },
+      { icon: "forum", title: "Sharia consultation", body: "Ask the asatidz whenever you need to." },
+      { icon: "explore", title: "Daily du'a and qibla", body: "Already available to every user." },
+    ],
+    woTitle: "Met the one?",
+    woLead: "Continue with your khitbah, akad and walimah with the Mahabbati Wedding Organizer.",
+    woCta: "See WO services",
+    memTitle: "Start free, upgrade when you're ready.",
+    memLead: "Current prices and periods are in the app.",
+    memRegion: "Membership comparison table",
+    memCaption: "Comparing Free, Silver and Gold membership",
+    feature: "Feature",
+    yes: "Included",
+    no: "Not included",
+    memCta: "See prices in the app",
+    faqTitle: "Questions and answers.",
+  },
+};
+const c = COPY[lang];
+
+const cell = (v: string | boolean | null) => v;
+---
+
+<Base
+  title={c.title}
+  description={c.desc}
+  current="aplikasi"
+  ogImage="n-khimar-bench"
+>
+  <section class="t-hero wrap" aria-labelledby="t-hero-title">
+    <div class="t-hero__copy">
+      <h1 id="t-hero-title" class="t-display">{c.h1}</h1>
+      <p class="t-lead">{c.lead}</p>
+      <StoreBadges from="taaruf-hero" class="t-hero__stores" />
+      <p class="t-hero__note">{c.heroNote}</p>
+    </div>
+    <div class="t-hero__phones">
+      <Phone src="kandidat" alt={c.phoneKandidat} width={270} class="t-hero__phone t-hero__phone--back" loading="eager" />
+      <Phone src="home" alt={c.phoneHome} width={270} class="t-hero__phone t-hero__phone--front" loading="eager" />
+    </div>
+  </section>
+
+  <section class="pains section" aria-labelledby="pains-title">
+    <div class="wrap pains__grid">
+      <h2 id="pains-title" class="t-h2 pains__title">{c.painsTitle}</h2>
+      <ul class="pains__list">
+        {
+          c.pains.map((p) => (
+            <li class="pain">
+              <p class="pain__q">{p.pain}</p>
+              <p class="pain__a">
+                {p.answer}
+                {p.link && (
+                  <>
+                    {" "}
+                    <a class="link" href={p.link.href}>
+                      {p.link.label}
+                    </a>
+                  </>
+                )}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Satu hal yang hidup: the 7-day quota refund, played by the visitor -->
+  <section id="anti-ghosting" class="ghost-sec section chapter-night on-dark" aria-labelledby="ghost-title">
+    <div class="wrap ghost-sec__grid">
+      <div class="ghost-sec__copy">
+        <h2 id="ghost-title" class="t-h2">{c.ghostTitle}</h2>
+        <p class="t-lead">{c.ghostLead}</p>
+        <p class="ghost-sec__hint">{c.ghostHint}</p>
+      </div>
+
+      <div class="ghost" data-ghost data-i18n={JSON.stringify(c.ghostT)}>
+        <div class="ghost__quota">
+          <span>{c.quota}</span>
+          <strong class="num" data-quota>10</strong>
+          <svg class="ghost__coin" data-coin viewBox="0 0 40 40" aria-hidden="true">
+            <circle cx="20" cy="20" r="17" fill="#D9C38E" />
+            <circle cx="20" cy="20" r="12.5" fill="none" stroke="#8A6E3B" stroke-width="2" />
+            <path d="M20 13v14M13 20h14" stroke="#33324A" stroke-width="3" stroke-linecap="round" />
+          </svg>
+        </div>
+
+        <article class="ghost__req" data-req data-state="idle">
+          <div class="ghost__avatar" aria-hidden="true">AH</div>
+          <div class="ghost__who">
+            <p class="ghost__name">{c.who}</p>
+            <p class="ghost__meta">{c.whoMeta}</p>
+          </div>
+          <p class="ghost__status" data-status>{c.idle}</p>
+          <span class="ghost__stamp" aria-hidden="true">{c.stamp}</span>
+        </article>
+
+        <ol class="ghost__days" aria-hidden="true" data-days>
+          {Array.from({ length: 7 }, (_, i) => <li>{i + 1}</li>)}
+        </ol>
+
+        <div class="ghost__controls">
+          <button class="btn btn--lilac" type="button" data-send>{c.send}</button>
+          <div class="ghost__time">
+            <label for="ghost-day">{c.slide}</label>
+            <input id="ghost-day" type="range" min="0" max="7" step="1" value="0" disabled data-range aria-valuetext={c.day0} />
+            <output for="ghost-day" data-day>{c.day0}</output>
+          </div>
+          <div class="ghost__more">
+            <button class="btn btn--outline" type="button" data-play disabled>
+              <Icon name="play_arrow" size={20} />{c.play}
+            </button>
+            <button class="btn btn--outline" type="button" data-reset hidden>
+              <Icon name="replay" size={20} />{c.again}
+            </button>
+          </div>
+        </div>
+        <p class="visually-hidden" role="status" data-live></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="privacy section" aria-labelledby="privacy-title">
+    <div class="wrap privacy__grid">
+      <div class="privacy__copy">
+        <h2 id="privacy-title" class="t-h2">{c.privTitle}</h2>
+        <ul class="privacy__facts">
+          {c.priv.map((x) => (
+            <li>
+              <Icon name={x.icon} size={26} />
+              <div>
+                <h3>{x.title}</h3>
+                <p>{x.body}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="lock" data-photo-demo data-i18n={JSON.stringify(c.photoT)}>
+        <figure class="lock__photo">
+          <Image
+            src={photo("n-khimar-purple")}
+            alt={c.lockAlt}
+            widths={[360, 540, 720]}
+            sizes="(max-width: 900px) 80vw, 360px"
+            class="lock__img"
+            data-photo-img
+          />
+          <span class="lock__badge" data-photo-badge><Icon name="lock" size={18} />{c.locked}</span>
+        </figure>
+        <div class="lock__panel">
+          <p class="lock__status" data-photo-status>{c.lockStatus}</p>
+          <button class="btn" type="button" data-photo-request>{c.request}</button>
+          <p class="lock__timer" data-photo-timer-wrap hidden>
+            {c.timeLeft} <span class="num" data-photo-timer>24:00:00</span>
+          </p>
+        </div>
+        <p class="visually-hidden" role="status" data-photo-live></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="verify section chapter-mist" aria-labelledby="verify-title">
+    <div class="wrap verify__grid">
+      <div class="verify__phones">
+        <Phone src="wna/id_capture" alt={c.verifyCapture} width={230} class="verify__phone" />
+        <Phone src="wna/id_final" alt={c.verifyFinal} width={230} class="verify__phone verify__phone--b" />
+      </div>
+      <div class="verify__copy">
+        <h2 id="verify-title" class="t-h2">{c.verifyTitle}</h2>
+        <p class="t-lead">{c.verifyLead}</p>
+        <ol class="verify__steps">
+          {c.verifySteps.map((x) => <li><span>{x}</span></li>)}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai section" aria-labelledby="ai-title">
+    <div class="wrap ai__grid">
+      <div class="ai__copy">
+        <h2 id="ai-title" class="t-h2">{c.aiTitle}</h2>
+        <p class="t-lead">{c.aiLead}</p>
+        <p class="ai__note"><Icon name="verified" size={22} />{c.aiNote}</p>
+      </div>
+      <Phone src="ai" alt={c.aiPhone} width={300} class="ai__phone" />
+    </div>
+  </section>
+
+  <section id="panduan" class="guide section chapter-mist" aria-labelledby="guide-title">
+    <div class="wrap guide__grid">
+      <div class="guide__aside">
+        <h2 id="guide-title" class="t-h2">{c.guideTitle}</h2>
+        <p class="t-lead">{c.guideLead}</p>
+        <div class="guide__rules">
+          <h3>{c.rulesTitle}</h3>
+          <ul>
+            {c.rules.map((x) => <li>{x}</li>)}
+          </ul>
+        </div>
+      </div>
+      <ol class="guide__steps">
+        {
+          c.steps.map((s, i) => (
+            <li class="guide__step" data-reveal style={`--d:${(i % 2) * 70}`}>
+              <span class="guide__num num" aria-hidden="true">
+                {i + 1}
+              </span>
+              <div>
+                <h3 class="t-h3">{s.title}</h3>
+                <p>{s.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id="pranikah" class="prep section" aria-labelledby="prep-title">
+    <div class="wrap prep__head">
+      <h2 id="prep-title" class="t-h2">{c.prepTitle}</h2>
+      <p class="t-lead">{c.prepLead}</p>
+      <div class="prep__nav">
+        <button type="button" class="prep__btn" data-row-prev aria-controls="prep-row">
+          <Icon name="chevron_left" size={26} /><span class="visually-hidden">{u.prev}</span>
+        </button>
+        <button type="button" class="prep__btn" data-row-next aria-controls="prep-row">
+          <Icon name="chevron_right" size={26} /><span class="visually-hidden">{u.next}</span>
+        </button>
+      </div>
+    </div>
+    <div class="prep__row" id="prep-row" data-row data-cursor={u.drag} data-lenis-prevent tabindex="0" role="region" aria-label={c.prepRow}>
+      <ul>
+        {
+          c.prep.map((p) => (
+            <li class="prep__card">
+              <Phone src={p.src} alt="" width={250} />
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="after section chapter-night on-dark" aria-labelledby="after-title">
+    <div class="wrap after__grid">
+      <div class="after__copy">
+        <h2 id="after-title" class="t-h2">{c.afterTitle}</h2>
+        <p class="t-lead">{c.afterLead}</p>
+        {BENEFITS_NOTE && <p class="after__note">{BENEFITS_NOTE}</p>}
+        <a class="btn btn--lilac" href={path(lang, "kelas")}>{c.seeClass}</a>
+      </div>
+      <ul class="after__list">
+        {c.after.map((x) => <li><Icon name={x.icon} size={28} /><div><h3>{x.title}</h3><p>{x.body}</p></div></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="to-wo section" aria-labelledby="towo-title">
+    <div class="wrap to-wo__inner">
+      <h2 id="towo-title" class="t-h2">{c.woTitle}</h2>
+      <p class="t-lead">{c.woLead}</p>
+      <a class="btn" href={path(lang, "layanan")}>{c.woCta}</a>
+    </div>
+  </section>
+
+  <section id="membership" class="members section chapter-mist" aria-labelledby="members-title">
+    <div class="wrap">
+      <div class="members__head">
+        <h2 id="members-title" class="t-h2">{c.memTitle}</h2>
+        <p class="t-lead">{c.memLead}</p>
+      </div>
+      <div class="members__scroll" data-lenis-prevent tabindex="0" role="region" aria-label={c.memRegion}>
+        <table class="members__table">
+          <caption class="visually-hidden">{c.memCaption}</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="visually-hidden">{c.feature}</span></th>
+              {
+                MEMBERSHIP.tiers.map((t) => (
+                  <th scope="col" class:list={["members__tier", `members__tier--${t.toLowerCase()}`]}>
+                    {t}
+                  </th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              MEMBERSHIP.rows.map((r) => (
+                <tr>
+                  <th scope="row">{r.label}</th>
+                  {r.values.map((v) => (
+                    <td>
+                      {v === true && <Icon name="check" size={22} label={c.yes} />}
+                      {(v === false || v === null) && (
+                        <span class="members__no">
+                          <span aria-hidden="true">–</span>
+                          <span class="visually-hidden">{c.no}</span>
+                        </span>
+                      )}
+                      {typeof v === "string" && <span class="num">{cell(v)}</span>}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <a class="btn members__cta" href={PLAY_STORE_URL} rel="noopener" data-track="play:membership">{c.memCta}</a>
+    </div>
+  </section>
+
+  <section id="faq" class="faq-sec section" aria-labelledby="faq-title">
+    <div class="wrap faq-sec__grid">
+      <h2 id="faq-title" class="t-h2">{c.faqTitle}</h2>
+      <Faq items={appFaqFor(lang)} id="faq-taaruf" />
+    </div>
+  </section>
+
+  <DownloadBlock from="taaruf" />
+</Base>
+
+<style>
+  /* ---------- Hero ---------- */
+  .t-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--s-7);
+    align-items: center;
+    padding-block: clamp(32px, 5vw, 72px) var(--s-8);
+  }
+  .t-hero__copy .t-lead {
+    margin-top: var(--s-5);
+  }
+  .t-hero__copy :global(.t-hero__stores) {
+    margin-top: var(--s-6);
+  }
+  .t-hero__note {
+    margin-top: var(--s-4);
+    font-size: var(--t-small);
+    color: var(--ink-2);
+  }
+  .t-hero__phones {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--s-5);
+  }
+  .t-hero__phones :global(.t-hero__phone--back) {
+    order: 2;
+    margin-top: var(--s-8);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .js .t-hero__phones :global(.t-hero__phone--front) {
+      animation: phone-in 1100ms var(--ease-expo) 150ms both;
+    }
+    .js .t-hero__phones :global(.t-hero__phone--back) {
+      animation: phone-in 1100ms var(--ease-expo) 300ms both;
+    }
+  }
+  @keyframes phone-in {
+    from {
+      opacity: 0;
+      transform: translateY(48px) rotate(2deg);
+    }
+  }
+
+  /* ---------- Pains ---------- */
+  .pains__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--s-8);
+  }
+  .pains__title {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+    align-self: start;
+  }
+  .pains__list {
+    list-style: none;
+  }
+  .pain {
+    padding-block: var(--s-6);
+    border-top: 1px solid var(--line);
+  }
+  .pain:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .pain__q {
+    font-family: var(--serif);
+    font-size: var(--t-h3);
+    line-height: 1.3;
+    color: var(--ink-2);
+  }
+  .pain__a {
+    margin-top: var(--s-3);
+    font-size: var(--t-lead);
+    color: var(--ink);
+    max-width: 44ch;
+  }
+
+  /* ---------- Anti-ghosting demo ---------- */
+  .ghost-sec__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--s-8);
+    align-items: center;
+  }
+  .ghost-sec__copy .t-lead {
+    margin-top: var(--s-5);
+  }
+  .ghost-sec__hint {
+    margin-top: var(--s-5);
+    font-family: var(--serif);
+    font-style: italic;
+    color: #fff;
+  }
+  .ghost {
+    position: relative;
+    padding: clamp(20px, 3vw, 36px);
+    border-radius: 28px;
+    background: var(--ground);
+    color: var(--ink);
+    --focus: var(--accent-ink);
+  }
+  .ghost__quota {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: var(--s-4) var(--s-5);
+    border-radius: var(--r-m);
+    background: var(--brand);
+    color: var(--haze);
+  }
+  .ghost__quota strong {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1;
+  }
+  .ghost__coin {
+    position: absolute;
+    right: 64px;
+    top: 50%;
+    width: 36px;
+    height: 36px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .ghost__req {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--s-2) var(--s-4);
+    align-items: center;
+    margin-top: var(--s-5);
+    padding: var(--s-5);
+    border-radius: var(--r-m);
+    background: var(--paper);
+    box-shadow: inset 0 0 0 1px var(--line);
+    overflow: clip;
+  }
+  .ghost__avatar {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--lilac);
+    color: var(--night);
+    font-weight: 700;
+  }
+  .ghost__name {
+    font-weight: 600;
+  }
+  .ghost__meta {
+    font-size: var(--t-small);
+    color: var(--ink-2);
+  }
+  .ghost__status {
+    grid-column: 1 / -1;
+    font-size: var(--t-small);
+    font-weight: 600;
+    color: var(--accent-ink);
+  }
+  .ghost__req[data-state="cancelled"] .ghost__status {
+    color: var(--ink);
+  }
+  .ghost__stamp {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    padding: 6px 12px;
+    border: 2px solid var(--brand);
+    border-radius: var(--r-s);
+    color: var(--brand);
+    font-weight: 700;
+    font-size: var(--t-small);
+    rotate: -8deg;
+    opacity: 0;
+    scale: 1.6;
+  }
+  .ghost__req[data-state="cancelled"] .ghost__stamp {
+    opacity: 1;
+    scale: 1;
+    transition: opacity 200ms ease, scale 380ms var(--ease-out);
+  }
+  .ghost__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-top: var(--s-4);
+    list-style: none;
+  }
+  .ghost__days li {
+    display: grid;
+    place-items: center;
+    height: 36px;
+    border-radius: var(--r-s);
+    background: var(--mist);
+    color: var(--ink-3);
+    font-size: var(--t-micro);
+    font-variant-numeric: tabular-nums;
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+  .ghost__days li:global(.is-past) {
+    background: var(--lilac);
+    color: var(--night);
+  }
+  .ghost__controls {
+    display: grid;
+    gap: var(--s-4);
+    margin-top: var(--s-5);
+  }
+  .ghost__time {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--s-3);
+    align-items: center;
+    font-size: var(--t-small);
+  }
+  .ghost__time input {
+    accent-color: var(--brand);
+    width: 100%;
+    min-height: 32px;
+  }
+  .ghost__time input:disabled {
+    opacity: 0.45;
+  }
+  .ghost__time output {
+    min-width: 5.5em;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+  .ghost__more {
+    display: flex;
+    gap: var(--s-3);
+  }
+  .ghost .btn--outline {
+    --btn-fg: var(--brand);
+    --btn-bg-hover: var(--haze);
+    box-shadow: inset 0 0 0 1.5px var(--brand);
+  }
+  .ghost .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .ghost .btn--lilac {
+    --btn-bg: var(--brand);
+    --btn-fg: #fff;
+    --btn-bg-hover: var(--night);
+  }
+
+  /* ---------- Privacy demo ---------- */
+  .privacy__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--s-8);
+    align-items: center;
+  }
+  .privacy__facts {
+    list-style: none;
+    display: grid;
+    gap: var(--s-5);
+    margin-top: var(--s-6);
+  }
+  .privacy__facts li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--s-4);
+  }
+  .privacy__facts li > :global(.icon) {
+    color: var(--accent);
+    margin-top: 2px;
+  }
+  .privacy__facts h3 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+  .privacy__facts p {
+    color: var(--ink-2);
+    max-width: 44ch;
+  }
+  .lock {
+    display: grid;
+    gap: var(--s-5);
+    justify-items: start;
+    max-width: 380px;
+    margin-inline: auto;
+  }
+  .lock__photo {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--r-l);
+    overflow: clip;
+    background: var(--haze);
+  }
+  .lock__photo :global(.lock__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(22px) saturate(0.7);
+    transform: scale(1.12);
+    transition: filter 900ms var(--ease-out), transform 900ms var(--ease-out);
+  }
+  .lock:global(.is-open) .lock__photo :global(.lock__img) {
+    filter: none;
+    transform: none;
+  }
+  .lock__badge {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: var(--r-s);
+    background: var(--ground);
+    color: var(--ink);
+    font-size: var(--t-small);
+    font-weight: 600;
+  }
+  .lock__status {
+    font-size: var(--t-small);
+    color: var(--ink-2);
+    min-height: 3em;
+  }
+  .lock__timer {
+    font-size: var(--t-small);
+    color: var(--ink-2);
+  }
+  .lock__timer .num {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ---------- Verify ---------- */
+  .verify__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--s-8);
+    align-items: center;
+  }
+  .verify__phones {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-5);
+    justify-content: center;
+  }
+  .verify__phones :global(.verify__phone--b) {
+    margin-top: var(--s-8);
+  }
+  .verify__copy .t-lead {
+    margin-top: var(--s-5);
+  }
+  .verify__steps {
+    display: grid;
+    gap: var(--s-3);
+    margin-top: var(--s-6);
+    padding-left: 1.4em;
+    font-weight: 500;
+  }
+  .verify__steps li::marker {
+    font-family: var(--serif);
+    color: var(--accent-ink);
+  }
+
+  /* ---------- AI ---------- */
+  .ai__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--s-8);
+    align-items: center;
+  }
+  .ai__copy .t-lead {
+    margin-top: var(--s-5);
+  }
+  .ai__note {
+    margin-top: var(--s-5);
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    color: var(--ink-2);
+  }
+  .ai__note :global(.icon) {
+    color: var(--accent);
+  }
+  .ai__grid :global(.ai__phone) {
+    justify-self: center;
+  }
+
+  /* ---------- Guide ---------- */
+  .guide__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--s-8);
+  }
+  .guide__aside {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+    align-self: start;
+  }
+  .guide__aside .t-lead {
+    margin-top: var(--s-4);
+  }
+  .guide__rules {
+    margin-top: var(--s-6);
+    padding: var(--s-5);
+    border-radius: var(--r-m);
+    background: var(--paper);
+  }
+  .guide__rules h3 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .guide__rules ul {
+    margin-top: var(--s-3);
+    padding-left: 1.2em;
+    display: grid;
+    gap: var(--s-2);
+    color: var(--ink-2);
+    font-size: var(--t-small);
+  }
+  .guide__steps {
+    list-style: none;
+  }
+  .guide__step {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: var(--s-4);
+    padding-block: var(--s-5);
+    border-top: 1px solid var(--line);
+  }
+  .guide__step:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .guide__num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    line-height: 1.1;
+    color: var(--accent);
+  }
+  .guide__step p {
+    margin-top: var(--s-2);
+    color: var(--ink-2);
+    max-width: 48ch;
+  }
+
+  /* ---------- Pranikah drag row ---------- */
+  .prep__head {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr) auto;
+    gap: var(--s-5) var(--s-7);
+    align-items: end;
+  }
+  .prep__nav {
+    display: flex;
+    gap: var(--s-2);
+  }
+  .prep__btn {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--haze);
+    color: var(--brand);
+    transition: background-color var(--t-hover) ease, opacity var(--t-hover) ease;
+  }
+  .prep__btn:hover {
+    background: var(--lilac);
+  }
+  .prep__btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .prep__row {
+    margin-top: var(--s-7);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    cursor: grab;
+  }
+  .prep__row::-webkit-scrollbar {
+    display: none;
+  }
+  .prep__row:global(.is-dragging) {
+    cursor: grabbing;
+    scroll-snap-type: none;
+  }
+  .prep__row ul {
+    display: flex;
+    gap: var(--s-6);
+    list-style: none;
+    padding-inline: max(var(--gutter), calc((100vw - var(--page)) / 2));
+    padding-bottom: var(--s-6);
+    width: max-content;
+  }
+  .prep__card {
+    width: 270px;
+    scroll-snap-align: start;
+    scroll-margin-left: max(var(--gutter), calc((100vw - var(--page)) / 2));
+    user-select: none;
+  }
+  .prep__card :global(img) {
+    pointer-events: none;
+  }
+  .prep__card h3 {
+    margin-top: var(--s-5);
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.25rem;
+  }
+  .prep__card p {
+    margin-top: var(--s-2);
+    color: var(--ink-2);
+    font-size: var(--t-small);
+  }
+
+  /* ---------- After marriage ---------- */
+  .after__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--s-8);
+    align-items: center;
+  }
+  .after__copy {
+    display: grid;
+    gap: var(--s-5);
+    justify-items: start;
+  }
+  .after__note {
+    font-size: var(--t-small);
+    color: var(--lilac);
+  }
+  .after__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-6);
+  }
+  .after__list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--s-3);
+  }
+  .after__list li > :global(.icon) {
+    color: var(--lilac);
+  }
+  .after__list h3 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  .after__list p {
+    color: var(--lilac);
+    font-size: var(--t-small);
+  }
+  .to-wo__inner {
+    display: grid;
+    gap: var(--s-4);
+    justify-items: start;
+  }
+  @media (max-width: 900px) {
+    .after__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .after__list {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  /* ---------- Membership ---------- */
+  .members__head {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--s-5) var(--s-7);
+    align-items: end;
+  }
+  .members__scroll {
+    margin-top: var(--s-7);
+    overflow-x: auto;
+    border-radius: var(--r-l);
+    background: var(--paper);
+  }
+  .members__table {
+    width: 100%;
+    min-width: 620px;
+    border-collapse: collapse;
+  }
+  .members__table th,
+  .members__table td {
+    padding: var(--s-4) var(--s-5);
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .members__table tbody tr:last-child th,
+  .members__table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  .members__table tbody th {
+    text-align: left;
+    font-weight: 500;
+  }
+  .members__table td {
+    color: var(--ink);
+    font-weight: 600;
+    width: 18%;
+  }
+  .members__table td :global(.icon) {
+    margin-inline: auto;
+    color: var(--success);
+  }
+  .members__no {
+    color: var(--ink-3);
+  }
+  .members__tier {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.375rem;
+  }
+  .members__tier--gold {
+    color: var(--gold-ink);
+  }
+  .members__table thead th {
+    background: var(--paper);
+    padding-block: var(--s-5);
+  }
+  .members__cta {
+    margin-top: var(--s-6);
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-sec__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: var(--s-8);
+  }
+
+  @media (max-width: 900px) {
+    .t-hero,
+    .pains__grid,
+    .ghost-sec__grid,
+    .privacy__grid,
+    .verify__grid,
+    .ai__grid,
+    .guide__grid,
+    .members__head,
+    .faq-sec__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--s-6);
+    }
+    .t-hero__phones :global(.phone) {
+      width: calc(50% - var(--s-5) / 2);
+      max-width: 230px;
+    }
+    .pains__title,
+    .guide__aside {
+      position: static;
+    }
+    .verify__grid .verify__phones {
+      order: 2;
+    }
+    .verify__phones :global(.phone) {
+      width: calc(50% - var(--s-5) / 2);
+      max-width: 230px;
+    }
+    .prep__head {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ghost__time {
+      grid-template-columns: 1fr auto;
+    }
+    .ghost__time label {
+      grid-column: 1 / -1;
+    }
+    .ghost__more {
+      flex-wrap: wrap;
+    }
+  }
+  @media (max-width: 640px) {
+    .members__table {
+      min-width: 0;
+      table-layout: fixed;
+    }
+    .members__table th,
+    .members__table td {
+      padding: var(--s-3) 6px;
+      font-size: var(--t-small);
+    }
+    .members__table tbody th {
+      width: 40%;
+      padding-left: var(--s-4);
+    }
+    .members__table td {
+      width: 20%;
+    }
+    .members__tier {
+      font-size: 1.0625rem;
+    }
+  }
+</style>
+
+<script>
+  import "../scripts/ghost.ts";
+  import "../scripts/photo-lock.ts";
+  import "../scripts/drag-row.ts";
+</script>

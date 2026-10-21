@@ -1,21 +1,26 @@
 ---
 import Icon from "./Icon.astro";
-import { BENEFITS, BENEFITS_NOTE } from "../data/content";
+import { benefitsFor, benefitsNoteFor } from "../data/content";
+import { langOf } from "../i18n/lang";
 
 interface Props {
   headingId?: string;
   title?: string;
   lead?: string;
 }
+const lang = langOf(Astro.url);
+const en = lang === "en";
 const {
   headingId = "benefits-title",
-  title = "Benefit sebelum dan setelah menikah.",
-  lead = "Untuk pengguna aplikasi dan klien Wedding Organizer Mahabbati.",
+  title = en ? "Benefits, before and after you marry." : "Benefit sebelum dan setelah menikah.",
+  lead = en ? "For app users and clients of the Mahabbati Wedding Organizer." : "Untuk pengguna aplikasi dan klien Wedding Organizer Mahabbati.",
 } = Astro.props;
 const groups = [
-  { phase: "Sebelum", label: "Sebelum menikah" },
-  { phase: "Setelah", label: "Setelah menikah" },
+  { phase: "Sebelum", label: en ? "Before marriage" : "Sebelum menikah" },
+  { phase: "Setelah", label: en ? "After marriage" : "Setelah menikah" },
 ] as const;
+const BENEFITS = benefitsFor(lang);
+const BENEFITS_NOTE = benefitsNoteFor(lang);
 ---
 
 <div class="benefits">

@@ -1,0 +1,161 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import StoryCard from "../components/StoryCard.astro";
+import { visibleStories, SHOW_PLACEHOLDERS } from "../data/people";
+import { PROOF, WA, waLink, EMAIL, INSTAGRAM_URL } from "../data/site";
+
+import { langOf } from "../i18n/lang";
+
+const lang = langOf(Astro.url);
+const wo = visibleStories((s) => s.type === "wo", lang);
+const others = visibleStories((s) => s.type !== "wo", lang);
+const COPY = {
+  id: {
+    title: "Cerita pasangan | Mahabbati",
+    desc: "Cerita pasangan yang bertemu lewat aplikasi Mahabbati dan menikah bersama Wedding Organizer Mahabbati.",
+    h1: "Cerita pasangan.",
+    proof: "pasangan sudah menikah bersama Wedding Organizer Mahabbati.",
+    draft: "Mode draf: kartu bergaris adalah slot placeholder. Isi datanya di src/data/people.ts; slot kosong tidak tampil di situs live.",
+    wo: "Bersama Wedding Organizer.",
+    app: "Dari aplikasi dan kelas pranikah.",
+    shareTitle: "Menikah bersama Mahabbati? Ceritakan kisahmu.",
+    shareLead: "Kami hanya menampilkan cerita dengan izin kalian, dan boleh memakai inisial saja.",
+    wa: "Kirim lewat WhatsApp",
+    email: "Kirim lewat email",
+    subject: "Cerita pernikahan kami",
+    ig: "Lihat cerita lain di Instagram",
+    waText: "Assalamu'alaikum, Tim Mahabbati. Kami ingin berbagi cerita pernikahan kami bersama Mahabbati.",
+  },
+  en: {
+    title: "Couples' stories | Mahabbati",
+    desc: "Stories from couples who met through the Mahabbati app and married with the Mahabbati Wedding Organizer.",
+    h1: "Couples' stories.",
+    proof: "couples have married with the Mahabbati Wedding Organizer.",
+    draft: "Draft mode: striped cards are placeholder slots. Fill them in src/data/people.ts; empty slots are hidden on the live site.",
+    wo: "With the Wedding Organizer.",
+    app: "From the app and the pre-marriage class.",
+    shareTitle: "Married with Mahabbati? Tell us your story.",
+    shareLead: "We only share stories with your permission, and initials are fine.",
+    wa: "Send on WhatsApp",
+    email: "Send by email",
+    subject: "Our wedding story",
+    ig: "More stories on Instagram",
+    waText: "Assalamu'alaikum, Mahabbati team. We'd like to share our wedding story with Mahabbati.",
+  },
+};
+const c = COPY[lang];
+const share = waLink(WA.wo.number, c.waText);
+---
+
+<Base
+  title={c.title}
+  description={c.desc}
+  current="cerita"
+  ogImage="hands"
+>
+  <section class="ch wrap" aria-labelledby="ch-title">
+    <h1 id="ch-title" class="t-display">{c.h1}</h1>
+    <p class="ch__proof"><strong class="num">{PROOF.couples}</strong> {c.proof}</p>
+    {
+      SHOW_PLACEHOLDERS && (
+        <p class="sample-note">
+          <Icon name="info" size={20} />
+          {c.draft}
+        </p>
+      )
+    }
+  </section>
+
+  <section class="cs section" aria-labelledby="cs-wo-title">
+    <div class="wrap">
+      <h2 id="cs-wo-title" class="t-h2">{c.wo}</h2>
+      <ul class="cs__grid">
+        {
+          wo.map((s) => (
+            <li>
+              <StoryCard story={s} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="cs section chapter-mist" aria-labelledby="cs-app-title">
+    <div class="wrap">
+      <h2 id="cs-app-title" class="t-h2">{c.app}</h2>
+      <ul class="cs__grid">
+        {
+          others.map((s) => (
+            <li>
+              <StoryCard story={s} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="cshare section" aria-labelledby="cshare-title">
+    <div class="wrap cshare__inner">
+      <h2 id="cshare-title" class="t-h2">{c.shareTitle}</h2>
+      <p class="t-lead">{c.shareLead}</p>
+      <div class="cshare__actions">
+        <a class="btn btn--wa" href={share} rel="noopener" data-track="wa:share-story"><Icon name="whatsapp" size={20} />{c.wa}</a>
+        <a class="btn btn--outline" href={`mailto:${EMAIL}?subject=${encodeURIComponent(c.subject)}`}><Icon name="mail" size={20} />{c.email}</a>
+        <a class="link" href={INSTAGRAM_URL} rel="noopener">{c.ig}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ch {
+    display: grid;
+    gap: var(--s-4);
+    padding-block: clamp(24px, 4vw, 56px) 0;
+  }
+  .ch__proof {
+    font-size: var(--t-lead);
+    color: var(--ink-2);
+  }
+  .ch__proof strong {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 2rem;
+    color: var(--ink);
+  }
+  .cs__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-5);
+    margin-top: var(--s-7);
+  }
+  .cs__grid > li {
+    display: grid;
+  }
+  .cshare__inner {
+    display: grid;
+    gap: var(--s-4);
+    justify-items: start;
+  }
+  .cshare__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3) var(--s-5);
+    margin-top: var(--s-2);
+  }
+  @media (max-width: 1000px) {
+    .cs__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    .cs__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

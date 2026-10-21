@@ -2,20 +2,24 @@
 import Icon from "./Icon.astro";
 import type { Story } from "../data/people";
 import { needLabel } from "../data/packages";
+import { langOf } from "../i18n/lang";
+import { ui } from "../i18n/ui";
 
 interface Props {
   story: Story;
 }
 const { story } = Astro.props;
-const kind = story.type === "app" ? "Aplikasi ta'aruf" : story.type === "kelas" ? "Kelas pranikah" : story.need ? needLabel(story.need) : "Wedding Organizer";
+const lang = langOf(Astro.url);
+const u = ui(lang);
+const kind = story.type === "app" ? u.kinds.app : story.type === "kelas" ? u.kinds.kelas : story.need ? needLabel(story.need, lang) : u.kinds.wo;
 ---
 
 <figure class:list={["story", story.placeholder && "story--placeholder"]} data-placeholder={story.placeholder ? "" : undefined}>
-  {story.placeholder && <span class="story__flag">Placeholder, tidak tampil di situs live</span>}
+  {story.placeholder && <span class="story__flag">{u.placeholderFlag}</span>}
   <p class="story__kind">{kind}</p>
   {
     story.rating && (
-      <p class="story__rating" role="img" aria-label={`Rating ${story.rating} dari 5`}>
+      <p class="story__rating" role="img" aria-label={u.rating(story.rating)}>
         {Array.from({ length: story.rating }, () => (
           <Icon name="star" fill size={18} />
         ))}
@@ -29,6 +33,7 @@ const kind = story.type === "app" ? "Aplikasi ta'aruf" : story.type === "kelas" 
     <strong>{story.by}</strong>
     {story.meta && <span>{story.meta}</span>}
     <span class="story__source">{story.source}</span>
+    {story.translated && <span class="story__source">{u.translated}</span>}
   </figcaption>
 </figure>
 

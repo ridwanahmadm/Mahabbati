@@ -1,19 +1,20 @@
 ---
 import Base from "../layouts/Base.astro";
 import Logo from "../components/Logo.astro";
-import { url } from "../data/site";
+import { path } from "../i18n/lang";
 ---
 
-<Base title="Halaman tidak ditemukan | Mahabbati" description="Halaman yang kamu cari tidak ada.">
+<Base title="Halaman tidak ditemukan | Mahabbati" description="Halaman yang kamu cari tidak ada." current="404">
   <section class="nf wrap section" aria-labelledby="nf-title">
     <Logo part="mark" class="nf__mark" />
     <h1 id="nf-title" class="t-h2">Halaman ini tidak ditemukan.</h1>
     <p class="t-lead">Mungkin tautannya sudah berubah. Lanjutkan dari salah satu halaman berikut.</p>
     <div class="nf__links">
-      <a class="btn" href={url("/")}>Ke beranda</a>
-      <a class="btn btn--outline" href={url("/taaruf/")}>Ta'aruf</a>
-      <a class="btn btn--outline" href={url("/wedding-organizer/")}>Wedding Organizer</a>
+      <a class="btn" href={path("id", "home")}>Ke beranda</a>
+      <a class="btn btn--outline" href={path("id", "layanan")}>Layanan WO</a>
+      <a class="btn btn--outline" href={path("id", "aplikasi")}>Aplikasi ta'aruf</a>
     </div>
+    <p class="nf__en" lang="en">Page not found. <a class="link" href={path("en", "home")}>Go to the English home page</a>.</p>
   </section>
 </Base>
 

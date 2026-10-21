@@ -8,13 +8,17 @@
 // - Harga asli dari mahabbati.com dan aplikasi: Wedding Planner Rp1,5 jt, Intimate Rp15 jt,
 //   Full Package Standard Rp75 jt (300 pax) dan Exclusive Rp95 jt (500 pax). Sisanya contoh.
 
+import type { Lang } from "../i18n/lang";
+import { merge } from "../i18n/merge";
+import { NEEDS_EN, ADDONS_EN, CLASS_ITEM_EN, PACKAGES_EN, RUNDOWN_EN, WO_STEPS_EN, GUEST_RANGES_EN, BUDGETS_EN } from "./packages.en";
+
 export type NeedId = "lengkap" | "akad" | "masjid" | "walimah" | "khitbah" | "tempat" | "harih";
 
 export const NEEDS: { id: NeedId; label: string; short: string; photo: string; alt: string }[] = [
-  { id: "lengkap", label: "Paket lengkap", short: "Akad sampai walimah, dipegang satu tim.", photo: "n-stage", alt: "Pelaminan berhias bunga merah dan putih dengan kursi pengantin berukir emas." },
-  { id: "akad", label: "Akad nikah", short: "Prosesi ijab qabul yang khidmat di rumah atau gedung.", photo: "n-ijab", alt: "Jabat tangan pengantin pria dan wali di atas meja akad saat ijab qabul." },
-  { id: "masjid", label: "Akad di masjid", short: "Akad di masjid mitra, dengan adab masjid yang terjaga.", photo: "v-masjid-court", alt: "Pelataran masjid putih dengan ukiran kerawang." },
-  { id: "walimah", label: "Walimah", short: "Jamuan tamu, pelaminan, dan dokumentasi.", photo: "wo-decor-lavender", alt: "Pelaminan berhias bunga lavender dan tirai." },
+  { id: "lengkap", label: "Paket lengkap", short: "Dari akad sampai walimah, diurus satu tim.", photo: "n-stage", alt: "Pelaminan berhias bunga merah dan putih dengan kursi pengantin berukir emas." },
+  { id: "akad", label: "Akad nikah", short: "Ijab qabul yang khidmat, di rumah atau di gedung.", photo: "n-ijab", alt: "Jabat tangan pengantin pria dan wali di atas meja akad saat ijab qabul." },
+  { id: "masjid", label: "Akad di masjid", short: "Akad di masjid mitra, adab masjidnya tetap terjaga.", photo: "v-masjid-court", alt: "Pelataran masjid putih dengan ukiran kerawang." },
+  { id: "walimah", label: "Walimah", short: "Jamuan, pelaminan, dan dokumentasi untuk resepsi.", photo: "wo-decor-lavender", alt: "Pelaminan berhias bunga lavender dan tirai." },
   { id: "khitbah", label: "Khitbah & lamaran", short: "Pertemuan dua keluarga yang hangat dan tertata.", photo: "n-ring-lamaran", alt: "Cincin dipasangkan ke jari calon pengantin wanita yang berhias inai." },
   { id: "tempat", label: "Tempat saja", short: "Sewa tempat mitra: masjid, gedung, taman, atau villa.", photo: "v-ballroom", alt: "Ballroom dengan lampu gantung dan meja tamu bertaplak putih." },
   { id: "harih", label: "Koordinasi hari H", short: "Vendor dari kamu, kendali acara dari kami.", photo: "n-venue-arch", alt: "Gapura bunga di aula resepsi yang tertata, sebelum tamu datang." },
@@ -98,9 +102,9 @@ export const PACKAGES: Package[] = [
     includesClass: true,
     featured: true,
     promise: "Didampingi dari rencana pertama sampai tamu terakhir pulang.",
-    forWho: "Akad dan walimah 300 tamu ke atas, dengan satu tim yang mengurus semuanya.",
+    forWho: "Untuk akad dan walimah 300 tamu ke atas, dengan satu tim yang mengurus semuanya.",
     summary:
-      "Kami mendampingi sejak awal: mempelajari prioritas kalian, lalu menyusunnya menjadi rencana yang terstruktur dan terukur.",
+      "Kami mulai dengan mendengarkan prioritas kalian, lalu menyusunnya jadi rencana yang jelas, lengkap dengan biayanya.",
     photo: "n-stage",
     gallery: ["n-stage", "wo-decor-lavender", "wo-catering", "n-siger", "wo-catering-2", "n-bride-arch"],
     variants: [
@@ -149,7 +153,7 @@ export const PACKAGES: Package[] = [
     includesClass: true,
     featured: true,
     promise: "Akad dan walimah yang hangat, untuk orang-orang terdekat.",
-    forWho: "Acara sederhana hingga 200 tamu, tanpa repot mengurus vendor satu per satu.",
+    forWho: "Untuk acara sederhana hingga 200 tamu, tanpa repot menghubungi vendor satu per satu.",
     summary: "Satu paket untuk akad dan walimah kecil: makanan, dekorasi, rias, dokumentasi, dan tim yang mengatur jalannya acara.",
     photo: "n-ring-white",
     gallery: ["n-ring-white", "n-doa", "wo-ring", "n-melati"],
@@ -181,7 +185,7 @@ export const PACKAGES: Package[] = [
     includesClass: true,
     featured: true,
     promise: "Ijab qabul yang khidmat, tanpa repot di belakang layar.",
-    forWho: "Kamu fokus pada akad di rumah atau gedung. Walimah bisa menyusul atau terpisah.",
+    forWho: "Untuk akad di rumah atau gedung. Walimah bisa menyusul, atau diadakan terpisah.",
     summary: "Area akad, rias, dokumentasi, dan koordinasi dengan penghulu, wali, serta saksi, ditangani satu tim.",
     photo: "n-ijab",
     gallery: ["n-ijab", "n-doa", "wo-ring", "hands"],
@@ -213,7 +217,7 @@ export const PACKAGES: Package[] = [
     includesClass: true,
     featured: true,
     promise: "Akad di rumah Allah, dengan adab masjid yang terjaga.",
-    forWho: "Kamu ingin akad di masjid mitra, lalu jamuan sederhana untuk keluarga dan sahabat.",
+    forWho: "Untuk akad di masjid mitra, disusul jamuan sederhana bersama keluarga dan sahabat.",
     summary: "Kami mengurus izin dan koordinasi dengan pengurus masjid, menata area akad sesuai adab masjid, sampai jamuan setelahnya.",
     photo: "v-masjid-court",
     gallery: ["v-masjid-court", "v-masjid", "n-ijab", "v-masjid-night"],
@@ -244,8 +248,8 @@ export const PACKAGES: Package[] = [
     priceFrom: 25_000_000,
     placeholder: true,
     includesClass: false,
-    promise: "Jamuan yang tertata, tamu pulang dengan kesan baik.",
-    forWho: "Akad sudah beres. Kamu butuh resepsi dengan katering, pelaminan, dan tim.",
+    promise: "Resepsi yang tertata, tamu pulang dengan kesan baik.",
+    forWho: "Akad sudah terlaksana, kini saatnya resepsi dengan katering, pelaminan, dan tim yang mengatur.",
     summary: "Katering, pelaminan, rias, dokumentasi, dan crew untuk resepsi. Tempat bisa memakai milikmu atau tempat mitra.",
     photo: "wo-decor-lavender",
     gallery: ["wo-decor-lavender", "wo-catering", "wo-catering-2", "v-ballroom"],
@@ -277,7 +281,7 @@ export const PACKAGES: Package[] = [
     placeholder: true,
     includesClass: false,
     promise: "Pertemuan dua keluarga yang hangat dan tertata.",
-    forWho: "Lamaran di rumah keluarga calon, dari yang sederhana sampai lengkap dengan seserahan.",
+    forWho: "Untuk lamaran di rumah keluarga, dari yang sederhana sampai lengkap dengan seserahan.",
     summary: "Dekorasi ruang lamaran, penataan seserahan, MC, dokumentasi, dan jamuan keluarga.",
     photo: "n-ring-lamaran",
     gallery: ["n-ring-lamaran", "j-khitbah", "wo-ring", "v-dining"],
@@ -307,10 +311,10 @@ export const PACKAGES: Package[] = [
     priceFrom: 1_500_000,
     placeholder: false,
     includesClass: false,
-    promise: "Hari H berjalan sesuai rencana.",
-    forWho: "Vendor sudah kamu pilih sendiri. Kami yang memegang kendali di hari H.",
+    promise: "Hari H berjalan sesuai rencana, kalian cukup hadir.",
+    forWho: "Untuk kalian yang sudah memilih vendor sendiri dan butuh satu tim untuk mengendalikan hari H.",
     summary:
-      "Tim kami mengendalikan hari H supaya seluruh rencana dieksekusi tepat, rapi, dan tanpa gangguan. Keluarga cukup hadir dan menikmati.",
+      "Vendor sudah kalian pilih. Tim kami memegang kendali di hari H, supaya semua rencana berjalan tepat waktu dan rapi.",
     photo: "n-venue-arch",
     gallery: ["n-venue-arch", "n-ijab", "hands"],
     variants: [
@@ -334,11 +338,21 @@ export const PACKAGES: Package[] = [
   },
 ];
 
-export const findPackage = (slug: string) => PACKAGES.find((p) => p.slug === slug);
-export const needLabel = (id: NeedId) => NEEDS.find((n) => n.id === id)?.label ?? id;
+// Language-aware views of the data above. English text lives in packages.en.ts.
+const PACKAGES_BY_LANG = {
+  id: PACKAGES,
+  en: PACKAGES.map((p) => merge(p, PACKAGES_EN[p.slug])),
+} as const;
+export const packagesFor = (lang: Lang = "id") => PACKAGES_BY_LANG[lang];
+export const needsFor = (lang: Lang = "id") => (lang === "en" ? merge(NEEDS, NEEDS_EN) : NEEDS);
+export const addonLabel = (id: AddonId, lang: Lang = "id") => (lang === "en" ? ADDONS_EN[id]?.label : undefined) ?? ADDONS[id].label;
+export const classItemFor = (lang: Lang = "id") => (lang === "en" ? merge(CLASS_ITEM, CLASS_ITEM_EN) : CLASS_ITEM);
+
+export const findPackage = (slug: string, lang: Lang = "id") => packagesFor(lang).find((p) => p.slug === slug);
+export const needLabel = (id: NeedId, lang: Lang = "id") => needsFor(lang).find((n) => n.id === id)?.label ?? id;
 
 /** Items shown on a package page: its own items, plus the class access when included. */
-export const itemsFor = (p: Package, v: Variant) => (p.includesClass ? [...v.items, CLASS_ITEM] : v.items);
+export const itemsFor = (p: Package, v: Variant, lang: Lang = "id") => (p.includesClass ? [...v.items, classItemFor(lang)] : v.items);
 
 /** Estimate for a variant, guest count and add-ons. Mirrors src/scripts/estimator.ts. */
 export const estimate = (v: Variant, guests: number, addons: AddonId[] = []) => {
@@ -369,7 +383,7 @@ export const WO_STEPS = [
   { title: "Konsultasi lewat WhatsApp", body: "Ceritakan tanggal, kota, dan perkiraan jumlah tamu." },
   { title: "Penawaran tertulis", body: "Rincian item dan harga dalam satu dokumen, sebelum kamu membayar DP." },
   { title: "Technical meeting", body: "Bersama keluarga dan vendor, mengunci rundown dan pembagian tugas." },
-  { title: "Hari H", body: "Tim memegang kendali. Keluarga cukup hadir dan menikmati momennya." },
+  { title: "Hari H", body: "Tim kami yang memegang kendali. Keluarga cukup hadir dan menikmati momennya." },
 ];
 
 export const GUEST_RANGES = [
@@ -384,3 +398,9 @@ export const BUDGETS = [
   { id: "b2", label: "Hingga Rp50 jt", max: 50_000_000 },
   { id: "b3", label: "Hingga Rp100 jt", max: 100_000_000 },
 ];
+
+export const rundownFor = (lang: Lang = "id") => (lang === "en" ? merge(RUNDOWN, RUNDOWN_EN) : RUNDOWN);
+export const woStepsFor = (lang: Lang = "id") => (lang === "en" ? merge(WO_STEPS, WO_STEPS_EN) : WO_STEPS);
+export const guestRangesFor = (lang: Lang = "id") =>
+  lang === "en" ? GUEST_RANGES.map((g, i) => ({ ...g, label: GUEST_RANGES_EN[i] })) : GUEST_RANGES;
+export const budgetsFor = (lang: Lang = "id") => (lang === "en" ? BUDGETS.map((b, i) => ({ ...b, label: BUDGETS_EN[i] })) : BUDGETS);

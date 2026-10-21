@@ -3,15 +3,19 @@
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import { photo } from "../data/images";
-import { NEEDS, PACKAGES } from "../data/packages";
+import { needsFor, packagesFor } from "../data/packages";
 import { VENUES } from "../data/venues";
-import { rupiahShort, url } from "../data/site";
+import { rupiahShort } from "../data/site";
+import { langOf, path } from "../i18n/lang";
+import { ui } from "../i18n/ui";
 
-const rows = NEEDS.map((n) => {
-  const pool = n.id === "tempat" ? VENUES : PACKAGES.filter((p) => p.need === n.id);
+const lang = langOf(Astro.url);
+const u = ui(lang);
+const rows = needsFor(lang).map((n) => {
+  const pool = n.id === "tempat" ? VENUES : packagesFor(lang).filter((p) => p.need === n.id);
   const min = Math.min(...pool.map((p) => p.priceFrom));
   const sample = pool.every((p) => p.placeholder);
-  const href = n.id === "tempat" ? url("/tempat/") : url(`/layanan/?kebutuhan=${n.id}`);
+  const href = n.id === "tempat" ? path(lang, "tempat") : `${path(lang, "layanan")}?kebutuhan=${n.id}`;
   return { ...n, min, sample, href, count: pool.length };
 });
 ---
@@ -30,10 +34,9 @@ const rows = NEEDS.map((n) => {
         </h3>
         <p class="nidx__short">{r.short}</p>
         <p class="nidx__price">
-          <span>
-            mulai{r.sample && <span class="nidx__sample">, harga contoh</span>}
-          </span>
-          <strong class="num">{rupiahShort(r.min)}</strong>
+          <span>{u.from}</span>
+          <strong class="num">{rupiahShort(r.min, lang)}</strong>
+          {r.sample && <span class="nidx__sample">({u.samplePrice})</span>}
         </p>
         <span class="nidx__go" aria-hidden="true">
           <Icon name="arrow_outward" size={26} />
@@ -170,6 +173,7 @@ const rows = NEEDS.map((n) => {
       display: flex;
       align-items: baseline;
       gap: var(--s-2);
+      flex-wrap: wrap;
     }
     .nidx__go,
     .nidx__preview {

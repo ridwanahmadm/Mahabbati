@@ -2,8 +2,10 @@
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import { photo } from "../data/images";
-import { type Venue, venueTypeLabel, VENUE_TYPES } from "../data/venues";
-import { rupiahShort, url } from "../data/site";
+import { type Venue, venueTypeLabel, VENUE_TYPES, cityLabel } from "../data/venues";
+import { rupiahShort } from "../data/site";
+import { langOf, path } from "../i18n/lang";
+import { ui } from "../i18n/ui";
 
 interface Props {
   venue: Venue;
@@ -13,39 +15,41 @@ interface Props {
 const { venue, sizes = "(max-width: 720px) 92vw, (max-width: 1100px) 46vw, 30vw", headingLevel = "h3" } = Astro.props;
 const icon = VENUE_TYPES.find((t) => t.id === venue.type)?.icon ?? "location_city";
 const H = headingLevel;
+const lang = langOf(Astro.url);
+const u = ui(lang);
 const cap = Math.max(venue.capacity.akad ?? 0, venue.capacity.walimah ?? 0);
 ---
 
 <article class="vcard" data-vcard data-type={venue.type} data-city={venue.city} data-cap={cap}>
   <figure class="vcard__photo photo">
     <Image src={photo(venue.photo)} alt="" widths={[360, 540, 720, 960]} sizes={sizes} />
-    {venue.placeholder && <span class="chip chip--sample">Data contoh</span>}
+    {venue.placeholder && <span class="chip chip--sample">{u.sample}</span>}
   </figure>
   <div class="vcard__body">
-    <p class="vcard__type"><Icon name={icon} size={18} />{venueTypeLabel(venue.type)}, {venue.city}</p>
+    <p class="vcard__type"><Icon name={icon} size={18} />{venueTypeLabel(venue.type, lang)}, {cityLabel(venue.city, lang)}</p>
     <H class="vcard__name">
-      <a href={url(`/tempat/${venue.slug}/`)} class="vcard__link">{venue.name}</a>
+      <a href={path(lang, "tempat", venue.slug)} class="vcard__link">{venue.name}</a>
     </H>
     <dl class="vcard__meta">
       {
         venue.capacity.akad && (
           <div>
-            <dt>akad</dt>
-            <dd class="num">{venue.capacity.akad} tamu</dd>
+            <dt>{u.akad}</dt>
+            <dd class="num">{u.guestsN(String(venue.capacity.akad))}</dd>
           </div>
         )
       }
       {
         venue.capacity.walimah && (
           <div>
-            <dt>walimah</dt>
-            <dd class="num">{venue.capacity.walimah} tamu</dd>
+            <dt>{u.walimah}</dt>
+            <dd class="num">{u.guestsN(String(venue.capacity.walimah))}</dd>
           </div>
         )
       }
       <div>
-        <dt>mulai</dt>
-        <dd class="num">{rupiahShort(venue.priceFrom)}</dd>
+        <dt>{u.from}</dt>
+        <dd class="num">{rupiahShort(venue.priceFrom, lang)}</dd>
       </div>
     </dl>
   </div>

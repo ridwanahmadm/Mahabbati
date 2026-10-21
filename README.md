@@ -24,6 +24,16 @@ Dibangun dengan [Astro](https://astro.build) dan menghasilkan HTML statis, ditam
 
 URL lama (`/taaruf/`, `/asatidz/`, `/wedding-organizer/...`) otomatis diarahkan ke halaman barunya.
 
+## Dua bahasa
+
+Bahasa Indonesia ada di root, bahasa Inggris di `/en/` dengan slug Inggris (`/en/services/`, `/en/venues/`, `/en/class/`, `/en/stories/`, `/en/app/`, `/en/about/`). Slug paket dan tempat sama di kedua bahasa. Menu bahasa di header mengarah ke halaman yang setara, dan setiap halaman punya `hreflang`.
+
+- **Copy halaman** ada di `src/views/*.astro`, dalam objek `COPY = { id: {...}, en: {...} }` di bagian atas tiap file. `src/pages/` dan `src/pages/en/` hanya pembungkus.
+- **Teks bersama** (menu, footer, label) ada di `src/i18n/ui.ts`.
+- **Data** ditulis dalam bahasa Indonesia di `src/data/*.ts`. Versi Inggrisnya berupa overlay dengan bentuk dan urutan yang sama di `*.en.ts`, berisi teks saja. Harga, foto, dan angka tetap diambil dari file Indonesia.
+- **Testimoni asli** diterjemahkan di versi Inggris dan diberi label "Translated from Indonesian".
+- **Menambah bahasa Arab nanti:** tambahkan `"ar"` di `src/i18n/lang.ts` (`Lang`, `LANGS`, `LANG_META` dengan `dir: "rtl"`, dan path-nya), lalu tulis copy `ar` di `COPY`, `ui.ts`, dan overlay `*.ar.ts`. Menu bahasa dan `<html dir>` akan mengikuti otomatis. Tata letak RTL tetap perlu dicek ulang.
+
 ## Menjalankan
 
 ```bash

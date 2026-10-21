@@ -18,6 +18,9 @@ if (root) {
   const live = $<HTMLElement>("[data-live]");
   const still = reducedMotion();
 
+  // Copy comes from the page (data-i18n), so the same demo runs in both languages.
+  const T = JSON.parse(root.dataset.i18n ?? "{}") as Record<string, string>;
+  const f = (k: string, v: Record<string, number> = {}) => (T[k] ?? k).replace(/\{(\w+)\}/g, (_, x) => String(v[x] ?? ""));
   const START = 10;
   let quota = START;
   let refunded = false;
@@ -43,26 +46,26 @@ if (root) {
 
   const setDay = (d: number) => {
     range.value = String(d);
-    dayOut.textContent = `Hari ke-${d}`;
-    range.setAttribute("aria-valuetext", `Hari ke-${d}`);
+    dayOut.textContent = f("day", { d });
+    range.setAttribute("aria-valuetext", f("day", { d }));
     days.forEach((li, i) => li.classList.toggle("is-past", i < d));
 
     if (d >= 7 && !refunded) {
       refunded = true;
       stop();
       req.dataset.state = "cancelled";
-      status.textContent = "Tidak dibalas 7 hari. Pengajuan batal otomatis, kuota dikembalikan.";
+      status.textContent = f("cancelled");
       range.disabled = true;
       play.disabled = true;
       reset.hidden = false;
       flyCoin();
       quota += 1;
       showQuota(quota);
-      announce(`Hari ke-7: pengajuan batal otomatis. Kuota dikembalikan, sisa ${quota}.`);
+      announce(f("day7", { q: quota }));
     } else if (d > 0 && !refunded) {
-      status.textContent = `Menunggu respons, belum dibalas ${d} hari.`;
+      status.textContent = f("waitingN", { d });
     } else if (!refunded) {
-      status.textContent = "Menunggu respons.";
+      status.textContent = f("waiting");
     }
   };
 
@@ -101,7 +104,7 @@ if (root) {
     range.disabled = false;
     play.disabled = false;
     setDay(0);
-    announce(`Pengajuan terkirim. Sisa kuota ${quota}. Geser waktu untuk melihat hari berikutnya.`);
+    announce(f("sent", { q: quota }));
     range.focus();
   });
 
@@ -123,14 +126,14 @@ if (root) {
     refunded = false;
     quotaEl.textContent = String(START);
     req.dataset.state = "idle";
-    status.textContent = "Belum diajukan";
+    status.textContent = f("idle");
     send.disabled = false;
     range.disabled = true;
     play.disabled = true;
     reset.hidden = true;
     setDay(0);
-    status.textContent = "Belum diajukan";
-    announce("Simulasi diulang.");
+    status.textContent = f("idle");
+    announce(f("reset"));
     send.focus();
   });
 }

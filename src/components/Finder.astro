@@ -1,8 +1,9 @@
 ---
 // "What are you preparing?" — a real GET form, so it works without JavaScript and links can be shared.
 import Icon from "./Icon.astro";
-import { NEEDS, GUEST_RANGES } from "../data/packages";
-import { url } from "../data/site";
+import { needsFor, guestRangesFor } from "../data/packages";
+import { langOf, path } from "../i18n/lang";
+import { ui } from "../i18n/ui";
 
 interface Props {
   id?: string;
@@ -10,25 +11,27 @@ interface Props {
   variant?: "hero" | "bar";
 }
 const { id = "finder", class: cls, variant = "hero" } = Astro.props;
+const lang = langOf(Astro.url);
+const u = ui(lang).finder;
 ---
 
-<form class:list={["finder", `finder--${variant}`, cls]} action={url("/layanan/")} method="get" role="search" aria-label="Cari layanan pernikahan" data-finder data-venues={url("/tempat/")}>
+<form class:list={["finder", `finder--${variant}`, cls]} action={path(lang, "layanan")} method="get" role="search" aria-label={u.label} data-finder data-venues={path(lang, "tempat")}>
   <div class="finder__field">
-    <label for={`${id}-need`}>Yang sedang kamu siapkan</label>
+    <label for={`${id}-need`}>{u.need}</label>
     <select id={`${id}-need`} name="kebutuhan" data-finder-need>
-      <option value="">Semua kebutuhan</option>
-      {NEEDS.map((n) => <option value={n.id}>{n.label}</option>)}
+      <option value="">{u.allNeeds}</option>
+      {needsFor(lang).map((n) => <option value={n.id}>{n.label}</option>)}
     </select>
   </div>
   <div class="finder__field">
-    <label for={`${id}-guests`}>Perkiraan tamu</label>
+    <label for={`${id}-guests`}>{u.guests}</label>
     <select id={`${id}-guests`} name="tamu" data-finder-guests>
-      <option value="">Belum tahu</option>
-      {GUEST_RANGES.map((g) => <option value={g.id}>{g.label}</option>)}
+      <option value="">{u.unsure}</option>
+      {guestRangesFor(lang).map((g) => <option value={g.id}>{g.label}</option>)}
     </select>
   </div>
   <button class="btn finder__go" type="submit">
-    <Icon name="search" size={20} />Lihat pilihan
+    <Icon name="search" size={20} />{u.go}
   </button>
 </form>
 
