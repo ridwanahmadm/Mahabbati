@@ -61,8 +61,8 @@ const COPY = {
     ig: "Pengikut Instagram",
     stories: "Baca cerita pasangan",
     crossTitle: "Kamu sedang di tahap mana?",
-    left: { title: "Sudah bertemu calon.", body: "Rencanakan khitbah, akad, dan walimah bersama tim kami, lengkap dengan kelas pranikah.", cta: "Lihat layanan", alt: "Pengantin berkerudung panjang dan bercadar tipis, tampak dari belakang menghadap laut." },
-    right: { title: "Belum bertemu calon.", body: "Mulai ta'aruf yang aman: profil terverifikasi, dan kuotamu kembali bila tak dibalas 7 hari.", cta: "Kenali aplikasinya", alt: "Seorang muslimah berkhimar biru panjang, tampak dari belakang di antara bunga putih." },
+    left: { title: "Sudah bertemu calon.", body: "Rencanakan khitbah, akad, dan walimah bersama tim kami, lengkap dengan kelas pranikah.", cta: "Lihat layanan", alt: "Tangan pengantin wanita berinai menggandeng lengan pengantin pria, dengan busana pengantin bersulam emas." },
+    right: { title: "Belum bertemu calon.", body: "Mulai ta'aruf yang aman: profil terverifikasi, dan kuotamu kembali bila tak dibalas 7 hari.", cta: "Kenali aplikasinya", alt: "Dua tangan mengetik pesan di layar ponsel." },
     faqTitle: "Tanya jawab.",
     faqLead: "Belum terjawab? Tanyakan langsung, tim WO membalas lewat WhatsApp.",
   },
@@ -98,8 +98,8 @@ const COPY = {
     ig: "Instagram followers",
     stories: "Read couples' stories",
     crossTitle: "Where are you on your journey?",
-    left: { title: "You've met the one.", body: "Plan your khitbah, akad and walimah with our team, with the pre-marriage class included.", cta: "See services", alt: "A bride in a long veil, seen from behind, facing the sea." },
-    right: { title: "Still looking.", body: "Start a safe ta'aruf: verified profiles, and your quota back if there's no reply in 7 days.", cta: "Explore the app", alt: "A woman in a long blue khimar, seen from behind among white flowers." },
+    left: { title: "You've met the one.", body: "Plan your khitbah, akad and walimah with our team, with the pre-marriage class included.", cta: "See services", alt: "A bride's henna-decorated hand on the groom's arm, her bridal dress embroidered in gold." },
+    right: { title: "Still looking.", body: "Start a safe ta'aruf: verified profiles, and your quota back if there's no reply in 7 days.", cta: "Explore the app", alt: "Two hands typing a message on a phone." },
     faqTitle: "Questions and answers.",
     faqLead: "Still wondering? Ask us directly. The WO team replies on WhatsApp.",
   },
@@ -280,8 +280,8 @@ const c = COPY[lang];
   <CrossBand
     id="fork"
     title={c.crossTitle}
-    left={{ ...c.left, href: path(lang, "layanan"), photo: "n-bride-back" }}
-    right={{ ...c.right, href: path(lang, "aplikasi"), photo: "n-khimar-blue", track: "app:home-fork" }}
+    left={{ ...c.left, href: path(lang, "layanan"), photo: "n-couple-arm" }}
+    right={{ ...c.right, href: path(lang, "aplikasi"), photo: "n-phone-chat", track: "app:home-fork" }}
   />
 
   <section class="home-faq section" aria-labelledby="hfaq-title">

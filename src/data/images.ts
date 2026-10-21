@@ -26,9 +26,9 @@ export const screen = (name: string) => {
 
 // Unsplash sources, for credits and replacement.
 export const CREDITS: Record<string, string> = {
+  "n-couple-arm": "https://unsplash.com/photos/A--OZVONuGE",
+  "n-phone-chat": "https://unsplash.com/photos/SrgMu4Fvk7E",
   "n-ring-white": "https://unsplash.com/photos/BQ_u__hBkJg",
-  "n-bride-back": "https://unsplash.com/photos/nvu0cgVqwMA",
-  "n-khimar-blue": "https://unsplash.com/photos/dgCuJ6Ly1Ow",
   "n-bride-arch": "https://unsplash.com/photos/nAgkf61yWaw",
   "n-ijab": "https://unsplash.com/photos/shdfFRzHMZs",
   "n-khimar-bench": "https://unsplash.com/photos/93vwMXC1r-w",
