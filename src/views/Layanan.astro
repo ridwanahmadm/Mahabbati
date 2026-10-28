@@ -20,9 +20,9 @@ const chips = needsFor(lang).filter((n) => n.id !== "tempat");
 const COPY = {
   id: {
     title: "Layanan pernikahan syar'i | Mahabbati",
-    desc: "Pilih paket khitbah, akad, akad di masjid, walimah, paket lengkap, atau koordinasi hari H. Bandingkan harga mulai dan jumlah tamu.",
+    desc: "Pilih paket khitbah, akad, akad di masjid, walimah, atau paket lengkap. Bandingkan harga setiap tingkat dan isinya.",
     h1: "Layanan pernikahan.",
-    lead: "Pesan satu acara, atau serahkan semuanya kepada kami. Setiap paket bisa kamu hitung estimasinya sesuai jumlah tamu.",
+    lead: "Pesan satu acara, atau serahkan semuanya kepada kami. Setiap paket punya beberapa tingkat, dengan harga dan isi yang jelas.",
     heroImg: "Pelaminan berhias bunga merah dan putih dengan kursi pengantin berukir emas.",
     listTitle: "Daftar paket",
     needLegend: "Kebutuhan",
@@ -39,7 +39,7 @@ const COPY = {
     showAll: "Tampilkan semua paket",
     ask: "Tanya tim WO",
     kTitle: "Kelas pranikah, sudah termasuk.",
-    kLead: "Paket Akad, Akad di Masjid, dan Paket Lengkap memberi akses kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati, langsung di aplikasi.",
+    kLead: "Paket Akad dan Masjid Akad sudah termasuk 4 sesi kelas pranikah via Zoom bersama asatidz Mahabbati.",
     kCta: "Lihat isi kelasnya",
     flowTitle: "Dari obrolan pertama sampai hari H.",
     faqTitle: "Tanya jawab.",
@@ -48,9 +48,9 @@ const COPY = {
   },
   en: {
     title: "Islamic wedding services | Mahabbati",
-    desc: "Choose a khitbah, akad, mosque akad, walimah or full wedding package, or wedding-day coordination. Compare starting prices and guest counts.",
+    desc: "Choose a khitbah, akad, mosque akad, walimah or full wedding package. Compare each tier's price and what it includes.",
     h1: "Wedding services.",
-    lead: "Book a single event, or hand the whole wedding over to us. Every package comes with an estimate for your guest count.",
+    lead: "Book a single event, or hand the whole wedding over to us. Every package comes in tiers, with clear prices and contents.",
     heroImg: "A wedding stage with red and white flowers and gold-carved chairs.",
     listTitle: "Packages",
     needLegend: "What you need",
@@ -67,7 +67,7 @@ const COPY = {
     showAll: "Show all packages",
     ask: "Ask the WO team",
     kTitle: "The pre-marriage class, included.",
-    kLead: "The Akad Package, Akad at a Mosque and the full wedding packages include the pre-marriage class and marriage advice from the asatidz of Mahabbati, in the app.",
+    kLead: "The Akad Package and Mosque Akad include a 4-session pre-marriage class on Zoom with the asatidz of Mahabbati.",
     kCta: "See what's in the class",
     flowTitle: "From the first chat to the wedding day.",
     faqTitle: "Questions and answers.",
@@ -135,7 +135,7 @@ const service = {
             <span>{c.budget}</span>
             <select name="budget">
               <option value="">{c.all}</option>
-              {budgetsFor(lang).map((b) => <option value={b.id}>{b.label}</option>)}
+              {budgetsFor(lang).map((b) => <option value={b.id} data-max={b.max}>{b.label}</option>)}
             </select>
           </label>
           <noscript><button class="btn" type="submit">{c.apply}</button></noscript>

@@ -6,7 +6,7 @@ import { photo } from "../data/images";
 import KelasBand from "../components/KelasBand.astro";
 import VenueCard from "../components/VenueCard.astro";
 import PackageCard from "../components/PackageCard.astro";
-import { packagesFor, ADDONS, addonLabel, rundownFor, estimate, itemsFor, needLabel, findPackage, type AddonId } from "../data/packages";
+import { packagesFor, rundownFor, itemsFor, foodOf, needLabel, findPackage, classTiers } from "../data/packages";
 import { venuesFor } from "../data/venues";
 import { WA, waLink, rupiah as rp, rupiahShort as rps } from "../data/site";
 import { langOf, path } from "../i18n/lang";
@@ -27,41 +27,33 @@ const COPY = {
     desc: (from: string) => `${pkg.promise} ${pkg.forWho} Mulai ${from}.`,
     crumbs: "Layanan",
     sampleNote: "Harga dan rincian paket ini masih contoh dan akan diperbarui.",
-    estimateCta: "Hitung estimasi",
+    estimateCta: "Pilih tingkat paket",
     ask: "Tanya tim WO",
     galleryAlt: `Suasana ${pkg.name}`,
     isi: "Isi paket.",
-    variantHead: (name: string, price: string, n: number) => `Varian ${name}, ${price}, sudah termasuk ${n} tamu`,
+    variantHead: (name: string, price: string) => `Tingkat ${name}, ${price}`,
     rundown: "Contoh susunan hari H.",
     rundownLead: "Gambaran alur akad dan walimah di pagi hari. Rundown aslinya kami susun bersama keluargamu.",
     gallery: "Galeri suasana.",
     galleryLead: "Foto ilustrasi. Portofolio acara kami bisa kamu lihat saat konsultasi.",
     galleryRow: "Galeri foto, geser ke samping",
-    estTitle: "Hitung estimasi",
-    variant: "Varian",
-    guests: "Perkiraan jumlah tamu",
-    guestsRange: "Geser jumlah tamu",
-    included: "Sudah termasuk {n} tamu.",
-    addons: "Tambahan",
-    estLabel: "Estimasi awal",
+    estTitle: "Pilih tingkat paket",
+    variant: "Tingkat",
+    estLabel: "Harga paket",
     consultPkg: "Konsultasikan paket ini",
-    estNote: "Estimasi awal sebagai gambaran. Harga final mengikuti lokasi, menu, dan jumlah tamu, dan tertulis di penawaran resmi.",
-    kTitle: "Termasuk kelas pranikah dari asatidz Mahabbati.",
-    kLead: "Setelah paket dipesan, kalian mendapat akses kelas pranikah dan nasihat pernikahan di aplikasi Mahabbati.",
+    estNote: "Butuh tambahan tamu, menu, atau layanan lain? Tim WO akan menyesuaikannya, dan semuanya tertulis di penawaran resmi.",
+    kTitle: "Termasuk kelas pranikah bersama asatidz Mahabbati.",
+    kLead: (tiers: string, _many: boolean) => `${tiers} sudah termasuk 4 sesi kelas pranikah via Zoom, diikuti berdua sebelum akad.`,
     kCta: "Lihat isi kelasnya",
     venues: "Tempat mitra yang cocok.",
     allVenues: "Semua tempat mitra",
     others: "Paket lainnya.",
-    sticky: "Estimasi",
+    sticky: "Harga paket",
     consult: "Konsultasi",
     t: {
-      included: "Sudah termasuk {n} tamu.",
-      over: "Tambahan {over} tamu dihitung per {per} tamu.",
-      extraRow: "Tambahan {over} tamu",
-      greet: "Assalamu'alaikum, Tim WO Mahabbati. Saya tertarik dengan paket {name}.",
-      guests: "Perkiraan tamu: {n} orang",
-      addons: "Tambahan: {list}",
-      estimate: "Estimasi dari website: {total}",
+      greet: "Assalamu'alaikum, Tim WO Mahabbati. Saya tertarik dengan {name}.",
+      food: "{label}: {value}",
+      price: "Harga di website: {total}",
       close: "Boleh dibantu jadwal konsultasinya?",
     },
   },
@@ -69,41 +61,33 @@ const COPY = {
     desc: (from: string) => `${pkg.promise} ${pkg.forWho} From ${from}.`,
     crumbs: "Services",
     sampleNote: "This package's prices and details are a sample and will be updated.",
-    estimateCta: "Estimate the cost",
+    estimateCta: "Choose a tier",
     ask: "Ask the WO team",
     galleryAlt: `The feel of ${pkg.name}`,
     isi: "What's included.",
-    variantHead: (name: string, price: string, n: number) => `${name}, ${price}, includes ${n} guests`,
+    variantHead: (name: string, price: string) => `${name} tier, ${price}`,
     rundown: "A sample wedding-day rundown.",
     rundownLead: "A morning akad and walimah, for a sense of the flow. Your real rundown is planned with your family.",
     gallery: "Gallery.",
     galleryLead: "Illustrative photos. You can see our event portfolio when we meet.",
     galleryRow: "Photo gallery, scroll sideways",
-    estTitle: "Estimate the cost",
-    variant: "Option",
-    guests: "Expected number of guests",
-    guestsRange: "Slide to set guests",
-    included: "Includes {n} guests.",
-    addons: "Add-ons",
-    estLabel: "First estimate",
+    estTitle: "Choose a tier",
+    variant: "Tier",
+    estLabel: "Package price",
     consultPkg: "Ask about this package",
-    estNote: "A first estimate, for planning. The final price depends on location, menu and guests, and is set out in a written quote.",
-    kTitle: "Includes the pre-marriage class from the asatidz of Mahabbati.",
-    kLead: "Once you book, you both get access to the pre-marriage class and marriage advice in the Mahabbati app.",
+    estNote: "Need more guests, a different menu or something extra? The WO team will tailor it, and it all goes into a written quote.",
+    kTitle: "Includes a pre-marriage class with the asatidz of Mahabbati.",
+    kLead: (tiers: string, many: boolean) => `${tiers} ${many ? "include" : "includes"} a 4-session pre-marriage class on Zoom, taken together before the akad.`,
     kCta: "See what's in the class",
     venues: "Partner venues that fit.",
     allVenues: "All partner venues",
     others: "Other packages.",
-    sticky: "Estimate",
+    sticky: "Package price",
     consult: "Talk to us",
     t: {
-      included: "Includes {n} guests.",
-      over: "{over} extra guests are charged per {per}.",
-      extraRow: "{over} extra guests",
-      greet: "Assalamu'alaikum, Mahabbati WO team. I'm interested in the {name} package.",
-      guests: "Expected guests: {n}",
-      addons: "Add-ons: {list}",
-      estimate: "Website estimate: {total}",
+      greet: "Assalamu'alaikum, Mahabbati WO team. I'm interested in {name}.",
+      food: "{label}: {value}",
+      price: "Price on the website: {total}",
       close: "Could you help me book a consultation?",
     },
   },
@@ -112,30 +96,31 @@ const c = COPY[lang];
 const fill = (tpl: string, v: Record<string, string | number>) => tpl.replace(/\{(\w+)\}/g, (_, k) => String(v[k] ?? ""));
 const v0 = pkg.variants[0];
 const multi = pkg.variants.length > 1;
-const addonIds = [...new Set(pkg.variants.flatMap((v) => v.addons))] as AddonId[];
+const withClass = classTiers(pkg);
+const allClass = withClass.length === pkg.variants.length;
+const classNames = allClass ? pkg.name : withClass.map((v) => v.name).join(", ");
+const food = (v: (typeof pkg.variants)[number]) => foodOf(v, lang);
+const foodLine = (v: (typeof pkg.variants)[number]) => {
+  const f = food(v);
+  return f ? fill(c.t.food, { label: f.label, value: f.value }) : "";
+};
 const others = [
   ...PACKAGES.filter((p) => p.slug !== pkg.slug && p.need === pkg.need),
   ...PACKAGES.filter((p) => p.slug !== pkg.slug && p.need !== pkg.need && p.featured),
 ].slice(0, 3);
 const venues = VENUES.filter((v) => v.needs.includes(pkg.need)).slice(0, 3);
-const firstTotal = estimate(v0, v0.guests.included);
-const waText = (variantName: string, guests: number, total: number) =>
-  [fill(c.t.greet, { name: multi ? `${pkg.name} (${variantName})` : pkg.name }), fill(c.t.guests, { n: guests }), fill(c.t.estimate, { total: rupiah(total) }), c.t.close].join("\n");
-const waHref = waLink(WA.wo.number, waText(v0.name, v0.guests.included, firstTotal));
+const waText = [
+  fill(c.t.greet, { name: `${pkg.name} (${v0.name})` }),
+  foodLine(v0),
+  fill(c.t.price, { total: rupiah(v0.price) }),
+  c.t.close,
+].filter(Boolean).join("\n");
+const waHref = waLink(WA.wo.number, waText);
 
 const data = {
   name: pkg.name,
-  multi,
   waNumber: WA.wo.number,
-  variants: pkg.variants.map((v) => ({
-    id: v.id,
-    name: v.name,
-    price: v.price,
-    guests: v.guests,
-    extra: v.extra,
-    addons: v.addons,
-  })),
-  addons: Object.fromEntries(addonIds.map((id) => [id, { label: addonLabel(id, lang), price: ADDONS[id].price }])),
+  variants: pkg.variants.map((v) => ({ id: v.id, name: v.name, price: v.price, food: foodLine(v) })),
   locale: numLocale(lang),
   t: c.t,
 };
@@ -218,9 +203,9 @@ const offer = {
         {
           pkg.variants.map((v, i) => (
             <div class="pd-items" data-variant-panel={v.id} hidden={i > 0 ? true : undefined}>
-              {multi && <h3 class="pd-items__variant">{c.variantHead(v.name, rupiah(v.price), v.guests.included)}</h3>}
+              {multi && <h3 class="pd-items__variant">{c.variantHead(v.name, rupiah(v.price))}</h3>}
               <ul>
-                {itemsFor(pkg, v, lang).map((it) => (
+                {itemsFor(v, lang).map((it) => (
                   <li class="pd-item">
                     <Icon name={it.icon} size={28} class="pd-item__icon" />
                     <div>
@@ -284,79 +269,24 @@ const offer = {
     <aside id="estimasi" class="est" aria-labelledby="est-title" data-estimator>
       <h2 id="est-title" class="est__title">{c.estTitle}</h2>
       <form class="est__form" onsubmit="return false">
-        {
-          multi && (
-            <fieldset class="est__field">
-              <legend>{c.variant}</legend>
-              <div class="seg">
-                {pkg.variants.map((v, i) => (
-                  <label class="seg__opt">
-                    <input type="radio" name="variant" value={v.id} checked={i === 0} data-variant />
-                    <span>
-                      {v.name}
-                      <small class="num">{rupiahShort(v.price)}</small>
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-          )
-        }
-
-        <div class="est__field">
-          <label for="est-guests">{c.guests}</label>
-          <div class="est__guests">
-            <input
-              id="est-guests-range"
-              type="range"
-              min={v0.guests.min}
-              max={v0.guests.max}
-              step={v0.guests.step}
-              value={v0.guests.included}
-              aria-label={c.guestsRange}
-              data-guests-range
-            />
-            <input
-              id="est-guests"
-              type="number"
-              inputmode="numeric"
-              min={v0.guests.min}
-              max={v0.guests.max}
-              step={v0.guests.step}
-              value={v0.guests.included}
-              aria-describedby="est-guests-hint"
-              data-guests
-            />
-          </div>
-          <p id="est-guests-hint" class="est__hint" data-guests-hint>
-            {fill(c.included, { n: v0.guests.included })}
-          </p>
-        </div>
-
         <fieldset class="est__field">
-          <legend>{c.addons}</legend>
-          <ul class="est__addons">
-            {
-              addonIds.map((id) => (
-                <li data-addon-row={id} data-for={pkg.variants.filter((v) => v.addons.includes(id)).map((v) => v.id).join(" ")}>
-                  <label>
-                    <input type="checkbox" value={id} data-addon />
-                    <span>{addonLabel(id, lang)}</span>
-                    <span class="num est__addon-price">+{rupiahShort(ADDONS[id].price)}</span>
-                  </label>
-                </li>
-              ))
-            }
-          </ul>
+          <legend class="visually-hidden">{c.variant}</legend>
+          <div class="tiers">
+            {pkg.variants.map((v, i) => (
+              <label class="tier">
+                <input type="radio" name="variant" value={v.id} checked={i === 0} data-variant />
+                <span class="tier__name">{v.name}</span>
+                {food(v) && food(v)!.value !== v.name && <span class="tier__pax num">{food(v)!.value}</span>}
+                <span class="tier__price num">{rupiahShort(v.price)}</span>
+              </label>
+            ))}
+          </div>
         </fieldset>
       </form>
 
       <div class="est__result">
-        <p class="est__label">{c.estLabel}</p>
-        <p class="est__total num" data-total aria-live="polite">{rupiah(firstTotal)}</p>
-        <ul class="est__breakdown" data-breakdown>
-          <li><span>{multi ? `${pkg.name}, ${v0.name}` : pkg.name}</span><span class="num">{rupiah(v0.price)}</span></li>
-        </ul>
+        <p class="est__label" data-tier>{pkg.name}, {v0.name}</p>
+        <p class="est__total num" data-total aria-live="polite">{rupiah(v0.price)}</p>
       </div>
       <a class="btn btn--wa est__cta" href={waHref} rel="noopener" data-wa data-track={`wa:${pkg.slug}-estimator`}>
         <Icon name="whatsapp" size={22} />{c.consultPkg}
@@ -368,11 +298,11 @@ const offer = {
   </div>
 
   {
-    pkg.includesClass && (
+    withClass.length > 0 && (
       <KelasBand
         id="pdk-title"
         title={c.kTitle}
-        lead={c.kLead}
+        lead={c.kLead(classNames, !allClass && withClass.length > 1)}
         cta={c.kCta}
       />
     )
@@ -416,7 +346,7 @@ const offer = {
   <div class="sticky-est" data-sticky-est hidden>
     <div>
       <span>{c.sticky}</span>
-      <strong class="num" data-sticky-total>{rupiah(firstTotal)}</strong>
+      <strong class="num" data-sticky-total>{rupiah(v0.price)}</strong>
     </div>
     <a class="btn btn--wa" href={waHref} rel="noopener" data-wa data-track={`wa:${pkg.slug}-sticky`}>{c.consult}</a>
   </div>
@@ -706,98 +636,55 @@ const offer = {
     font-size: var(--t-small);
     font-weight: 600;
   }
-  .seg {
+  .tiers {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    padding: 6px;
+    gap: var(--s-2);
+  }
+  .tier {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "name price" "pax price";
+    align-items: center;
+    column-gap: var(--s-3);
+    min-height: 56px;
+    padding: var(--s-3) var(--s-4);
     border-radius: var(--r-m);
     background: var(--mist);
+    cursor: pointer;
+    transition: background-color var(--t-hover) ease, color var(--t-hover) ease;
   }
-  .seg__opt input {
+  .tier input {
     position: absolute;
     opacity: 0;
     pointer-events: none;
   }
-  .seg__opt span {
-    display: grid;
-    gap: 2px;
-    min-height: 52px;
-    place-content: center;
-    text-align: center;
-    border-radius: 9px;
+  .tier__name {
+    grid-area: name;
     font-weight: 600;
-    cursor: pointer;
-    transition: background-color var(--t-hover) ease, color var(--t-hover) ease;
   }
-  .seg__opt small {
-    font-weight: 500;
+  .tier__pax {
+    grid-area: pax;
     font-size: var(--t-micro);
     color: var(--ink-2);
   }
-  .seg__opt input:checked + span {
+  .tier__price {
+    grid-area: price;
+    font-weight: 600;
+  }
+  .tier:hover {
+    background: var(--haze);
+  }
+  .tier:has(input:checked) {
     background: var(--brand);
     color: #fff;
   }
-  .seg__opt input:checked + span small {
+  .tier:has(input:checked) .tier__pax {
     color: var(--haze);
   }
-  .seg__opt input:focus-visible + span {
+  .tier:has(input:focus-visible) {
     outline: 2.5px solid var(--focus);
     outline-offset: 2px;
-  }
-  .est__guests {
-    display: grid;
-    grid-template-columns: 1fr 96px;
-    gap: var(--s-3);
-    align-items: center;
-  }
-  .est__guests input[type="range"] {
-    width: 100%;
-    accent-color: var(--brand);
-    min-height: 32px;
-  }
-  .est__guests input[type="number"] {
-    width: 100%;
-    min-height: 48px;
-    padding: 0 var(--s-3);
-    border: 1.5px solid var(--lilac);
-    border-radius: var(--r-s);
-    background: var(--ground);
-    font-variant-numeric: tabular-nums;
-    font-weight: 600;
-    font-size: 1rem;
-  }
-  .est__guests input[type="number"]:focus-visible {
-    border-color: var(--accent-ink);
-  }
-  .est__hint {
-    margin-top: var(--s-2);
-    font-size: var(--t-micro);
-    color: var(--ink-2);
-  }
-  .est__addons {
-    list-style: none;
-    display: grid;
-    gap: 2px;
-  }
-  .est__addons label {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: var(--s-3);
-    align-items: center;
-    min-height: 44px;
-    padding: 6px 0;
-    font-size: var(--t-small);
-    cursor: pointer;
-  }
-  .est__addons input {
-    width: 20px;
-    height: 20px;
-    accent-color: var(--brand);
-  }
-  .est__addon-price {
-    color: var(--ink-2);
   }
   .est__result {
     margin-top: var(--s-5);
@@ -812,19 +699,6 @@ const offer = {
     font-family: var(--serif);
     font-size: clamp(1.875rem, 1.5rem + 1vw, 2.375rem);
     line-height: 1.15;
-  }
-  .est__breakdown {
-    list-style: none;
-    margin-top: var(--s-3);
-    display: grid;
-    gap: 4px;
-    font-size: var(--t-micro);
-    color: var(--ink-2);
-  }
-  .est__breakdown :global(li) {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--s-3);
   }
   .est__cta {
     width: 100%;

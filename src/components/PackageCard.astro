@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import { photo } from "../data/images";
-import { type Package, needLabel, guestRange } from "../data/packages";
+import { type Package, needLabel, paxRange, classTiers } from "../data/packages";
 import { rupiahShort } from "../data/site";
 import { langOf, path } from "../i18n/lang";
 import { ui, numLocale } from "../i18n/ui";
@@ -12,19 +12,21 @@ interface Props {
   sizes?: string;
   headingLevel?: "h2" | "h3";
 }
-const { pkg, sizes = "(max-width: 720px) 92vw, (max-width: 1100px) 46vw, 30vw", headingLevel = "h3" } = Astro.props;
-const g = guestRange(pkg);
-const H = headingLevel;
 const lang = langOf(Astro.url);
 const u = ui(lang);
+const { pkg, sizes = "(max-width: 720px) 92vw, (max-width: 1100px) 46vw, 30vw", headingLevel = "h3" } = Astro.props;
+const g = paxRange(pkg);
+const withClass = classTiers(pkg);
+const classTag = withClass.length === pkg.variants.length ? u.classTag : u.classTagSome(withClass.map((v) => v.name).join(", "));
+const H = headingLevel;
 ---
 
 <article
   class="pcard"
   data-pcard
   data-need={pkg.need}
-  data-min={g.min}
-  data-max={g.max}
+  data-min={g?.min ?? 0}
+  data-max={g?.max ?? 0}
   data-price={pkg.priceFrom}
 >
   <figure class="pcard__photo photo">
@@ -42,16 +44,20 @@ const u = ui(lang);
         <dt>{u.from}</dt>
         <dd class="num pcard__price">{rupiahShort(pkg.priceFrom, lang)}</dd>
       </div>
-      <div>
-        <dt>{u.guests}</dt>
-        <dd class="num">{u.range(String(g.min), g.max.toLocaleString(numLocale(lang)))}</dd>
-      </div>
+      {
+        g && (
+          <div>
+            <dt>{u.guests}</dt>
+            <dd class="num">{g.min === g.max ? g.min : u.range(String(g.min), g.max.toLocaleString(numLocale(lang)))}</dd>
+          </div>
+        )
+      }
     </dl>
     {
-      pkg.includesClass && (
+      withClass.length > 0 && (
         <p class="pcard__class">
           <Icon name="school" size={18} />
-          {u.classTag}
+          {classTag}
         </p>
       )
     }

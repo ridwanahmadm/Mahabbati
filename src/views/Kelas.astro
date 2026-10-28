@@ -7,57 +7,57 @@ import PackageCard from "../components/PackageCard.astro";
 import Benefits from "../components/Benefits.astro";
 import StoreBadges from "../components/StoreBadges.astro";
 import { kelasFactsFor } from "../data/content";
-import { packagesFor } from "../data/packages";
+import { packagesFor, includesClass } from "../data/packages";
 import { langOf, path } from "../i18n/lang";
 
 const lang = langOf(Astro.url);
-const withClass = packagesFor(lang).filter((p) => p.includesClass);
+const withClass = packagesFor(lang).filter(includesClass);
 const COPY = {
   id: {
     title: "Kelas pranikah dan nasihat pernikahan | Mahabbati",
-    desc: "Kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati di aplikasi, termasuk untuk klien Paket Akad dan Paket Lengkap.",
+    desc: "Kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati: 4 sesi via Zoom di Paket Akad dan Masjid Akad, atau kapan saja di aplikasi.",
     h1: "Bekal ilmu, sebelum dan setelah akad.",
-    lead: "Kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati, langsung di aplikasi. Sudah termasuk untuk klien Paket Akad, Akad di Masjid, dan Paket Lengkap.",
+    lead: "Kelas pranikah dan nasihat pernikahan dari asatidz Mahabbati. Ikuti 4 sesi via Zoom lewat Paket Akad dan Masjid Akad, atau belajar kapan saja di aplikasi.",
     access: "Cara mendapat akses",
     pkgs: "Paket yang termasuk kelas",
     mTitle: "Materi kelasnya.",
     mLead: "Disusun berurutan, dari niat menikah sampai mengelola rumah tangga. Disampaikan oleh asatidz Mahabbati.",
     howTitle: "Cara belajarnya.",
-    howLead: "Semuanya ada di aplikasi, jadi bisa kalian ikuti dari rumah masing-masing.",
+    howLead: "Di aplikasi, semuanya bisa kalian ikuti dari rumah masing-masing.",
     contents: [
       { src: "kajian", title: "Kajian dan e-learning", body: "Video dan audio dari asatidz Mahabbati, bisa diputar ulang kapan saja.", alt: "Layar kajian di aplikasi Mahabbati: video materi rumah tangga dengan tombol putar versi audio." },
       { src: "ujian_q", title: "Ujian pranikah", body: "Uji kesiapan diri, keluarga, dan ilmu pernikahan.", alt: "Layar ujian pranikah dengan pertanyaan pilihan ganda." },
       { src: "ujian_hasil", title: "Sertifikat kelulusan", body: "Lulus ujian, unduh sertifikatnya untuk dibagikan.", alt: "Layar hasil ujian: dinyatakan lulus, dengan tombol unduh sertifikat." },
     ],
     aTitle: "Dua jalan untuk mendapat akses.",
-    wo: { title: "Lewat Wedding Organizer", steps: ["Pesan Paket Akad, Akad di Masjid, atau Paket Lengkap.", "Unduh aplikasi Mahabbati dan daftar dengan nomor yang sama.", "Tim kami membuka akses kelas dan nasihat pernikahan di akunmu."], link: "Lihat layanan WO" },
+    wo: { title: "Lewat Wedding Organizer", steps: ["Pesan Paket Akad (tingkat mana pun) atau Masjid Akad.", "Tim kami menjadwalkan 4 sesi kelas pranikah via Zoom.", "Kalian mengikutinya berdua, bersama asatidz Mahabbati, sebelum akad."], link: "Lihat layanan WO" },
     app: { title: "Lewat membership aplikasi", steps: ["Unduh aplikasi Mahabbati dan daftar gratis.", "Pilih membership Silver atau Gold.", "Kajian, e-learning, dan ujian pranikah langsung terbuka."], link: "Bandingkan membership" },
     pkTitle: "Paket yang termasuk kelas pranikah.",
-    dlTitle: "Kelasnya ada di aplikasi Mahabbati.",
-    dlLead: "Unduh aplikasinya, lalu daftar dengan nomor yang sama seperti saat memesan WO.",
+    dlTitle: "Kajian dan e-learning ada di aplikasi Mahabbati.",
+    dlLead: "Unduh aplikasinya, daftar gratis, lalu pilih membership untuk membuka materinya.",
   },
   en: {
     title: "Pre-marriage class and marriage advice | Mahabbati",
-    desc: "The pre-marriage class and marriage advice from the asatidz of Mahabbati, in the app. Included for Akad and Full wedding package clients.",
+    desc: "The pre-marriage class and marriage advice from the asatidz of Mahabbati: 4 sessions on Zoom with the Akad Package and Mosque Akad, or anytime in the app.",
     h1: "Knowledge for before and after the akad.",
-    lead: "The pre-marriage class and marriage advice from the asatidz of Mahabbati, right in the app. Included for clients of the Akad Package, Akad at a Mosque and the full wedding packages.",
+    lead: "The pre-marriage class and marriage advice from the asatidz of Mahabbati. Take 4 sessions on Zoom with the Akad Package or Mosque Akad, or learn anytime in the app.",
     access: "How to get access",
     pkgs: "Packages that include it",
     mTitle: "What you'll learn.",
     mLead: "In a clear order, from the intention to marry to running a home together. Taught by the asatidz of Mahabbati.",
     howTitle: "How you learn.",
-    howLead: "It's all in the app, so you can each follow it from your own home.",
+    howLead: "In the app, you can each follow along from your own home.",
     contents: [
       { src: "kajian", title: "Talks and e-learning", body: "Video and audio from the asatidz of Mahabbati, to replay anytime.", alt: "A talk screen in the Mahabbati app: a lesson video on married life with an audio option." },
       { src: "ujian_q", title: "Pre-marriage test", body: "Check how ready you, your family and your knowledge are.", alt: "A pre-marriage test screen with a multiple-choice question." },
       { src: "ujian_hasil", title: "Certificate", body: "Pass the test, then download a certificate to share.", alt: "A test result screen: passed, with a button to download the certificate." },
     ],
     aTitle: "Two ways to get access.",
-    wo: { title: "Through the Wedding Organizer", steps: ["Book the Akad Package, Akad at a Mosque, or a full wedding package.", "Download the Mahabbati app and sign up with the same phone number.", "Our team unlocks the class and marriage advice on your account."], link: "See WO services" },
+    wo: { title: "Through the Wedding Organizer", steps: ["Book the Akad Package (any tier) or Mosque Akad.", "Our team schedules 4 pre-marriage sessions on Zoom.", "You take them together, with the asatidz of Mahabbati, before the akad."], link: "See WO services" },
     app: { title: "Through app membership", steps: ["Download the Mahabbati app and sign up for free.", "Choose Silver or Gold membership.", "Talks, e-learning and the pre-marriage test open right away."], link: "Compare membership" },
     pkTitle: "Packages that include the pre-marriage class.",
-    dlTitle: "The class lives in the Mahabbati app.",
-    dlLead: "Download the app, then sign up with the same phone number you used to book the WO.",
+    dlTitle: "Talks and e-learning live in the Mahabbati app.",
+    dlLead: "Download the app, sign up for free, then choose a membership to open the lessons.",
   },
 };
 const c = COPY[lang];

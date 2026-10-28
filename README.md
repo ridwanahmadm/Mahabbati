@@ -52,9 +52,9 @@ Semua data ada di `src/data/`. Cari kata `PLACEHOLDER`, `DUMMY`, dan `GANTI`.
 
 **`packages.ts`** (paket WO)
 - `placeholder: true` berarti harga dan rincian masih contoh. Label "Data contoh" tampil di situs sampai diubah ke `false`.
-- `includesClass: true` berarti paket termasuk kelas pranikah dan nasihat di aplikasi. Saat ini: Paket Akad, Akad di Masjid, Intimate, Full Package.
-- Harga asli: Wedding Planner Rp1,5 jt, Intimate Rp15 jt, Full Package Standard Rp75 jt (300 pax) dan Exclusive Rp95 jt (500 pax). Khitbah, Akad, Akad di Masjid, dan Walimah masih contoh.
-- `ADDONS`, harga per tamu tambahan, `RUNDOWN`, dan `WO_STEPS` masih contoh.
+- Harga dan isi paket dari "Paket wedding MAHABBATI_REVAMP.xlsx" (28 Okt 2026): Khitbah, Akad, Walimah, Mahabbati Complete, dan Akad di Masjid, masing-masing dengan beberapa tingkat. Isi tiap tingkat ditulis sebagai kunci item (`ITEM_TEXT`), teks Inggrisnya di `ITEM_TEXT_EN`.
+- Item `kelas` (Zoom Pranikah, 4 sesi) hanya di Paket Akad dan Masjid Akad, mengikuti file. Label kelas di kartu paket dan halaman kelas mengikutinya otomatis.
+- Halaman paket memakai pemilih tingkat, bukan kalkulator per tamu. `RUNDOWN` dan `WO_STEPS` masih contoh.
 
 **`venues.ts`** (tempat mitra)
 - Seluruhnya contoh dengan nama generik. Ganti dengan data mitra resmi lalu set `placeholder: false`.

@@ -18,7 +18,7 @@ export const JOURNEY_EN = [
   {
     name: "Pre-marriage class",
     line: "Knowledge from the asatidz of Mahabbati.",
-    how: "The pre-marriage class and marriage advice live in the app, included with the Akad and Full wedding packages.",
+    how: "A 4-session pre-marriage class on Zoom, included with the Akad Package and Mosque Akad. Further lessons are in the app.",
     alt: "Hands holding a copy of the Qur'an and prayer beads.",
   },
   {
@@ -71,7 +71,7 @@ export const KELAS_FACTS_EN = [
 
 export const BENEFITS_NOTE_EN = "These benefits are being prepared. Details and terms will be announced in the Mahabbati app.";
 export const BENEFITS_EN = [
-  { title: "Pre-marriage class & marriage advice", body: "From the asatidz of Mahabbati, in the app.", for: "Akad and Full wedding package clients" },
+  { title: "Pre-marriage class on Zoom", body: "4 sessions with the asatidz of Mahabbati, before the akad.", for: "Akad Package and Mosque Akad clients" },
   { title: "Sharia consultation", body: "Ask the asatidz about preparing for marriage.", for: "App users and WO clients" },
   { title: "Talks on married life", body: "Exclusive access to talks for newlyweds.", for: "Couples from the app and WO clients" },
   { title: "Married-life seminars", body: "Invitations to seminars with the asatidz.", for: "Couples from the app and WO clients" },
@@ -125,7 +125,7 @@ export const APP_FAQ_EN = [
 export const WO_FAQ_EN = [
   {
     q: "Which packages include the pre-marriage class?",
-    a: "For now: the Akad Package, Akad at a Mosque, and the full wedding packages (Intimate and Full Package). The class and marriage advice from the asatidz of Mahabbati are in the Mahabbati app.",
+    a: "The Akad Package (every tier) and Mosque Akad. Both include a 4-session pre-marriage class on Zoom with the asatidz of Mahabbati.",
   },
   {
     q: "Can I book just a venue?",
@@ -141,7 +141,7 @@ export const WO_FAQ_EN = [
   },
   {
     q: "Are the prices on the website final?",
-    a: "Not yet. They are a first estimate. The final price depends on guests, location and menu, and is set out in a written quote.",
+    a: "They are the package price for each tier. If you need more guests, a different menu or something extra, the WO team tailors it and sets it out in a written quote.",
   },
   {
     q: "Do you work outside Jakarta?",

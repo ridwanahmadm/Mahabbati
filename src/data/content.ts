@@ -18,7 +18,7 @@ export const JOURNEY: { id: string; phase: Phase; name: string; line: string; ho
     phase: "Sebelum akad",
     name: "Kelas pranikah",
     line: "Bekal ilmu dari asatidz Mahabbati.",
-    how: "Kelas pranikah dan nasihat pernikahan di aplikasi, termasuk dalam Paket Akad dan Paket Lengkap.",
+    how: "4 sesi kelas pranikah via Zoom, termasuk dalam Paket Akad dan Masjid Akad. Materi lanjutannya ada di aplikasi.",
     photo: "j-pranikah",
     alt: "Tangan memegang mushaf Al-Qur'an dan tasbih.",
   },
@@ -90,7 +90,7 @@ export const KELAS_FACTS: { value: string; label: string }[] = [
 // Selama `BENEFITS_NOTE` tidak kosong, catatan ini tampil di situs agar tidak terbaca sebagai janji final.
 export const BENEFITS_NOTE = "Program benefit ini sedang disiapkan. Detail dan syaratnya diumumkan di aplikasi Mahabbati.";
 export const BENEFITS: { phase: "Sebelum" | "Setelah"; icon: string; title: string; body: string; for: string }[] = [
-  { phase: "Sebelum", icon: "school", title: "Kelas pranikah & nasihat pernikahan", body: "Bersama asatidz Mahabbati, diakses di aplikasi.", for: "Klien Paket Akad dan Paket Lengkap" },
+  { phase: "Sebelum", icon: "school", title: "Kelas pranikah via Zoom", body: "4 sesi bersama asatidz Mahabbati, sebelum akad.", for: "Klien Paket Akad dan Masjid Akad" },
   { phase: "Sebelum", icon: "forum", title: "Konsultasi syariah", body: "Tanya langsung ke asatidz soal persiapan nikah.", for: "Pengguna aplikasi dan klien WO" },
   { phase: "Setelah", icon: "menu_book", title: "Kajian rumah tangga", body: "Akses khusus kajian rumah tangga untuk pengantin baru.", for: "Pasangan dari aplikasi dan klien WO" },
   { phase: "Setelah", icon: "calendar_month", title: "Seminar rumah tangga", body: "Undangan seminar rumah tangga bersama asatidz.", for: "Pasangan dari aplikasi dan klien WO" },
@@ -145,8 +145,8 @@ export const APP_FAQ = [
 export const WO_FAQ = [
   {
     q: "Paket apa saja yang termasuk kelas pranikah?",
-    // PLACEHOLDER: ikut flag includesClass di src/data/packages.ts.
-    a: "Untuk saat ini Paket Akad, Akad di Masjid, dan Paket Lengkap (Intimate dan Full Package). Kelas pranikah dan nasihat pernikahan bersama asatidz Mahabbati diakses lewat aplikasi Mahabbati.",
+    // Ikuti item "kelas" di src/data/packages.ts.
+    a: "Paket Akad (semua tingkat) dan Masjid Akad. Keduanya sudah termasuk 4 sesi kelas pranikah via Zoom bersama asatidz Mahabbati.",
   },
   {
     q: "Bisa pesan tempat saja?",
@@ -163,7 +163,7 @@ export const WO_FAQ = [
   },
   {
     q: "Apakah harga di website sudah final?",
-    a: "Belum. Angka di website adalah estimasi awal. Harga final mengikuti jumlah tamu, lokasi, dan pilihan menu, dan dituliskan di penawaran resmi.",
+    a: "Harga di website adalah harga paket per tingkat. Bila butuh tambahan tamu, menu, atau layanan lain, tim WO menyesuaikannya dan menuliskannya di penawaran resmi.",
   },
   {
     q: "Bisa melayani di luar Jakarta?",

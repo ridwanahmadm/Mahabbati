@@ -7,7 +7,6 @@ const count = document.querySelector<HTMLElement>("[data-catalog-count]");
 const empty = document.querySelector<HTMLElement>("[data-catalog-empty]");
 
 const GUESTS: Record<string, [number, number]> = { s: [0, 100], m: [100, 300], l: [300, 500], xl: [500, 5000] };
-const BUDGET: Record<string, number> = { b1: 10_000_000, b2: 50_000_000, b3: 100_000_000 };
 
 if (form) {
   const params = new URLSearchParams(location.search);
@@ -24,7 +23,7 @@ if (form) {
     const data = new FormData(form);
     const n = String(data.get("kebutuhan") ?? "");
     const g = GUESTS[String(data.get("tamu") ?? "")];
-    const b = BUDGET[String(data.get("budget") ?? "")];
+    const b = Number(form.querySelector<HTMLSelectElement>('select[name="budget"]')?.selectedOptions[0]?.dataset.max ?? 0);
     let shown = 0;
     const appearing: HTMLElement[] = [];
     for (const li of items) {
