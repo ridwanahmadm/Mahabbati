@@ -1,0 +1,52 @@
+---
+// Layout for the WO-first variant under /v2/. Indonesian only and kept out of search until it is chosen.
+import "../styles/v2/site.css";
+import Header from "../components/v2/Header.astro";
+import Footer from "../components/v2/Footer.astro";
+import { url } from "../data/site";
+import serifWoff2 from "@fontsource/libre-baskerville/files/libre-baskerville-latin-400-normal.woff2?url";
+import sansWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+
+interface Props {
+  title: string;
+  description: string;
+  current?: "home" | "layanan" | "tentang";
+  /** Home only: the header sits transparent over the hero photograph until the page scrolls. */
+  overHero?: boolean;
+}
+const { title, description, current = "home", overHero = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#FAF7F0" />
+    <link rel="icon" href={url("/favicon.svg")} type="image/svg+xml" />
+    <link rel="preload" href={serifWoff2} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sansWoff2} as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <a class="skip-link" href="#konten">Lewati ke konten</a>
+    <Header current={current} over={overHero} />
+    <main id="konten" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import "../scripts/v2.ts";
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* Also in base.css; repeated here so the page's own source states the Floor rule. */
+  html,
+  body {
+    overflow-x: clip;
+  }
+</style>

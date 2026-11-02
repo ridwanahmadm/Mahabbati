@@ -58,5 +58,9 @@ export const CREDITS: Record<string, string> = {
   "v-garden-arch": "https://images.unsplash.com/photo-1783142979736-9596873cf20a",
   "v-gazebo": "https://images.unsplash.com/photo-1523438885200-e635ba2c371e",
   "v-villa": "https://images.unsplash.com/photo-1663185776079-33231c5242eb",
+  // /v2/ variant
+  "v2-walimah-tent": "https://images.unsplash.com/photo-1772127822525-7eda37383b9f",
+  "v2-akad-ijab": "https://images.unsplash.com/photo-1609841272096-cdd94818a6e0",
+  "v2-joglo": "https://images.unsplash.com/photo-1610425303802-f09737e52e28",
   "v-dining": "https://images.unsplash.com/photo-1769812343590-485512e27838",
 };

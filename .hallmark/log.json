@@ -1,0 +1,40 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "shape": "Showcase",
+  "theme": "brand",
+  "axes": "light/roman-serif/cool",
+  "hero": "full-bleed photograph, copy bottom-left",
+  "nav": "edge-aligned bar, wordmark, five links, one pill",
+  "footer": "mast, wordmark over three link columns",
+  "imagery": "photo",
+  "photos": [
+   "v2-walimah-tent",
+   "v2-akad-ijab",
+   "v2-joglo",
+   "n-venue-arch",
+   "n-pelaminan",
+   "wo-catering"
+  ],
+  "entry": "src/pages/v2/index.astro",
+  "fingerprint": "ivory paper, violet ink, gold hairlines, Libre Baskerville price numerals",
+  "sections": [
+   "hero",
+   "moments",
+   "price list",
+   "standards",
+   "portfolio rail",
+   "quote",
+   "faq",
+   "closing band",
+   "footer"
+  ],
+  "signature": "package price list set like an undangan card",
+  "waived": [
+   "25"
+  ],
+  "prompt": "WO-first variant of the Mahabbati microsite from a reference wedding-organizer homepage, adapted to the Mahabbati brand",
+  "date": "2026-11-02"
+ }
+]

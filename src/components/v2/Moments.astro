@@ -1,0 +1,42 @@
+---
+// Layanan: the three moments of a Muslim wedding in order, then the all-in package.
+import { V2, MOMENTS, ALL_IN } from "../../data/v2";
+
+interface Props {
+  title?: string;
+  lead?: string;
+}
+const {
+  title = "Satu tim, dari lamaran sampai resepsi",
+  lead = "Setiap paket sudah termasuk ustadz untuk tausiyah, MC, foto dan video, serta crew di hari H.",
+} = Astro.props;
+---
+
+<section class="sec" id="layanan" aria-labelledby="layanan-title">
+  <div class="container moments">
+    <div>
+      <h2 id="layanan-title">{title}</h2>
+      <p class="sec-lead">{lead}</p>
+    </div>
+    <ol class="moments__list">
+      {
+        MOMENTS.map((m) => (
+          <li class="moment">
+            <h3>{m.name}</h3>
+            <div>
+              <p>{m.line}</p>
+              <a class="text-link moment__link" href={V2(`/layanan/${m.slug}/`)}>{m.cta}</a>
+            </div>
+          </li>
+        ))
+      }
+      <li class="moment moment--all">
+        <h3>{ALL_IN.name}</h3>
+        <div>
+          <p>{ALL_IN.line}</p>
+          <a class="text-link moment__link" href={V2(`/layanan/${ALL_IN.slug}/`)}>{ALL_IN.cta}</a>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>

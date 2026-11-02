@@ -1,0 +1,38 @@
+---
+import Icon from "../Icon.astro";
+import { WA } from "../../data/site";
+import { V2, WA_HREF } from "../../data/v2";
+
+interface Props {
+  title?: string;
+  lead?: string;
+  /** Prefilled WhatsApp link; defaults to the general consultation greeting. */
+  href?: string;
+  secondary?: boolean;
+}
+const {
+  title = "Ceritakan rencana kalian, kami bantu susun",
+  lead = "Kirim tanggal, kota, dan perkiraan jumlah tamu. Tim WO membalas dengan pilihan paket dan penawaran tertulis.",
+  href = WA_HREF,
+  secondary = true,
+} = Astro.props;
+---
+
+<section class="cta sec" aria-labelledby="cta-title">
+  <div class="container cta__inner">
+    <div>
+      <h2 id="cta-title">{title}</h2>
+      <p class="sec-lead">{lead}</p>
+      <div class="cta__actions">
+        <a class="btn btn--on-dark" href={href} rel="noopener" data-wa>
+          <Icon name="whatsapp" size={20} />Konsultasi via WhatsApp
+        </a>
+        {secondary && <a class="btn btn--line-dark" href={V2("/layanan/")}>Bandingkan paket</a>}
+      </div>
+    </div>
+    <div class="cta__contact">
+      <span>WhatsApp tim WO</span>
+      <a href={href} rel="noopener" data-wa>{WA.wo.label}</a>
+    </div>
+  </div>
+</section>

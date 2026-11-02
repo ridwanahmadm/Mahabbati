@@ -1,0 +1,86 @@
+---
+// Packages. Full size: photo-led cards in a double gold frame, set like an undangan, price on a gold rule.
+// Compact: one row per package, for "other packages" on a detail page.
+import { Image } from "astro:assets";
+import { photo } from "../../data/images";
+import { packagesFor, paxRange } from "../../data/packages";
+import { PACKAGE_ORDER, V2 } from "../../data/v2";
+import { rupiahShort } from "../../data/site";
+
+interface Props {
+  /** Show each tier's name and price on the card. */
+  tiers?: boolean;
+  compact?: boolean;
+  exclude?: string;
+  headingLevel?: "h3" | "h4";
+}
+const { tiers = false, compact = false, exclude, headingLevel: H = "h3" } = Astro.props;
+const pkgs = PACKAGE_ORDER.filter((s) => s !== exclude).map((s) => packagesFor("id").find((p) => p.slug === s)!);
+const top = (p: (typeof pkgs)[number]) => Math.max(...p.variants.map((v) => v.price));
+// Guest counts only where every tier is priced by catering portions (Walimah, Complete).
+const guests = (p: (typeof pkgs)[number]) => {
+  const r = paxRange(p);
+  if (!r || !p.variants.every((v) => v.items.some(([k]) => k === "catering"))) return "";
+  return r.min === r.max ? `${r.min} tamu` : `${r.min} sampai ${r.max} tamu`;
+};
+const upTo = (p: (typeof pkgs)[number]) => [`sampai ${rupiahShort(top(p))}`, guests(p)].filter(Boolean).join(", ");
+---
+
+{
+  compact ? (
+    <ul class="pkgs pkgs--compact">
+      {pkgs.map((p) => (
+        <li class="pkg">
+          <div class="pkg__photo">
+            <Image src={photo(p.photo)} alt="" widths={[200]} sizes="96px" />
+          </div>
+          <H class="pkg__name">
+            <a href={V2(`/layanan/${p.slug}/`)}>{p.name}</a>
+          </H>
+          <p class="pkg__price">
+            <span class="pkg__price-from">mulai</span>
+            <span class="pkg__price-num">{rupiahShort(p.priceFrom)}</span>
+          </p>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <ul class="pcards">
+      {pkgs.map((p) => {
+        const wide = p.slug === "mahabbati-complete";
+        return (
+          <li class:list={["pcard", { "pcard--wide": wide }]}>
+            <div class="pcard__photo">
+              <Image
+                src={photo(p.photo)}
+                alt=""
+                widths={wide ? [480, 720, 960] : [400, 600, 800]}
+                sizes={wide ? "(max-width: 40rem) 100vw, (max-width: 64rem) 92vw, 40vw" : "(max-width: 40rem) 100vw, (max-width: 64rem) 46vw, 30vw"}
+              />
+            </div>
+            <div class="pcard__body">
+              <H class="pcard__name">
+                <a href={V2(`/layanan/${p.slug}/`)}>{p.name}</a>
+              </H>
+              <p class="pcard__for">{p.forWho}</p>
+              {tiers && (
+                <ul class="pcard__tiers" aria-label={`Tingkat ${p.name}`}>
+                  {p.variants.map((v) => (
+                    <li>
+                      {v.name} <b>{rupiahShort(v.price)}</b>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <p class="pcard__price">
+                <span class="pcard__from">mulai</span>
+                <span class="pcard__num">{rupiahShort(p.priceFrom)}</span>
+                <span class="pcard__to">{upTo(p)}</span>
+              </p>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  )
+}

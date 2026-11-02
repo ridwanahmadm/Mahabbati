@@ -1,0 +1,38 @@
+---
+import V2Layout from "../../layouts/V2.astro";
+import PackageList from "../../components/v2/PackageList.astro";
+import Moments from "../../components/v2/Moments.astro";
+import CtaBand from "../../components/v2/CtaBand.astro";
+import { V2 } from "../../data/v2";
+---
+
+<V2Layout
+  title="Layanan & Paket | Mahabbati Wedding Organizer Syar’i"
+  description="Paket Khitbah, Akad, Akad di Masjid, Walimah, dan Mahabbati Complete, dengan harga setiap tingkat tertulis. Mulai Rp15 jt."
+  current="layanan"
+>
+  <nav class="crumbs container" aria-label="Breadcrumb">
+    <ol>
+      <li><a href={V2("/")}>Beranda</a></li>
+      <li aria-current="page">Layanan & Paket</li>
+    </ol>
+  </nav>
+
+  <header class="page-head container">
+    <h1>Layanan dan paket pernikahan</h1>
+    <p class="sec-lead">
+      Lima paket untuk tiap momen pernikahan, tiap tingkat dengan harga tertulis.
+    </p>
+  </header>
+
+  <section class="sec--s band" aria-labelledby="list-title">
+    <div class="container">
+      <h2 id="list-title" class="visually-hidden">Daftar paket</h2>
+      <PackageList tiers />
+    </div>
+  </section>
+
+  <Moments title="Apa yang kami urus di tiap momen" />
+
+  <CtaBand />
+</V2Layout>

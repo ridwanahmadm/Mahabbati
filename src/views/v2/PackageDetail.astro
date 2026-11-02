@@ -1,0 +1,199 @@
+---
+import V2Layout from "../../layouts/V2.astro";
+import Icon from "../../components/Icon.astro";
+import PackageList from "../../components/v2/PackageList.astro";
+import CtaBand from "../../components/v2/CtaBand.astro";
+import { Image } from "astro:assets";
+import { photo } from "../../data/images";
+import { itemsFor, foodOf, findPackage, classTiers } from "../../data/packages";
+import { WA, waLink, rupiah, rupiahShort, url } from "../../data/site";
+import { V2 } from "../../data/v2";
+
+interface Props {
+  slug: string;
+}
+const pkg = findPackage(Astro.props.slug, "id")!;
+const v0 = pkg.variants[0];
+const multi = pkg.variants.length > 1;
+const top = Math.max(...pkg.variants.map((v) => v.price));
+
+const t = {
+  greet: "Assalamu'alaikum, Tim WO Mahabbati. Saya tertarik dengan {name}.",
+  food: "{label}: {value}",
+  price: "Harga di website: {total}",
+  close: "Boleh dibantu jadwal konsultasinya?",
+};
+const fill = (tpl: string, v: Record<string, string | number>) => tpl.replace(/\{(\w+)\}/g, (_, k) => String(v[k] ?? ""));
+const food = (v: (typeof pkg.variants)[number]) => foodOf(v, "id");
+const foodLine = (v: (typeof pkg.variants)[number]) => {
+  const f = food(v);
+  return f ? fill(t.food, { label: f.label, value: f.value }) : "";
+};
+const waText = [fill(t.greet, { name: `${pkg.name} (${v0.name})` }), foodLine(v0), fill(t.price, { total: rupiah(v0.price) }), t.close]
+  .filter(Boolean)
+  .join("\n");
+const waHref = waLink(WA.wo.number, waText);
+const data = {
+  name: pkg.name,
+  waNumber: WA.wo.number,
+  variants: pkg.variants.map((v) => ({ id: v.id, name: v.name, price: v.price, food: foodLine(v) })),
+  locale: "id-ID",
+  t,
+};
+
+const withClass = classTiers(pkg);
+const classNames = withClass.length === pkg.variants.length ? pkg.name : withClass.map((v) => v.name).join(" dan ");
+const gallery = pkg.gallery.filter((g) => g !== pkg.photo).slice(0, 2);
+---
+
+<V2Layout
+  title={`${pkg.name} | Mahabbati Wedding Organizer Syar’i`}
+  description={`${pkg.promise} ${pkg.forWho} Mulai ${rupiahShort(pkg.priceFrom)}.`}
+  current="layanan"
+>
+  <nav class="crumbs container" aria-label="Breadcrumb">
+    <ol>
+      <li><a href={V2("/")}>Beranda</a></li>
+      <li><a href={V2("/layanan/")}>Layanan & Paket</a></li>
+      <li aria-current="page">{pkg.name}</li>
+    </ol>
+  </nav>
+
+  <section class="pd-hero container" aria-labelledby="pd-title">
+    <div class="pd-hero__copy">
+      <h1 id="pd-title">{pkg.name}</h1>
+      <p class="pd-hero__promise">{pkg.promise}</p>
+      <p class="pd-hero__for">{pkg.forWho}</p>
+      <p class="pd-hero__price">
+        <span>mulai</span>
+        <strong>{rupiahShort(pkg.priceFrom)}</strong>
+        {multi && <span>sampai {rupiahShort(top)}</span>}
+      </p>
+      <div class="pd-hero__actions">
+        <a class="btn" href="#tingkat">Pilih tingkat paket</a>
+        <a class="btn btn--quiet" href={waHref} rel="noopener" data-wa>
+          <Icon name="whatsapp" size={20} />Tanya tim WO
+        </a>
+      </div>
+    </div>
+    <figure class="pd-hero__photo">
+      <Image
+        src={photo(pkg.photo)}
+        alt=""
+        widths={[480, 720, 960, 1200]}
+        sizes="(max-width: 60rem) 100vw, 46vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </figure>
+  </section>
+
+  <div class="pd-body container">
+    <div class="pd-main">
+      <section aria-labelledby="isi-title">
+        <h2 id="isi-title">Isi paket</h2>
+        <p class="pd-sub">{pkg.summary}</p>
+        {
+          pkg.variants.map((v, i) => (
+            <div class="pd-items" data-variant-panel={v.id} hidden={i > 0 ? true : undefined}>
+              {multi && (
+                <h3 class="pd-items__tier">
+                  Tingkat {v.name}, {rupiah(v.price)}
+                </h3>
+              )}
+              <ul>
+                {itemsFor(v, "id").map((it) => (
+                  <li class="pd-item">
+                    <Icon name={it.icon} size={26} class="pd-item__icon" />
+                    <div>
+                      <p class="pd-item__title">
+                        {it.label}
+                        {it.value !== "Termasuk" && <span class="pd-item__qty">{it.value}</span>}
+                      </p>
+                      {it.detail && <p class="pd-item__detail">{it.detail}</p>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </section>
+
+      {
+        withClass.length > 0 && (
+          <section class="pd-kelas" aria-labelledby="kelas-title">
+            <h2 id="kelas-title">Termasuk kelas pranikah bersama asatidz Mahabbati</h2>
+            <p>
+              {classNames} sudah termasuk 4 sesi kelas pranikah via Zoom bersama asatidz Mahabbati.
+            </p>
+            <a class="text-link" href={url("/kelas/")}>Lihat isi kelasnya</a>
+          </section>
+        )
+      }
+
+      {
+        gallery.length > 0 && (
+          <section class="pd-gallery" aria-labelledby="gal-title">
+            <h2 id="gal-title">Gambaran suasana</h2>
+            <p class="pd-sub">Foto ilustrasi dari Unsplash, bukan dokumentasi acara Mahabbati.</p>
+            <div class="pd-gallery__grid">
+              {gallery.map((g) => (
+                <Image src={photo(g)} alt="" widths={[480, 720]} sizes="(max-width: 40rem) 100vw, 28vw" />
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
+
+    <aside id="tingkat" class="est" aria-labelledby="est-title" data-estimator>
+      <h2 id="est-title">Pilih tingkat paket</h2>
+      <fieldset class="est__field">
+        <legend class="visually-hidden">Tingkat {pkg.name}</legend>
+        {
+          pkg.variants.map((v, i) => (
+            <label class="tier">
+              <input type="radio" name="variant" value={v.id} checked={i === 0} data-variant />
+              <span class="tier__name">{v.name}</span>
+              {food(v) && food(v)!.value !== v.name && <span class="tier__pax">{food(v)!.value}</span>}
+              <span class="tier__price">{rupiahShort(v.price)}</span>
+            </label>
+          ))
+        }
+      </fieldset>
+      <div class="est__result">
+        <p class="est__label" data-tier>{pkg.name}, {v0.name}</p>
+        <p class="est__total" data-total aria-live="polite">{rupiah(v0.price)}</p>
+      </div>
+      <a class="btn est__cta" href={waHref} rel="noopener" data-wa>
+        <Icon name="whatsapp" size={20} />Konsultasikan paket ini
+      </a>
+      <p class="est__note">
+        Butuh tambahan tamu, menu, atau layanan lain? Tim WO menyesuaikannya, dan semuanya tertulis di penawaran resmi.
+      </p>
+    </aside>
+  </div>
+
+  <section class="sec band" aria-labelledby="others-title">
+    <div class="container">
+      <h2 id="others-title" class="others-title">Paket lainnya</h2>
+      <PackageList compact exclude={pkg.slug} />
+    </div>
+  </section>
+
+  <CtaBand title={`Tanyakan ${pkg.name} ke tim WO`} href={waHref} secondary={false} />
+
+  <div class="sticky-est" data-sticky-est hidden>
+    <div>
+      <span>Harga paket</span>
+      <strong data-sticky-total>{rupiah(v0.price)}</strong>
+    </div>
+    <a class="btn btn--sm" href={waHref} rel="noopener" data-wa>Konsultasi</a>
+  </div>
+
+  <script type="application/json" id="est-data" set:html={JSON.stringify(data)} />
+  <script>
+    import "../../scripts/estimator.ts";
+  </script>
+</V2Layout>

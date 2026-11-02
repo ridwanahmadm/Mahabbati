@@ -1,0 +1,48 @@
+---
+import Logo from "../Logo.astro";
+import { packagesFor } from "../../data/packages";
+import { PACKAGE_ORDER, V2, WA_HREF } from "../../data/v2";
+import { WA, EMAIL, ADDRESS, INSTAGRAM_URL, PLAY_STORE_URL, url } from "../../data/site";
+
+const pkgs = PACKAGE_ORDER.map((s) => packagesFor("id").find((p) => p.slug === s)!);
+const year = 2026;
+---
+
+<footer class="v2-footer site-footer">
+  <div class="container">
+    <div class="v2-footer__top">
+      <div class="v2-footer__brand">
+        <Logo part="lockup" title="Mahabbati" />
+        <p class="v2-footer__about">Wedding organizer syar’i di Jakarta, untuk khitbah, akad, dan walimah.</p>
+      </div>
+      <div>
+        <h2>Paket</h2>
+        <ul>
+          {pkgs.map((p) => <li><a href={V2(`/layanan/${p.slug}/`)}>{p.name}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h2>Mahabbati</h2>
+        <ul>
+          <li><a href={V2("/tentang/")}>Tentang Kami</a></li>
+          <li><a href={url("/kelas/")}>Kelas pranikah</a></li>
+          <li><a href={url("/aplikasi/")}>Aplikasi ta’aruf</a></li>
+          <li><a href={PLAY_STORE_URL} rel="noopener">Unduh di Google Play</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Kontak</h2>
+        <ul>
+          <li><a href={WA_HREF} rel="noopener">WhatsApp <span class="nowrap">{WA.wo.label}</span></a></li>
+          <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+          <li><a href={INSTAGRAM_URL} rel="noopener">Instagram @mahabbati_official</a></li>
+          <li><address>{ADDRESS}</address></li>
+        </ul>
+      </div>
+    </div>
+    <div class="v2-footer__bottom">
+      <p>© {year} Mahabbati</p>
+      <p>Foto ilustrasi dari Unsplash. <a href={V2("/tentang/#kredit-foto")}>Kredit foto</a></p>
+    </div>
+  </div>
+</footer>

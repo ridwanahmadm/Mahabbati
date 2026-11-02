@@ -1,0 +1,513 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-02T00:00:00Z",
+  "title": "Design System: Mahabbati Wedding Organizer (/v2/ variant)",
+  "scope": "Documents the /v2/ candidate variant only. Move beside a root DESIGN.md (as .impeccable/design.json) only if the client adopts /v2/.",
+  "extensions": {
+    "colorMeta": {
+      "undangan-ivory": {
+        "role": "neutral",
+        "displayName": "Undangan Ivory",
+        "canonical": "oklch(97.6% 0.011 85)",
+        "tonalRamp": [
+          "oklch(15% 0.006 85)",
+          "oklch(27% 0.008 85)",
+          "oklch(39% 0.009 85)",
+          "oklch(51% 0.011 85)",
+          "oklch(63% 0.010 85)",
+          "oklch(75% 0.009 85)",
+          "oklch(86% 0.007 85)",
+          "oklch(95% 0.006 85)"
+        ]
+      },
+      "warm-linen": {
+        "role": "neutral",
+        "displayName": "Warm Linen",
+        "canonical": "oklch(95% 0.016 72)",
+        "tonalRamp": [
+          "oklch(15% 0.009 72)",
+          "oklch(27% 0.011 72)",
+          "oklch(39% 0.013 72)",
+          "oklch(51% 0.015 72)",
+          "oklch(63% 0.015 72)",
+          "oklch(75% 0.013 72)",
+          "oklch(86% 0.011 72)",
+          "oklch(95% 0.009 72)"
+        ]
+      },
+      "lilac-mist": {
+        "role": "neutral",
+        "displayName": "Lilac Mist",
+        "canonical": "oklch(91.5% 0.022 300)",
+        "tonalRamp": [
+          "oklch(15% 0.012 300)",
+          "oklch(27% 0.015 300)",
+          "oklch(39% 0.018 300)",
+          "oklch(51% 0.021 300)",
+          "oklch(63% 0.020 300)",
+          "oklch(75% 0.017 300)",
+          "oklch(86% 0.015 300)",
+          "oklch(95% 0.012 300)"
+        ]
+      },
+      "violet-ink": {
+        "role": "neutral",
+        "displayName": "Violet Ink",
+        "canonical": "oklch(28% 0.045 290)",
+        "tonalRamp": [
+          "oklch(15% 0.025 290)",
+          "oklch(27% 0.031 290)",
+          "oklch(39% 0.037 290)",
+          "oklch(51% 0.043 290)",
+          "oklch(63% 0.041 290)",
+          "oklch(75% 0.035 290)",
+          "oklch(86% 0.030 290)",
+          "oklch(95% 0.025 290)"
+        ]
+      },
+      "violet-ink-soft": {
+        "role": "neutral",
+        "displayName": "Violet Ink Soft",
+        "canonical": "oklch(38% 0.05 290)",
+        "tonalRamp": [
+          "oklch(15% 0.028 290)",
+          "oklch(27% 0.035 290)",
+          "oklch(39% 0.041 290)",
+          "oklch(51% 0.048 290)",
+          "oklch(63% 0.046 290)",
+          "oklch(75% 0.039 290)",
+          "oklch(86% 0.033 290)",
+          "oklch(95% 0.028 290)"
+        ]
+      },
+      "muted-violet": {
+        "role": "neutral",
+        "displayName": "Muted Violet",
+        "canonical": "oklch(47% 0.035 290)",
+        "tonalRamp": [
+          "oklch(15% 0.020 290)",
+          "oklch(27% 0.024 290)",
+          "oklch(39% 0.029 290)",
+          "oklch(51% 0.033 290)",
+          "oklch(63% 0.032 290)",
+          "oklch(75% 0.027 290)",
+          "oklch(86% 0.023 290)",
+          "oklch(95% 0.020 290)"
+        ]
+      },
+      "sand-rule": {
+        "role": "neutral",
+        "displayName": "Sand Rule",
+        "canonical": "oklch(86% 0.022 80)",
+        "tonalRamp": [
+          "oklch(15% 0.012 80)",
+          "oklch(27% 0.015 80)",
+          "oklch(39% 0.018 80)",
+          "oklch(51% 0.021 80)",
+          "oklch(63% 0.020 80)",
+          "oklch(75% 0.017 80)",
+          "oklch(86% 0.015 80)",
+          "oklch(95% 0.012 80)"
+        ]
+      },
+      "hairline-gold": {
+        "role": "secondary",
+        "displayName": "Hairline Gold",
+        "canonical": "oklch(63% 0.085 80)",
+        "tonalRamp": [
+          "oklch(15% 0.048 80)",
+          "oklch(27% 0.059 80)",
+          "oklch(39% 0.070 80)",
+          "oklch(51% 0.081 80)",
+          "oklch(63% 0.078 80)",
+          "oklch(75% 0.066 80)",
+          "oklch(86% 0.056 80)",
+          "oklch(95% 0.048 80)"
+        ]
+      },
+      "pale-gold": {
+        "role": "secondary",
+        "displayName": "Pale Gold",
+        "canonical": "oklch(82% 0.07 85)",
+        "tonalRamp": [
+          "oklch(15% 0.039 85)",
+          "oklch(27% 0.049 85)",
+          "oklch(39% 0.058 85)",
+          "oklch(51% 0.067 85)",
+          "oklch(63% 0.064 85)",
+          "oklch(75% 0.055 85)",
+          "oklch(86% 0.046 85)",
+          "oklch(95% 0.039 85)"
+        ]
+      },
+      "mahabbati-violet": {
+        "role": "primary",
+        "displayName": "Mahabbati Violet",
+        "canonical": "oklch(42% 0.095 300)",
+        "tonalRamp": [
+          "oklch(15% 0.054 300)",
+          "oklch(27% 0.066 300)",
+          "oklch(39% 0.078 300)",
+          "oklch(51% 0.091 300)",
+          "oklch(63% 0.087 300)",
+          "oklch(75% 0.074 300)",
+          "oklch(86% 0.063 300)",
+          "oklch(95% 0.054 300)"
+        ]
+      },
+      "mahabbati-violet-deep": {
+        "role": "primary",
+        "displayName": "Mahabbati Violet Deep",
+        "canonical": "oklch(35% 0.09 300)",
+        "tonalRamp": [
+          "oklch(15% 0.051 300)",
+          "oklch(27% 0.063 300)",
+          "oklch(39% 0.074 300)",
+          "oklch(51% 0.086 300)",
+          "oklch(63% 0.082 300)",
+          "oklch(75% 0.070 300)",
+          "oklch(86% 0.060 300)",
+          "oklch(95% 0.051 300)"
+        ]
+      },
+      "ivory-on-violet": {
+        "role": "neutral",
+        "displayName": "Ivory On Violet",
+        "canonical": "oklch(98.5% 0.006 85)",
+        "tonalRamp": [
+          "oklch(15% 0.003 85)",
+          "oklch(27% 0.004 85)",
+          "oklch(39% 0.005 85)",
+          "oklch(51% 0.006 85)",
+          "oklch(63% 0.005 85)",
+          "oklch(75% 0.005 85)",
+          "oklch(86% 0.004 85)",
+          "oklch(95% 0.003 85)"
+        ]
+      },
+      "focus-violet": {
+        "role": "primary",
+        "displayName": "Focus Violet",
+        "canonical": "oklch(48% 0.14 300)",
+        "tonalRamp": [
+          "oklch(15% 0.079 300)",
+          "oklch(27% 0.097 300)",
+          "oklch(39% 0.116 300)",
+          "oklch(51% 0.134 300)",
+          "oklch(63% 0.128 300)",
+          "oklch(75% 0.109 300)",
+          "oklch(86% 0.093 300)",
+          "oklch(95% 0.079 300)"
+        ]
+      },
+      "night-violet": {
+        "role": "neutral",
+        "displayName": "Night Violet",
+        "canonical": "oklch(25% 0.055 295)",
+        "tonalRamp": [
+          "oklch(15% 0.031 295)",
+          "oklch(27% 0.038 295)",
+          "oklch(39% 0.045 295)",
+          "oklch(51% 0.053 295)",
+          "oklch(63% 0.050 295)",
+          "oklch(75% 0.043 295)",
+          "oklch(86% 0.036 295)",
+          "oklch(95% 0.031 295)"
+        ]
+      },
+      "night-ivory": {
+        "role": "neutral",
+        "displayName": "Night Ivory",
+        "canonical": "oklch(96% 0.012 85)",
+        "tonalRamp": [
+          "oklch(15% 0.007 85)",
+          "oklch(27% 0.008 85)",
+          "oklch(39% 0.010 85)",
+          "oklch(51% 0.011 85)",
+          "oklch(63% 0.011 85)",
+          "oklch(75% 0.009 85)",
+          "oklch(86% 0.008 85)",
+          "oklch(95% 0.007 85)"
+        ]
+      },
+      "night-lilac": {
+        "role": "neutral",
+        "displayName": "Night Lilac",
+        "canonical": "oklch(84% 0.03 295)",
+        "tonalRamp": [
+          "oklch(15% 0.017 295)",
+          "oklch(27% 0.021 295)",
+          "oklch(39% 0.025 295)",
+          "oklch(51% 0.029 295)",
+          "oklch(63% 0.027 295)",
+          "oklch(75% 0.023 295)",
+          "oklch(86% 0.020 295)",
+          "oklch(95% 0.017 295)"
+        ]
+      },
+      "scrim-violet": {
+        "role": "neutral",
+        "displayName": "Scrim Violet",
+        "canonical": "oklch(17% 0.04 295)",
+        "tonalRamp": [
+          "oklch(15% 0.023 295)",
+          "oklch(27% 0.028 295)",
+          "oklch(39% 0.033 295)",
+          "oklch(51% 0.038 295)",
+          "oklch(63% 0.037 295)",
+          "oklch(75% 0.031 295)",
+          "oklch(86% 0.026 295)",
+          "oklch(95% 0.023 295)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Home hero headline only."
+      },
+      "display-page": {
+        "displayName": "Display page",
+        "purpose": "Inner page and package detail titles."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section h2."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Moment, package and part names."
+      },
+      "title-sm": {
+        "displayName": "Title small",
+        "purpose": "Standards items, compact rows, mobile menu links, F & N story sentence."
+      },
+      "price": {
+        "displayName": "Price",
+        "purpose": "Every rupiah figure, lining tabular numerals."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "One-sentence ledes under headlines."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraphs, max 65ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Nav, captions, price qualifiers; sentence case, no tracking."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-hover",
+        "value": "0 14px 30px -22px oklch(17% 0.04 295)",
+        "purpose": "Package card hover only; the system is flat at rest."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Default easing for state transitions and the hero unveil."
+      },
+      {
+        "name": "ease-in",
+        "value": "cubic-bezier(0.7, 0, 0.84, 0)",
+        "purpose": "Exits."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "Symmetric moves."
+      },
+      {
+        "name": "dur-micro",
+        "value": "120ms",
+        "purpose": "Press nudge, radio dot."
+      },
+      {
+        "name": "dur-short",
+        "value": "220ms",
+        "purpose": "Colour and border transitions."
+      },
+      {
+        "name": "dur-long",
+        "value": "420ms",
+        "purpose": "Longer state changes."
+      },
+      {
+        "name": "hero-unveil",
+        "value": "1.8s ease-out; clip-path inset(0 0 0 34%) to inset(0) with scale 1.05 to 1",
+        "purpose": "The one authored moment: drapes open on the hero photograph on load; disabled under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "xs",
+        "value": "30rem"
+      },
+      {
+        "name": "sm",
+        "value": "40rem"
+      },
+      {
+        "name": "md",
+        "value": "48rem"
+      },
+      {
+        "name": "lg",
+        "value": "60rem"
+      },
+      {
+        "name": "nav",
+        "value": "64rem"
+      }
+    ],
+    "ornaments": [
+      {
+        "name": "double-frame",
+        "value": "1px gold at 70% outer, 1px gold at 35% inner inset 5px (cards) or 8px (panel)"
+      },
+      {
+        "name": "lattice",
+        "value": "assets/v2/lattice.svg mask, 88px tile, pale gold at 9% on night violet"
+      },
+      {
+        "name": "m-heart",
+        "value": "Mahabbati mark, 64px, violet, above the standards heading"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one filled action per surface: violet pill.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Konsultasi via WhatsApp</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid var(--color-accent,oklch(42% 0.095 300));background:var(--color-accent,oklch(42% 0.095 300));color:var(--color-accent-ink,oklch(98.5% 0.006 85));font-family:'Inter Variable',Inter,system-ui,sans-serif;font-weight:560;font-size:1rem;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 220ms cubic-bezier(0.16,1,0.3,1),border-color 220ms cubic-bezier(0.16,1,0.3,1),transform 120ms cubic-bezier(0.16,1,0.3,1)}.ds-btn:hover{background:oklch(35% 0.09 300);border-color:oklch(35% 0.09 300)}.ds-btn:active{transform:translateY(1px)}.ds-btn:focus-visible{outline:2px solid oklch(48% 0.14 300);outline-offset:3px}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Secondary action: ink outline pill.",
+      "html": "<a class=\"ds-btn-quiet\" href=\"#\">Lihat paket dan harga</a>",
+      "css": ".ds-btn-quiet{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid color-mix(in oklab,oklch(28% 0.045 290) 35%,transparent);background:transparent;color:oklch(28% 0.045 290);font-family:'Inter Variable',Inter,system-ui,sans-serif;font-weight:560;font-size:1rem;text-decoration:none;transition:background-color 220ms cubic-bezier(0.16,1,0.3,1),border-color 220ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-quiet:hover{background:oklch(95% 0.016 72);border-color:oklch(28% 0.045 290)}.ds-btn-quiet:focus-visible{outline:2px solid oklch(48% 0.14 300);outline-offset:3px}"
+    },
+    {
+      "name": "On-dark Button",
+      "kind": "button",
+      "refersTo": "button-on-dark",
+      "description": "The primary pill inverted for the night band.",
+      "html": "<div class=\"ds-night\"><a class=\"ds-btn-ondark\" href=\"#\">Konsultasi via WhatsApp</a></div>",
+      "css": ".ds-night{background:oklch(25% 0.055 295);padding:24px}.ds-btn-ondark{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid oklch(96% 0.012 85);background:oklch(96% 0.012 85);color:oklch(28% 0.045 290);font-family:'Inter Variable',Inter,system-ui,sans-serif;font-weight:560;text-decoration:none;transition:background-color 220ms}.ds-btn-ondark:hover{background:oklch(95% 0.016 72);border-color:oklch(95% 0.016 72)}.ds-btn-ondark:focus-visible{outline:2px solid oklch(96% 0.012 85);outline-offset:3px}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Ink-soft Inter links; hover and current page get a gold underline.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Layanan &amp; Paket</a><a href=\"#\">Portofolio</a><a href=\"#\">Tentang Kami</a><a href=\"#\">FAQ</a></nav>",
+      "css": ".ds-nav{display:flex;gap:24px;font-family:'Inter Variable',Inter,system-ui,sans-serif}.ds-nav a{padding:8px 0;color:oklch(38% 0.05 290);font-size:0.875rem;font-weight:500;text-decoration:none;border-bottom:1px solid transparent;transition:color 220ms,border-color 220ms}.ds-nav a:hover,.ds-nav a[aria-current=page]{color:oklch(28% 0.045 290);border-bottom-color:oklch(63% 0.085 80)}.ds-nav a:focus-visible{outline:2px solid oklch(48% 0.14 300);outline-offset:3px}"
+    },
+    {
+      "name": "Package Card",
+      "kind": "card",
+      "refersTo": "package-card",
+      "description": "Signature: undangan card in a double gold frame, price on a gold rule.",
+      "html": "<a class=\"ds-pcard\" href=\"#\"><div class=\"ds-pcard-photo\"></div><div class=\"ds-pcard-body\"><h3>Paket Walimah</h3><p class=\"ds-for\">Resepsi untuk keluarga yang ingin semuanya rapi.</p><p class=\"ds-price\"><span>mulai</span><b>Rp43 jt</b><span>sampai Rp75 jt, 100 sampai 300 tamu</span></p></div></a>",
+      "css": ".ds-pcard{position:relative;display:flex;flex-direction:column;max-width:340px;padding:12px;background:oklch(97.6% 0.011 85);border:1px solid color-mix(in oklab,oklch(63% 0.085 80) 70%,transparent);border-radius:2px;color:oklch(28% 0.045 290);text-decoration:none;transition:border-color 220ms,box-shadow 220ms}.ds-pcard::before{content:'';position:absolute;inset:5px;border:1px solid color-mix(in oklab,oklch(63% 0.085 80) 35%,transparent);border-radius:2px;pointer-events:none}.ds-pcard-photo{aspect-ratio:4/3;background:linear-gradient(160deg,oklch(95% 0.016 72),oklch(91.5% 0.022 300))}.ds-pcard-body{display:flex;flex-direction:column;align-items:center;text-align:center;padding:40px 24px 24px}.ds-pcard h3{margin:0;font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:1.953rem;line-height:1.15;letter-spacing:-0.015em}.ds-for{margin:12px 0 0;color:oklch(38% 0.05 290);font-family:Inter,system-ui,sans-serif}.ds-price{display:grid;justify-items:center;gap:2px;padding-top:24px;margin:0;font-family:Inter,system-ui,sans-serif;font-size:0.875rem;color:oklch(47% 0.035 290)}.ds-price::before{content:'';width:48px;height:1px;margin-bottom:16px;background:oklch(63% 0.085 80)}.ds-price b{font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:2.25rem;line-height:1.1;color:oklch(28% 0.045 290);font-variant-numeric:lining-nums tabular-nums}.ds-pcard:hover{border-color:oklch(63% 0.085 80);box-shadow:0 14px 30px -22px oklch(17% 0.04 295)}.ds-pcard:hover h3{color:oklch(42% 0.095 300)}.ds-pcard:focus-visible{outline:2px solid oklch(48% 0.14 300);outline-offset:4px}"
+    },
+    {
+      "name": "Tier Option",
+      "kind": "input",
+      "refersTo": "tier-option",
+      "description": "Radio row in the price estimator; selected turns violet on linen.",
+      "html": "<label class=\"ds-tier\"><input type=\"radio\" name=\"t\" checked><span class=\"ds-tn\">Silver</span><span class=\"ds-tp\">Rp43 jt</span></label><label class=\"ds-tier\"><input type=\"radio\" name=\"t\"><span class=\"ds-tn\">Gold</span><span class=\"ds-tp\">Rp55 jt</span></label>",
+      "css": ".ds-tier{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;margin-bottom:8px;padding:12px 16px;border:1px solid oklch(86% 0.022 80);border-radius:2px;background:oklch(97.6% 0.011 85);cursor:pointer;font-family:Inter,system-ui,sans-serif;transition:border-color 220ms,background-color 220ms}.ds-tier:hover{border-color:oklch(38% 0.05 290)}.ds-tier input{appearance:none;width:18px;height:18px;margin:0;border:1.5px solid oklch(47% 0.035 290);border-radius:50%;display:grid;place-items:center}.ds-tier input::before{content:'';width:8px;height:8px;border-radius:50%;background:oklch(42% 0.095 300);transform:scale(0);transition:transform 120ms}.ds-tier input:checked{border-color:oklch(42% 0.095 300)}.ds-tier input:checked::before{transform:scale(1)}.ds-tier:has(input:checked){border-color:oklch(42% 0.095 300);background:oklch(95% 0.016 72)}.ds-tier:has(input:focus-visible){outline:2px solid oklch(48% 0.14 300);outline-offset:2px}.ds-tier input:focus-visible{outline:none}.ds-tn{font-weight:560;color:oklch(28% 0.045 290)}.ds-tp{font-family:'Libre Baskerville',Georgia,serif;color:oklch(28% 0.045 290);font-variant-numeric:lining-nums tabular-nums}"
+    },
+    {
+      "name": "Closing Band",
+      "kind": "custom",
+      "refersTo": "closing-band",
+      "description": "Night-violet band with the pale-gold lattice; the closing WhatsApp ask.",
+      "html": "<section class=\"ds-cta\"><h2>Ceritakan rencana kalian, kami bantu susun</h2><p>Kirim tanggal, kota, dan perkiraan jumlah tamu.</p></section>",
+      "css": ".ds-cta{position:relative;padding:64px 40px;background:oklch(25% 0.055 295) repeating-linear-gradient(45deg,color-mix(in oklab,oklch(82% 0.07 85) 9%,transparent) 0 1px,transparent 1px 44px);color:oklch(96% 0.012 85)}.ds-cta h2{margin:0;max-width:18ch;font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:2.441rem;line-height:1.12;letter-spacing:-0.015em}.ds-cta p{margin:24px 0 0;max-width:40ch;color:oklch(84% 0.03 295);font-family:Inter,system-ui,sans-serif;font-size:1.25rem}"
+    },
+    {
+      "name": "FAQ Row",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Ruled disclosure; serif question, violet plus that turns to a cross.",
+      "html": "<details class=\"ds-faq\"><summary>Apakah harga di website sudah final?<svg width=\"22\" height=\"22\" viewBox=\"0 -960 960 960\" fill=\"currentColor\"><path d=\"M440-440H240q-17 0-28.5-11.5T200-480q0-17 11.5-28.5T240-520h200v-200q0-17 11.5-28.5T480-760q17 0 28.5 11.5T520-720v200h200q17 0 28.5 11.5T760-480q0 17-11.5 28.5T720-440H520v200q0 17-11.5 28.5T480-200q-17 0-28.5-11.5T440-240v-200Z\"/></svg></summary><p>Harga di website adalah harga paket per tingkat.</p></details>",
+      "css": ".ds-faq{border-top:1px solid oklch(86% 0.022 80);border-bottom:1px solid oklch(86% 0.022 80)}.ds-faq summary{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:24px;cursor:pointer;list-style:none;font-family:'Libre Baskerville',Georgia,serif;font-size:1.25rem;line-height:1.35;color:oklch(28% 0.045 290)}.ds-faq summary::-webkit-details-marker{display:none}.ds-faq summary:hover{color:oklch(42% 0.095 300)}.ds-faq summary:focus-visible{outline:2px solid oklch(48% 0.14 300);outline-offset:3px}.ds-faq svg{flex:none;color:oklch(42% 0.095 300);transition:transform 220ms}.ds-faq[open] svg{transform:rotate(45deg)}.ds-faq p{margin:0;padding-bottom:24px;color:oklch(38% 0.05 290);font-family:Inter,system-ui,sans-serif;max-width:60ch}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Printed Undangan",
+    "overview": "The /v2/ pages read like a wedding invitation and the walimah it announces. Warm ivory paper carries violet ink set in a classical serif; gold appears only as a thin rule or a double hairline frame, the way foil sits on a printed card. Photographs are full colour and do the emotional work: the first screen is a dressed walimah tent, veiled on its left by the paper itself so the headline sits on ivory rather than on a dark overlay.\n\nDensity is generous and quiet. Sections are separated by large vertical gaps (144px desktop) and by alternating ivory and linen bands, never by boxes or shadows. Lists are ruled like an order of service: hairline rules between items, serif names, Inter detail. One deep-violet band with a faint Islamic lattice closes every page with the WhatsApp ask. Motion is limited to one authored moment, the drapes opening on the hero photograph, plus short state transitions.\n\nPrices are part of the voice, not hidden in a modal: every package shows \"mulai Rp15 jt\" style figures in serif lining numerals on a short gold rule.",
+    "keyCharacteristics": [
+      "Warm ivory paper, violet ink, gold strictly as hairline ornament.",
+      "Libre Baskerville 400 for everything that is named or priced; Inter for everything that explains.",
+      "Flat paper surfaces; depth comes from photography, tonal bands and hairline frames.",
+      "One filled action per surface: the violet pill (inverted to ivory on the night band).",
+      "Full-colour photography, captioned honestly; illustrations say \"Ilustrasi\"."
+    ],
+    "rules": [
+      {
+        "name": "The Foil Rule",
+        "body": "Gold is a 1px line, a frame or a single ornamental glyph at display size. It is never a fill, never a button, never body or label text.",
+        "section": "colors"
+      },
+      {
+        "name": "The AA Pair Rule",
+        "body": "Every text pair in the system clears WCAG AA, computed from these tokens: ink on ivory 13.8:1, ink-soft 9.5:1, muted 6.4:1, violet 8.2:1, ivory on violet 8.4:1, night-ivory on night 14.4:1. A new pair is admitted only after its ratio is computed.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Night Rule",
+        "body": "Night violet appears once per page, as the closing band. Every other surface is ivory or linen.",
+        "section": "colors"
+      },
+      {
+        "name": "The Spoken Serif Rule",
+        "body": "If it is a name, a question, a promise or a price, it is set in Libre Baskerville; if it explains, it is Inter.",
+        "section": "typography"
+      },
+      {
+        "name": "The Plain Label Rule",
+        "body": "Small headings are Inter in sentence case at 0 tracking. No uppercase tracked labels and no kicker line above a headline; a gold rule may sit there instead.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Paper Rule",
+        "body": "Nothing is raised at rest. A shadow may appear only on hover of a linked card, and only as a soft blurred tint, never a hard offset.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep gold to 1px rules, the double frame and the ornamental ampersand; compute contrast for any new text pair against the token values first.",
+      "Do set names, questions, promises and every price in Libre Baskerville 400 with lining tabular numerals.",
+      "Do write prices as \"Rp15 jt\" in lists, prefaced by \"mulai\", and ranges with \"sampai\" (\"sampai Rp25 jt\", \"100 sampai 300 tamu\").",
+      "Do caption every illustrative portfolio photo \"Ilustrasi: ...\" and state in the section that the photos are not Mahabbati event documentation.",
+      "Do use typographic apostrophes in copy (syar’i, ta’aruf) and commas or full stops instead of dashes in prose.",
+      "Do keep one filled action per surface; on the night band the filled action is the ivory pill.",
+      "Do alternate ivory and linen bands so two photo sections never sit back to back, and end every page with the night band.",
+      "Do keep the drapes-opening hero animation as the only authored motion; all other motion is 120 to 420ms state transitions, removed under reduced motion."
+    ],
+    "donts": [
+      "Don't show a muslimah's face in any photograph; use back views, hands, silhouettes, decor or venues.",
+      "Don't name or picture the asatidz; refer to them only as \"asatidz Mahabbati\".",
+      "Don't invent testimonials, couples, client counts, ratings or other figures; the F & N story is the only testimony and it carries its source.",
+      "Don't use gold for body text, labels, button fills or backgrounds (3.3:1 on ivory).",
+      "Don't add eyebrows, kickers or uppercase tracked labels above headings.",
+      "Don't use dark overlays on photographs; the hero is veiled with ivory paper, not shaded.",
+      "Don't add resting shadows, hard offset shadows, or rounded corners beyond 2px on cards and photos.",
+      "Don't use icon-card grids or floral clip art; the m-heart mark and the lattice are the only ornaments.",
+      "Don't tint photographs into duotone; they stay full colour."
+    ]
+  }
+}

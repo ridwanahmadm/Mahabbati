@@ -1,0 +1,56 @@
+---
+import Logo from "../Logo.astro";
+import Icon from "../Icon.astro";
+import { NAV, V2, WA_HREF } from "../../data/v2";
+
+interface Props {
+  current?: "home" | "layanan" | "tentang";
+  over?: boolean;
+}
+const { current = "home", over = false } = Astro.props;
+---
+
+<header class:list={["v2-header", { "v2-header--over": over }]} data-header>
+  <div class="container v2-header__bar">
+    <a class="v2-brand" href={V2("/")} aria-label="Mahabbati Wedding Organizer, beranda">
+      <Logo part="lockup" title="Mahabbati" />
+    </a>
+    <nav class="v2-nav" aria-label="Menu utama">
+      <ul>
+        {
+          NAV.map((n) => (
+            <li>
+              <a href={n.href} aria-current={n.key === current ? "page" : undefined}>
+                {n.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a class="btn btn--sm v2-header__cta" href={WA_HREF} rel="noopener">
+      <Icon name="whatsapp" size={18} />Konsultasi
+    </a>
+    <button class="v2-menu-btn" type="button" aria-expanded="false" aria-controls="v2-mobile-nav" data-menu-toggle>
+      <Icon name="menu" size={20} />Menu
+    </button>
+  </div>
+  <div class="v2-mobile" id="v2-mobile-nav" hidden>
+    <nav class="container" aria-label="Menu utama, layar kecil">
+      <ul>
+        {
+          NAV.map((n) => (
+            <li>
+              <a href={n.href} aria-current={n.key === current ? "page" : undefined}>
+                {n.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="btn" href={WA_HREF} rel="noopener">
+        <Icon name="whatsapp" size={20} />Konsultasi via WhatsApp
+      </a>
+    </nav>
+  </div>
+</header>
