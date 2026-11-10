@@ -1,24 +1,24 @@
 ---
 name: Mahabbati Wedding Organizer (/v2/ variant)
-description: A syar’i wedding organizer set like a printed undangan; ivory paper, violet ink, gold only as a hairline, every price said out loud.
+description: A syar’i wedding organizer set like a printed undangan; lavender paper and ink from the Mahabbati brand purple (#45445E, #5B5B8F, #69699E, #C9CFF2), gold only as a hairline; soft 12px controls and 24px cards, every price said out loud.
 colors:
-  undangan-ivory: "oklch(97.6% 0.011 85)"
-  warm-linen: "oklch(95% 0.016 72)"
-  lilac-mist: "oklch(91.5% 0.022 300)"
-  violet-ink: "oklch(28% 0.045 290)"
-  violet-ink-soft: "oklch(38% 0.05 290)"
-  muted-violet: "oklch(47% 0.035 290)"
-  sand-rule: "oklch(86% 0.022 80)"
+  lavender-paper: "oklch(98.6% 0.005 285)"
+  lavender-mist: "oklch(96.3% 0.012 282)"
+  lavender-haze: "oklch(92.4% 0.021 278)"
+  brand-ink: "oklch(30% 0.042 285)"
+  brand-primary: "oklch(39.9% 0.044 286)"
+  muted-violet: "oklch(48% 0.05 284)"
+  lavender-rule: "oklch(88.5% 0.022 282)"
   hairline-gold: "oklch(63% 0.085 80)"
   pale-gold: "oklch(82% 0.07 85)"
-  mahabbati-violet: "oklch(42% 0.095 300)"
-  mahabbati-violet-deep: "oklch(35% 0.09 300)"
-  ivory-on-violet: "oklch(98.5% 0.006 85)"
-  focus-violet: "oklch(48% 0.14 300)"
-  night-violet: "oklch(25% 0.055 295)"
-  night-ivory: "oklch(96% 0.012 85)"
-  night-lilac: "oklch(84% 0.03 295)"
-  scrim-violet: "oklch(17% 0.04 295)"
+  brand-violet: "oklch(39.9% 0.044 286)"
+  brand-primary-deep: "oklch(32.9% 0.042 285)"
+  paper-on-violet: "oklch(99% 0.004 285)"
+  brand-accent: "oklch(54.3% 0.082 283)"
+  night-violet: "oklch(30% 0.045 285)"
+  night-paper: "oklch(97% 0.008 282)"
+  brand-lilac: "oklch(86.1% 0.049 277)"
+  scrim-violet: "oklch(18% 0.03 285)"
 typography:
   display:
     fontFamily: "Libre Baskerville, ui-serif, Georgia, serif"
@@ -71,8 +71,10 @@ typography:
     fontWeight: 500
     letterSpacing: "0em"
 rounded:
-  card: "2px"
-  pill: "999px"
+  xs: "8px"
+  control: "12px"
+  media: "16px"
+  card: "24px"
 spacing:
   3xs: "2px"
   2xs: "4px"
@@ -90,56 +92,56 @@ spacing:
   section-gap-l: "176px"
 components:
   button-primary:
-    backgroundColor: "{colors.mahabbati-violet}"
-    textColor: "{colors.ivory-on-violet}"
-    rounded: "{rounded.pill}"
+    backgroundColor: "{colors.brand-violet}"
+    textColor: "{colors.paper-on-violet}"
+    rounded: "{rounded.control}"
     padding: "0 24px"
     height: "52px"
   button-primary-hover:
-    backgroundColor: "{colors.mahabbati-violet-deep}"
-    textColor: "{colors.ivory-on-violet}"
+    backgroundColor: "{colors.brand-primary-deep}"
+    textColor: "{colors.paper-on-violet}"
   button-quiet:
     backgroundColor: "transparent"
-    textColor: "{colors.violet-ink}"
-    rounded: "{rounded.pill}"
+    textColor: "{colors.brand-ink}"
+    rounded: "{rounded.control}"
     padding: "0 24px"
     height: "52px"
   button-quiet-hover:
-    backgroundColor: "{colors.warm-linen}"
+    backgroundColor: "{colors.lavender-mist}"
   button-on-dark:
-    backgroundColor: "{colors.night-ivory}"
-    textColor: "{colors.violet-ink}"
-    rounded: "{rounded.pill}"
+    backgroundColor: "{colors.night-paper}"
+    textColor: "{colors.brand-ink}"
+    rounded: "{rounded.control}"
     padding: "0 24px"
     height: "52px"
   button-line-dark:
     backgroundColor: "transparent"
-    textColor: "{colors.night-ivory}"
-    rounded: "{rounded.pill}"
+    textColor: "{colors.night-paper}"
+    rounded: "{rounded.control}"
     padding: "0 24px"
     height: "52px"
   button-sm:
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.control}"
     padding: "0 16px"
     height: "44px"
   package-card:
-    backgroundColor: "{colors.undangan-ivory}"
-    textColor: "{colors.violet-ink}"
+    backgroundColor: "{colors.lavender-paper}"
+    textColor: "{colors.brand-ink}"
     rounded: "{rounded.card}"
     padding: "12px"
   tier-option:
-    backgroundColor: "{colors.undangan-ivory}"
-    textColor: "{colors.violet-ink}"
+    backgroundColor: "{colors.lavender-paper}"
+    textColor: "{colors.brand-ink}"
     rounded: "{rounded.card}"
     padding: "12px 16px"
   tier-option-selected:
-    backgroundColor: "{colors.warm-linen}"
-    textColor: "{colors.violet-ink}"
+    backgroundColor: "{colors.lavender-mist}"
+    textColor: "{colors.brand-ink}"
   closing-band:
     backgroundColor: "{colors.night-violet}"
-    textColor: "{colors.night-ivory}"
+    textColor: "{colors.night-paper}"
   nav-link:
-    textColor: "{colors.violet-ink-soft}"
+    textColor: "{colors.brand-primary}"
     typography: "{typography.label}"
 ---
 
@@ -153,49 +155,49 @@ components:
 
 **Creative North Star: "The Printed Undangan"**
 
-The /v2/ pages read like a wedding invitation and the walimah it announces. Warm ivory paper carries violet ink set in a classical serif; gold appears only as a thin rule or a double hairline frame, the way foil sits on a printed card. Photographs are full colour and do the emotional work: the first screen is a dressed walimah tent, veiled on its left by the paper itself so the headline sits on ivory rather than on a dark overlay.
+The /v2/ pages read like a wedding invitation and the walimah it announces. Lavender-white paper (the app's own ground) carries ink from the Mahabbati brand purple, set in a classical serif; gold appears only as a thin rule or a double hairline frame, the way foil sits on a printed card. Photographs are full colour and do the emotional work: the first screen is a dressed walimah tent, veiled on its left by the paper itself so the headline sits on paper rather than on a dark overlay.
 
-Density is generous and quiet. Sections are separated by large vertical gaps (144px desktop) and by alternating ivory and linen bands, never by boxes or shadows. Lists are ruled like an order of service: hairline rules between items, serif names, Inter detail. One deep-violet band with a faint Islamic lattice closes every page with the WhatsApp ask. Motion is limited to one authored moment, the drapes opening on the hero photograph, plus short state transitions.
+Density is generous and quiet. Sections are separated by large vertical gaps (144px desktop) and by alternating paper and mist bands, never by boxes or shadows. Lists are ruled like an order of service: hairline rules between items, serif names, Inter detail. One deep-violet band with a faint Islamic lattice closes every page with the WhatsApp ask. Motion is limited to one authored moment, the drapes opening on the hero photograph, plus short state transitions.
 
 Prices are part of the voice, not hidden in a modal: every package shows "mulai Rp15 jt" style figures in serif lining numerals on a short gold rule.
 
 **Key Characteristics:**
-- Warm ivory paper, violet ink, gold strictly as hairline ornament.
+- Lavender-white paper, brand-purple ink (#45445E family), gold strictly as hairline ornament.
 - Libre Baskerville 400 for everything that is named or priced; Inter for everything that explains.
 - Flat paper surfaces; depth comes from photography, tonal bands and hairline frames.
-- One filled action per surface: the violet pill (inverted to ivory on the night band).
+- One filled action per surface: the violet button (inverted to paper on the night band).
 - Full-colour photography, captioned honestly; illustrations say "Ilustrasi".
 
 ## Colors
 
-A warm-paper and violet-ink palette with gold as foil and one night-violet band.
+A lavender-paper and brand-purple palette (hue 277 to 286, low chroma, as in the app's Figma design system) with gold as foil and one night-violet band.
 
 ### Primary
-- **Mahabbati Violet** (mahabbati-violet): the single action colour. Filled pill buttons, text links, the logo lockup, the m-heart ornament, FAQ plus icons, item icons and quantity labels on package detail, and the tier radio dot. 8.2:1 on ivory; ivory text on it is 8.4:1.
-- **Mahabbati Violet Deep** (mahabbati-violet-deep): hover and pressed fill for the primary pill only.
-- **Focus Violet** (focus-violet): the 2px focus outline on every interactive element (6.5:1 on ivory).
+- **Mahabbati Violet** (brand-violet): the single action colour. Filled pill buttons, text links, the logo lockup, the m-heart ornament, FAQ plus icons, item icons and quantity labels on package detail, and the tier radio dot. #45445E, the guideline primary. 9.0:1 on paper; paper text on it is 9.1:1.
+- **Mahabbati Violet Deep** (brand-primary-deep): hover and pressed fill for the primary pill only.
+- **Focus Violet** (brand-accent): the 2px focus outline on every interactive element (4.9:1 on paper).
 
 ### Secondary
-- **Hairline Gold** (hairline-gold): decorative only. The 64 to 72px rule under the hero headline and section heads, the short rule above each price, the outer and inner borders of the double frame (at 70% and 35% mix), the top border of price lists and the estimator, the active nav underline, the ampersand in the couple's initials. 3.3:1 on ivory, which is why it never carries body text.
+- **Hairline Gold** (hairline-gold): decorative only. The 64 to 72px rule under the hero headline and section heads, the short rule above each price, the outer and inner borders of the double frame (at 70% and 35% mix), the top border of price lists and the estimator, the active nav underline, the ampersand in the couple's initials. 3.3:1 on paper, which is why it never carries body text.
 - **Pale Gold** (pale-gold): the lattice pattern on the night band (at 9% opacity) and the divider beside the closing contact.
 
 ### Neutral
-- **Undangan Ivory** (undangan-ivory): the page, the header once scrolled, cards, the hero scrim colour.
-- **Warm Linen** (warm-linen): alternating section bands, footer, the "all at once" moment row, selected tier, hover fill of quiet buttons.
-- **Lilac Mist** (lilac-mist): image placeholder behind photos while loading; selection highlight.
-- **Violet Ink** (violet-ink): headings, prices, primary text (13.8:1 on ivory).
-- **Violet Ink Soft** (violet-ink-soft): body paragraphs under headings, ledes, nav links (9.5:1).
-- **Muted Violet** (muted-violet): "mulai", "sampai", tier pax, breadcrumbs, footer legal (6.4:1 on ivory, 6.0:1 on linen).
-- **Sand Rule** (sand-rule): every 1px list divider, the scrolled header hairline, borders of tier options and the estimator.
-- **Night Violet / Night Ivory / Night Lilac**: the closing band surface, its headline (14.4:1) and its lede (9.9:1).
+- **Lavender Paper** (lavender-paper): the page, the header once scrolled, cards, the hero scrim colour.
+- **Lavender Mist** (lavender-mist): alternating section bands, footer, the "all at once" moment row, selected tier, hover fill of quiet buttons.
+- **Lilac Mist** (lavender-haze): image placeholder behind photos while loading; selection highlight.
+- **Violet Ink** (brand-ink): headings, prices, primary text (13.2:1 on paper).
+- **Violet Ink Soft** (brand-primary): body paragraphs under headings, ledes, nav links (9.5:1).
+- **Muted Violet** (muted-violet): "mulai", "sampai", tier pax, breadcrumbs, footer legal (6.4:1 on paper, 5.9:1 on mist).
+- **Sand Rule** (lavender-rule): every 1px list divider, the scrolled header hairline, borders of tier options and the estimator.
+- **Night Violet / Night Paper / Night Lilac**: the closing band surface, its headline (12.6:1) and its lede in brand lilac #C9CFF2 (9.0:1).
 - **Scrim Violet** (scrim-violet): only as the colour of the soft package-card hover shadow.
 
 ### Named Rules
 **The Foil Rule.** Gold is a 1px line, a frame or a single ornamental glyph at display size. It is never a fill, never a button, never body or label text.
 
-**The AA Pair Rule.** Every text pair in the system clears WCAG AA, computed from these tokens: ink on ivory 13.8:1, ink-soft 9.5:1, muted 6.4:1, violet 8.2:1, ivory on violet 8.4:1, night-ivory on night 14.4:1. A new pair is admitted only after its ratio is computed.
+**The AA Pair Rule.** Every text pair in the system clears WCAG AA, computed from these tokens: ink on paper 13.2:1, ink-soft 9.0:1, muted 6.4:1, violet 6.0:1, paper on violet 6.1:1, night-paper on night 12.6:1. A new pair is admitted only after its ratio is computed.
 
-**The One Night Rule.** Night violet appears once per page, as the closing band. Every other surface is ivory or linen.
+**The One Night Rule.** Night violet appears once per page, as the closing band. Every other surface is paper or mist.
 
 ## Typography
 
@@ -225,7 +227,7 @@ Serif is also used for things that are spoken rather than explained: FAQ questio
 
 A 1440px container with 64px gutters (24px under 60rem, 16px under 40rem). Sections breathe on three vertical gaps: 120, 144 and 176px on desktop, scaling to 80/96/120 and 56/72/96. Content grids are asymmetric 5:7 or 7:5 splits (moments, FAQ, package head, closing band, Tentang parts) with a 40px column gap, collapsing to one column at 60rem or 40rem.
 
-Page rhythm alternates ivory and linen bands so photo-heavy sections never touch each other; the closing night band ends every page above a linen footer. Centred composition is reserved for the framed standards panel and the couple's story; everything else is left-aligned.
+Page rhythm alternates paper and mist bands so photo-heavy sections never touch each other; the closing night band ends every page above a mist footer. Centred composition is reserved for the framed standards panel and the couple's story; everything else is left-aligned.
 
 Breakpoints in use: 30rem (footer single column), 40rem (single column, full-width buttons), 48rem (hero copy moves to the bottom), 60rem (most grids collapse, estimator unsticks), 64rem (nav becomes the Menu button, cards go two-up).
 
@@ -233,41 +235,49 @@ Header height is 76px; anchor scrolling is offset by header plus 24px.
 
 ## Elevation & Depth
 
-Flat paper. The card shadow token is none. Depth is made by photography, by the ivory scrim fading into the hero image, by linen bands and by double gold hairlines. The only shadow is a state response: a package card on hover gains a soft, low, diffuse shadow tinted with scrim violet (`0 14px 30px -22px`), alongside its frame turning full gold.
+Flat paper. The card shadow token is none. Depth is made by photography, by the paper scrim fading into the hero image, by mist bands and by double gold hairlines. The only shadow is a state response: a package card on hover gains a soft, low, diffuse shadow tinted with scrim violet (`0 14px 30px -22px`), alongside its frame turning full gold.
 
 ### Named Rules
 **The Flat Paper Rule.** Nothing is raised at rest. A shadow may appear only on hover of a linked card, and only as a soft blurred tint, never a hard offset.
 
 ## Shapes
 
-Near-square paper corners (2px) on cards, photos, tier options, the estimator and the skip link; full pills (999px) for every button and the mobile Menu toggle; perfect circles for the portfolio rail arrows (52px) and radio dots. Borders are 1px hairlines; the one 2px border is the gold top edge of the price estimator.
+A soft four-step radius scale, nested so inner corners equal outer minus padding: 8px for small marks (skip link, chips, day cells, the cancel stamp, name tabs), 12px for every control (buttons, the Menu toggle, the 52px arrow buttons, tier options, photos inside a 12px-padded card), 16px for standalone photos and inset panels, 24px for cards, frames and the estimator. Double gold frames step their inner hairline down by the inset (24 to 19px). Radio dots and the avatar stay circles. Borders are 1px hairlines.
 
 The double frame is the signature form: an outer gold hairline at 70% strength with an inner one at 35%, inset 5px on package cards and 8px on the standards panel. The hero photograph is clipped only during its opening animation.
 
 ## Components
 
 ### Buttons
-Soft, confident pills; one filled action per surface.
-- **Shape:** full pill (999px), 52px tall, 24px side padding, Inter 560 at 1rem, optional 20px icon with 8px gap.
-- **Primary:** Mahabbati violet fill, ivory text; hover deepens to violet deep; press nudges down 1px.
-- **Quiet:** transparent with a 35% ink outline and ink text; hover fills linen and the outline turns solid ink. Over the hero photograph it carries a 70% ivory fill so it stays legible.
-- **On dark:** on the night band the primary inverts to a night-ivory fill with ink text; the secondary is a 55% ivory outline.
-- **Small:** 44px tall, 16px padding, 0.875rem; used for the header Konsultasi pill.
+Soft, confident 12px buttons; one filled action per surface.
+- **Shape:** 12px corners, 52px tall, 24px side padding, Inter 560 at 1rem, optional 20px icon with 8px gap.
+- **Primary:** Mahabbati violet fill, paper text; hover deepens to violet deep; press nudges down 1px.
+- **Quiet:** transparent with a 35% ink outline and ink text; hover fills mist and the outline turns solid ink. Over the hero photograph it carries a 70% paper fill so it stays legible.
+- **On dark:** on the night band the primary inverts to a night-paper fill with ink text; the secondary is a 55% paper outline.
+- **Small:** 44px tall, 16px padding, 0.875rem; used for the header Konsultasi button.
 - **Text link:** violet, Inter 560, underline offset 0.22em.
-- **Focus:** 2px focus-violet outline, 3px offset.
+- **Focus:** 2px brand-accent outline, 3px offset.
 
 ### Package cards (signature)
 Set like an undangan card.
-- **Frame:** ivory card, 12px inner padding, double gold hairline (outer 70%, inner 35% inset 5px), 2px corners.
+- **Frame:** paper card, 12px inner padding, double gold hairline (outer 70%, inner 35% inset 5px), 24px corners, photo inside at 12px.
 - **Content:** 4:3 full-colour photo, then a centred body: serif name, one-line "for whom", optional tier list, and at the foot a 48px gold rule over "mulai", the serif price, and "sampai Rp25 jt, 100 sampai 300 tamu".
-- **Layout:** three across, two under 64rem, one under 40rem; the all-in package spans two columns with photo and body side by side.
+- **Layout:** on Layanan & Paket, three across, two under 64rem, one under 40rem; the all-in package spans two columns with photo and body side by side.
+
+### Package carousel (home)
+The same undangan card, set in a centre-aligned carousel that runs full bleed.
+- **Card:** up to 960px (76% of the track), photo 5fr on the left at least 440px tall, body 6fr on the right: serif name, "for whom", every tier ruled with its price, and "mulai" plus the serif price at the foot. Under 60rem the card stacks the photo (4:3) over the body at 80% width.
+- **Neighbours:** cards on either side peek in, scaled down by up to 10% and dimmed to 55% opacity by their distance from the centre. The script measures the distance each frame; without JS, or under reduced motion, every card stays full size and opacity.
+- **Movement:** native horizontal scroll with centre snap, so touch, trackpad and the keyboard (arrow keys on the focused track) all work. Clicking a side card first brings it to the centre; the centred card links to its package.
+- **Controls:** under the track, two 52px arrow buttons around a segmented row of package names (8px tabs inside a 12px tray; the active tab is filled violet). Under 40rem only the arrows remain.
+- **Start:** the middle package is centred on load, so two packages show on each side.
 - **Hover / Focus:** frame goes full gold, name turns violet, soft shadow; the whole card is the link and shows the focus outline 4px outside.
 
 ### Compact package rows
-Ruled list for "Paket lainnya": gold top rule, sand dividers, 96px 4:5 thumbnail, serif name, right-aligned "mulai" plus serif price. Whole row is the link.
+Ruled list for "Paket lainnya": gold top rule, lavender dividers, 96px 4:5 thumbnail, serif name, right-aligned "mulai" plus serif price. Whole row is the link.
 
 ### Lists and moments
-Order-of-service lists: 1px sand rule above and between items, 40px vertical padding, serif title in a narrow left column with Inter detail and a violet text link to the right. The closing "all at once" row sits on linen.
+Order-of-service lists: 1px sand rule above and between items, 40px vertical padding, serif title in a narrow left column with Inter detail and a violet text link to the right. The closing "all at once" row sits on mist.
 
 ### Standards panel
 A centred double-gold frame (96px by 64px padding), the Mahabbati m-heart mark in violet as the ornament above the heading, then a three-column grid where each item is headed by a 40px gold rule, a serif title and a one-sentence Inter line.
@@ -282,25 +292,25 @@ Centred: the couple's initials in very large serif with a gold ampersand, one se
 Native disclosure rows on a ruled list; serif question at 1.25rem with a violet plus icon that rotates 45 degrees when open; answer in ink-soft Inter, max 60ch. A short aside on the left carries a WhatsApp text link.
 
 ### Closing band
-Night-violet band with a pale-gold Islamic lattice masked across it at 9% opacity, 88px tile. Headline and lede on the left, inverted pill plus outline pill; on the right a gold-ruled column with the WhatsApp number in serif.
+Night-violet band with a pale-gold Islamic lattice masked across it at 9% opacity, 88px tile. Headline and lede on the left, inverted button plus outline button; on the right a gold-ruled column with the WhatsApp number in serif.
 
 ### Navigation
-- **Bar:** 76px, logo lockup in violet at left, five Inter 500 0.875rem links in ink-soft, then the small Konsultasi pill.
+- **Bar:** 76px, logo lockup in violet at left, five Inter 500 0.875rem links in ink-soft, then the small Konsultasi button.
 - **States:** hover and current page turn ink with a 1px gold underline.
-- **Over the hero:** on the home page the header is fixed and transparent over the photograph's ivory scrim; once the page scrolls (or the menu opens) it fills ivory and a sand hairline appears beneath it.
+- **Over the hero:** on the home page the header is fixed and transparent over the photograph's paper scrim; once the page scrolls (or the menu opens) it fills with paper and a lavender hairline appears beneath it.
 - **Mobile (under 64rem):** links and pill hide behind an outlined "Menu" pill; the panel lists links in serif 1.5625rem on sand rules, followed by the full WhatsApp pill. Escape closes it and returns focus.
 
 ### Hero
-Full-bleed photograph (min 600px, up to 100svh capped at 940px) with an ivory scrim: a horizontal gradient from solid paper at the left fading to clear by 76%, plus a short top fade under the header. Copy sits left, max 640px: headline, 72px gold rule, lede, two buttons. Under 48rem the scrim runs bottom-up and the copy drops to the bottom. On load the image opens once like drapes: clip from 34% left inset to full while easing from 1.05 scale, 1.8s ease-out; skipped under reduced motion.
+Full-bleed photograph (min 600px, up to 100svh capped at 940px) with an paper scrim: a horizontal gradient from solid paper at the left fading to clear by 76%, plus a short top fade under the header. Copy sits left, max 640px: headline, 72px gold rule, lede, two buttons. Under 48rem the scrim runs bottom-up and the copy drops to the bottom. On load the image opens once like drapes: clip from 34% left inset to full while easing from 1.05 scale, 1.8s ease-out; skipped under reduced motion.
 
 ### Package detail, tier picker and sticky price bar
 - **Detail hero:** two columns, serif title and promise, then the price on a gold top rule in large serif numerals, then actions; a 4:5 photo on the right (3:2 and first on small screens).
 - **Inclusions:** two-column ruled list; violet Material Symbols icon, serif item title, violet quantity, Inter detail. Tier headings are Inter 600 on a gold rule.
-- **Estimator:** ivory panel with sand border and 2px gold top edge, sticky beside the content on desktop. Tier options are 2px-cornered rows with a custom radio (muted ring, violet dot); selected rows turn violet-bordered on linen. Total in large serif numerals, full-width primary pill below.
-- **Sticky bar:** under 60rem only, a fixed ivory bar with a sand top rule showing the tier label and serif price beside the action.
+- **Estimator:** paper panel with sand border and 2px gold top edge, sticky beside the content on desktop. Tier options are 2px-cornered rows with a custom radio (muted ring, violet dot); selected rows turn violet-bordered on mist. Total in large serif numerals, full-width primary pill below.
+- **Sticky bar:** under 60rem only, a fixed paper bar with a sand top rule showing the tier label and serif price beside the action.
 
 ### Footer
-Linen; logo lockup over a short about line, three link columns headed in Inter 600, a sand rule, then a small muted legal row.
+Mist; logo lockup over a short about line, three link columns headed in Inter 600, a sand rule, then a small muted legal row.
 
 ## Do's and Don'ts
 
@@ -310,17 +320,18 @@ Linen; logo lockup over a short about line, three link columns headed in Inter 6
 - **Do** write prices as "Rp15 jt" in lists, prefaced by "mulai", and ranges with "sampai" ("sampai Rp25 jt", "100 sampai 300 tamu").
 - **Do** caption every illustrative portfolio photo "Ilustrasi: ..." and state in the section that the photos are not Mahabbati event documentation.
 - **Do** use typographic apostrophes in copy (syar’i, ta’aruf) and commas or full stops instead of dashes in prose.
-- **Do** keep one filled action per surface; on the night band the filled action is the ivory pill.
-- **Do** alternate ivory and linen bands so two photo sections never sit back to back, and end every page with the night band.
+- **Do** keep one filled action per surface; on the night band the filled action is the paper button.
+- **Do** alternate paper and mist bands so two photo sections never sit back to back, and end every page with the night band.
 - **Do** keep the drapes-opening hero animation as the only authored motion; all other motion is 120 to 420ms state transitions, removed under reduced motion.
 
 ### Don't:
 - **Don't** show a muslimah's face in any photograph; use back views, hands, silhouettes, decor or venues.
 - **Don't** name or picture the asatidz; refer to them only as "asatidz Mahabbati".
 - **Don't** invent testimonials, couples, client counts, ratings or other figures; the F & N story is the only testimony and it carries its source.
-- **Don't** use gold for body text, labels, button fills or backgrounds (3.3:1 on ivory).
+- **Don't** use gold for body text, labels, button fills or backgrounds (3.3:1 on paper).
 - **Don't** add eyebrows, kickers or uppercase tracked labels above headings.
-- **Don't** use dark overlays on photographs; the hero is veiled with ivory paper, not shaded.
-- **Don't** add resting shadows, hard offset shadows, or rounded corners beyond 2px on cards and photos.
+- **Don't** use dark overlays on photographs; the hero is veiled with paper, not shaded.
+- **Don't** add hard offset shadows, or corners outside the 8/12/16/24px scale; the only resting shadow is the soft one under the centred carousel card.
+- **Don't** drift to a warm plum or a saturated violet; colour stays in the brand family (hue 277 to 286, chroma 0.08 or less).
 - **Don't** use icon-card grids or floral clip art; the m-heart mark and the lattice are the only ornaments.
 - **Don't** tint photographs into duotone; they stay full colour.

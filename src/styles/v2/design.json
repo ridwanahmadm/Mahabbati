@@ -5,10 +5,10 @@
   "scope": "Documents the /v2/ candidate variant only. Move beside a root DESIGN.md (as .impeccable/design.json) only if the client adopts /v2/.",
   "extensions": {
     "colorMeta": {
-      "undangan-ivory": {
+      "lavender-paper": {
         "role": "neutral",
         "displayName": "Undangan Ivory",
-        "canonical": "oklch(97.6% 0.011 85)",
+        "canonical": "oklch(98.6% 0.005 285)",
         "tonalRamp": [
           "oklch(15% 0.006 85)",
           "oklch(27% 0.008 85)",
@@ -20,10 +20,10 @@
           "oklch(95% 0.006 85)"
         ]
       },
-      "warm-linen": {
+      "lavender-mist": {
         "role": "neutral",
         "displayName": "Warm Linen",
-        "canonical": "oklch(95% 0.016 72)",
+        "canonical": "oklch(96.3% 0.012 282)",
         "tonalRamp": [
           "oklch(15% 0.009 72)",
           "oklch(27% 0.011 72)",
@@ -35,10 +35,10 @@
           "oklch(95% 0.009 72)"
         ]
       },
-      "lilac-mist": {
+      "lavender-haze": {
         "role": "neutral",
         "displayName": "Lilac Mist",
-        "canonical": "oklch(91.5% 0.022 300)",
+        "canonical": "oklch(92.4% 0.021 278)",
         "tonalRamp": [
           "oklch(15% 0.012 300)",
           "oklch(27% 0.015 300)",
@@ -50,10 +50,10 @@
           "oklch(95% 0.012 300)"
         ]
       },
-      "violet-ink": {
+      "brand-ink": {
         "role": "neutral",
         "displayName": "Violet Ink",
-        "canonical": "oklch(28% 0.045 290)",
+        "canonical": "oklch(30% 0.042 285)",
         "tonalRamp": [
           "oklch(15% 0.025 290)",
           "oklch(27% 0.031 290)",
@@ -65,10 +65,10 @@
           "oklch(95% 0.025 290)"
         ]
       },
-      "violet-ink-soft": {
+      "brand-primary": {
         "role": "neutral",
         "displayName": "Violet Ink Soft",
-        "canonical": "oklch(38% 0.05 290)",
+        "canonical": "oklch(39.9% 0.044 286)",
         "tonalRamp": [
           "oklch(15% 0.028 290)",
           "oklch(27% 0.035 290)",
@@ -83,7 +83,7 @@
       "muted-violet": {
         "role": "neutral",
         "displayName": "Muted Violet",
-        "canonical": "oklch(47% 0.035 290)",
+        "canonical": "oklch(48% 0.05 284)",
         "tonalRamp": [
           "oklch(15% 0.020 290)",
           "oklch(27% 0.024 290)",
@@ -95,10 +95,10 @@
           "oklch(95% 0.020 290)"
         ]
       },
-      "sand-rule": {
+      "lavender-rule": {
         "role": "neutral",
         "displayName": "Sand Rule",
-        "canonical": "oklch(86% 0.022 80)",
+        "canonical": "oklch(88.5% 0.022 282)",
         "tonalRamp": [
           "oklch(15% 0.012 80)",
           "oklch(27% 0.015 80)",
@@ -140,10 +140,10 @@
           "oklch(95% 0.039 85)"
         ]
       },
-      "mahabbati-violet": {
+      "brand-violet": {
         "role": "primary",
         "displayName": "Mahabbati Violet",
-        "canonical": "oklch(42% 0.095 300)",
+        "canonical": "oklch(39.9% 0.044 286)",
         "tonalRamp": [
           "oklch(15% 0.054 300)",
           "oklch(27% 0.066 300)",
@@ -155,10 +155,10 @@
           "oklch(95% 0.054 300)"
         ]
       },
-      "mahabbati-violet-deep": {
+      "brand-primary-deep": {
         "role": "primary",
         "displayName": "Mahabbati Violet Deep",
-        "canonical": "oklch(35% 0.09 300)",
+        "canonical": "oklch(32.9% 0.042 285)",
         "tonalRamp": [
           "oklch(15% 0.051 300)",
           "oklch(27% 0.063 300)",
@@ -170,10 +170,10 @@
           "oklch(95% 0.051 300)"
         ]
       },
-      "ivory-on-violet": {
+      "paper-on-violet": {
         "role": "neutral",
         "displayName": "Ivory On Violet",
-        "canonical": "oklch(98.5% 0.006 85)",
+        "canonical": "oklch(99% 0.004 285)",
         "tonalRamp": [
           "oklch(15% 0.003 85)",
           "oklch(27% 0.004 85)",
@@ -185,10 +185,10 @@
           "oklch(95% 0.003 85)"
         ]
       },
-      "focus-violet": {
+      "brand-accent": {
         "role": "primary",
         "displayName": "Focus Violet",
-        "canonical": "oklch(48% 0.14 300)",
+        "canonical": "oklch(54.3% 0.082 283)",
         "tonalRamp": [
           "oklch(15% 0.079 300)",
           "oklch(27% 0.097 300)",
@@ -203,7 +203,7 @@
       "night-violet": {
         "role": "neutral",
         "displayName": "Night Violet",
-        "canonical": "oklch(25% 0.055 295)",
+        "canonical": "oklch(30% 0.045 285)",
         "tonalRamp": [
           "oklch(15% 0.031 295)",
           "oklch(27% 0.038 295)",
@@ -215,10 +215,10 @@
           "oklch(95% 0.031 295)"
         ]
       },
-      "night-ivory": {
+      "night-paper": {
         "role": "neutral",
         "displayName": "Night Ivory",
-        "canonical": "oklch(96% 0.012 85)",
+        "canonical": "oklch(97% 0.008 282)",
         "tonalRamp": [
           "oklch(15% 0.007 85)",
           "oklch(27% 0.008 85)",
@@ -230,10 +230,10 @@
           "oklch(95% 0.007 85)"
         ]
       },
-      "night-lilac": {
+      "brand-lilac": {
         "role": "neutral",
         "displayName": "Night Lilac",
-        "canonical": "oklch(84% 0.03 295)",
+        "canonical": "oklch(86.1% 0.049 277)",
         "tonalRamp": [
           "oklch(15% 0.017 295)",
           "oklch(27% 0.021 295)",
@@ -248,7 +248,7 @@
       "scrim-violet": {
         "role": "neutral",
         "displayName": "Scrim Violet",
-        "canonical": "oklch(17% 0.04 295)",
+        "canonical": "oklch(18% 0.03 285)",
         "tonalRamp": [
           "oklch(15% 0.023 295)",
           "oklch(27% 0.028 295)",
@@ -302,7 +302,7 @@
     "shadows": [
       {
         "name": "card-hover",
-        "value": "0 14px 30px -22px oklch(17% 0.04 295)",
+        "value": "0 14px 30px -22px oklch(18% 0.03 285)",
         "purpose": "Package card hover only; the system is flat at rest."
       }
     ],
@@ -387,7 +387,7 @@
       "refersTo": "button-primary",
       "description": "The one filled action per surface: violet pill.",
       "html": "<a class=\"ds-btn\" href=\"#\">Konsultasi via WhatsApp</a>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid var(--color-accent,oklch(42% 0.095 300));background:var(--color-accent,oklch(42% 0.095 300));color:var(--color-accent-ink,oklch(98.5% 0.006 85));font-family:'Inter Variable',Inter,system-ui,sans-serif;font-weight:560;font-size:1rem;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 220ms cubic-bezier(0.16,1,0.3,1),border-color 220ms cubic-bezier(0.16,1,0.3,1),transform 120ms cubic-bezier(0.16,1,0.3,1)}.ds-btn:hover{background:oklch(35% 0.09 300);border-color:oklch(35% 0.09 300)}.ds-btn:active{transform:translateY(1px)}.ds-btn:focus-visible{outline:2px solid oklch(48% 0.14 300);outline-offset:3px}"
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 24px;border-radius:12px;border:1px solid var(--color-accent,oklch(39.9% 0.044 286));background:var(--color-accent,oklch(39.9% 0.044 286));color:var(--color-accent-ink,oklch(99% 0.004 285));font-family:'Inter Variable',Inter,system-ui,sans-serif;font-weight:560;font-size:1rem;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 220ms cubic-bezier(0.16,1,0.3,1),border-color 220ms cubic-bezier(0.16,1,0.3,1),transform 120ms cubic-bezier(0.16,1,0.3,1)}.ds-btn:hover{background:oklch(32.9% 0.042 285);border-color:oklch(32.9% 0.042 285)}.ds-btn:active{transform:translateY(1px)}.ds-btn:focus-visible{outline:2px solid oklch(54.3% 0.082 283);outline-offset:3px}"
     },
     {
       "name": "Quiet Button",
@@ -395,7 +395,7 @@
       "refersTo": "button-quiet",
       "description": "Secondary action: ink outline pill.",
       "html": "<a class=\"ds-btn-quiet\" href=\"#\">Lihat paket dan harga</a>",
-      "css": ".ds-btn-quiet{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid color-mix(in oklab,oklch(28% 0.045 290) 35%,transparent);background:transparent;color:oklch(28% 0.045 290);font-family:'Inter Variable',Inter,system-ui,sans-serif;font-weight:560;font-size:1rem;text-decoration:none;transition:background-color 220ms cubic-bezier(0.16,1,0.3,1),border-color 220ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-quiet:hover{background:oklch(95% 0.016 72);border-color:oklch(28% 0.045 290)}.ds-btn-quiet:focus-visible{outline:2px solid oklch(48% 0.14 300);outline-offset:3px}"
+      "css": ".ds-btn-quiet{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:12px;border:1px solid color-mix(in oklab,oklch(30% 0.042 285) 35%,transparent);background:transparent;color:oklch(30% 0.042 285);font-family:'Inter Variable',Inter,system-ui,sans-serif;font-weight:560;font-size:1rem;text-decoration:none;transition:background-color 220ms cubic-bezier(0.16,1,0.3,1),border-color 220ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-quiet:hover{background:oklch(96.3% 0.012 282);border-color:oklch(30% 0.042 285)}.ds-btn-quiet:focus-visible{outline:2px solid oklch(54.3% 0.082 283);outline-offset:3px}"
     },
     {
       "name": "On-dark Button",
@@ -403,7 +403,7 @@
       "refersTo": "button-on-dark",
       "description": "The primary pill inverted for the night band.",
       "html": "<div class=\"ds-night\"><a class=\"ds-btn-ondark\" href=\"#\">Konsultasi via WhatsApp</a></div>",
-      "css": ".ds-night{background:oklch(25% 0.055 295);padding:24px}.ds-btn-ondark{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid oklch(96% 0.012 85);background:oklch(96% 0.012 85);color:oklch(28% 0.045 290);font-family:'Inter Variable',Inter,system-ui,sans-serif;font-weight:560;text-decoration:none;transition:background-color 220ms}.ds-btn-ondark:hover{background:oklch(95% 0.016 72);border-color:oklch(95% 0.016 72)}.ds-btn-ondark:focus-visible{outline:2px solid oklch(96% 0.012 85);outline-offset:3px}"
+      "css": ".ds-night{background:oklch(30% 0.045 285);padding:24px}.ds-btn-ondark{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:12px;border:1px solid oklch(97% 0.008 282);background:oklch(97% 0.008 282);color:oklch(30% 0.042 285);font-family:'Inter Variable',Inter,system-ui,sans-serif;font-weight:560;text-decoration:none;transition:background-color 220ms}.ds-btn-ondark:hover{background:oklch(96.3% 0.012 282);border-color:oklch(96.3% 0.012 282)}.ds-btn-ondark:focus-visible{outline:2px solid oklch(97% 0.008 282);outline-offset:3px}"
     },
     {
       "name": "Navigation",
@@ -411,7 +411,7 @@
       "refersTo": "nav-link",
       "description": "Ink-soft Inter links; hover and current page get a gold underline.",
       "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Layanan &amp; Paket</a><a href=\"#\">Portofolio</a><a href=\"#\">Tentang Kami</a><a href=\"#\">FAQ</a></nav>",
-      "css": ".ds-nav{display:flex;gap:24px;font-family:'Inter Variable',Inter,system-ui,sans-serif}.ds-nav a{padding:8px 0;color:oklch(38% 0.05 290);font-size:0.875rem;font-weight:500;text-decoration:none;border-bottom:1px solid transparent;transition:color 220ms,border-color 220ms}.ds-nav a:hover,.ds-nav a[aria-current=page]{color:oklch(28% 0.045 290);border-bottom-color:oklch(63% 0.085 80)}.ds-nav a:focus-visible{outline:2px solid oklch(48% 0.14 300);outline-offset:3px}"
+      "css": ".ds-nav{display:flex;gap:24px;font-family:'Inter Variable',Inter,system-ui,sans-serif}.ds-nav a{padding:8px 0;color:oklch(32.9% 0.042 285);font-size:0.875rem;font-weight:500;text-decoration:none;border-bottom:1px solid transparent;transition:color 220ms,border-color 220ms}.ds-nav a:hover,.ds-nav a[aria-current=page]{color:oklch(30% 0.042 285);border-bottom-color:oklch(63% 0.085 80)}.ds-nav a:focus-visible{outline:2px solid oklch(54.3% 0.082 283);outline-offset:3px}"
     },
     {
       "name": "Package Card",
@@ -419,7 +419,7 @@
       "refersTo": "package-card",
       "description": "Signature: undangan card in a double gold frame, price on a gold rule.",
       "html": "<a class=\"ds-pcard\" href=\"#\"><div class=\"ds-pcard-photo\"></div><div class=\"ds-pcard-body\"><h3>Paket Walimah</h3><p class=\"ds-for\">Resepsi untuk keluarga yang ingin semuanya rapi.</p><p class=\"ds-price\"><span>mulai</span><b>Rp43 jt</b><span>sampai Rp75 jt, 100 sampai 300 tamu</span></p></div></a>",
-      "css": ".ds-pcard{position:relative;display:flex;flex-direction:column;max-width:340px;padding:12px;background:oklch(97.6% 0.011 85);border:1px solid color-mix(in oklab,oklch(63% 0.085 80) 70%,transparent);border-radius:2px;color:oklch(28% 0.045 290);text-decoration:none;transition:border-color 220ms,box-shadow 220ms}.ds-pcard::before{content:'';position:absolute;inset:5px;border:1px solid color-mix(in oklab,oklch(63% 0.085 80) 35%,transparent);border-radius:2px;pointer-events:none}.ds-pcard-photo{aspect-ratio:4/3;background:linear-gradient(160deg,oklch(95% 0.016 72),oklch(91.5% 0.022 300))}.ds-pcard-body{display:flex;flex-direction:column;align-items:center;text-align:center;padding:40px 24px 24px}.ds-pcard h3{margin:0;font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:1.953rem;line-height:1.15;letter-spacing:-0.015em}.ds-for{margin:12px 0 0;color:oklch(38% 0.05 290);font-family:Inter,system-ui,sans-serif}.ds-price{display:grid;justify-items:center;gap:2px;padding-top:24px;margin:0;font-family:Inter,system-ui,sans-serif;font-size:0.875rem;color:oklch(47% 0.035 290)}.ds-price::before{content:'';width:48px;height:1px;margin-bottom:16px;background:oklch(63% 0.085 80)}.ds-price b{font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:2.25rem;line-height:1.1;color:oklch(28% 0.045 290);font-variant-numeric:lining-nums tabular-nums}.ds-pcard:hover{border-color:oklch(63% 0.085 80);box-shadow:0 14px 30px -22px oklch(17% 0.04 295)}.ds-pcard:hover h3{color:oklch(42% 0.095 300)}.ds-pcard:focus-visible{outline:2px solid oklch(48% 0.14 300);outline-offset:4px}"
+      "css": ".ds-pcard{position:relative;display:flex;flex-direction:column;max-width:340px;padding:12px;background:oklch(98.6% 0.005 285);border:1px solid color-mix(in oklab,oklch(63% 0.085 80) 70%,transparent);border-radius:24px;color:oklch(30% 0.042 285);text-decoration:none;transition:border-color 220ms,box-shadow 220ms}.ds-pcard::before{content:'';position:absolute;inset:5px;border:1px solid color-mix(in oklab,oklch(63% 0.085 80) 35%,transparent);border-radius:19px;pointer-events:none}.ds-pcard-photo{aspect-ratio:4/3;border-radius:12px;background:linear-gradient(160deg,oklch(96.3% 0.012 282),oklch(92.4% 0.021 278))}.ds-pcard-body{display:flex;flex-direction:column;align-items:center;text-align:center;padding:40px 24px 24px}.ds-pcard h3{margin:0;font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:1.953rem;line-height:1.15;letter-spacing:-0.015em}.ds-for{margin:12px 0 0;color:oklch(32.9% 0.042 285);font-family:Inter,system-ui,sans-serif}.ds-price{display:grid;justify-items:center;gap:2px;padding-top:24px;margin:0;font-family:Inter,system-ui,sans-serif;font-size:0.875rem;color:oklch(48% 0.05 284)}.ds-price::before{content:'';width:48px;height:1px;margin-bottom:16px;background:oklch(63% 0.085 80)}.ds-price b{font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:2.25rem;line-height:1.1;color:oklch(30% 0.042 285);font-variant-numeric:lining-nums tabular-nums}.ds-pcard:hover{border-color:oklch(63% 0.085 80);box-shadow:0 14px 30px -22px oklch(18% 0.03 285)}.ds-pcard:hover h3{color:oklch(39.9% 0.044 286)}.ds-pcard:focus-visible{outline:2px solid oklch(54.3% 0.082 283);outline-offset:4px}"
     },
     {
       "name": "Tier Option",
@@ -427,7 +427,7 @@
       "refersTo": "tier-option",
       "description": "Radio row in the price estimator; selected turns violet on linen.",
       "html": "<label class=\"ds-tier\"><input type=\"radio\" name=\"t\" checked><span class=\"ds-tn\">Silver</span><span class=\"ds-tp\">Rp43 jt</span></label><label class=\"ds-tier\"><input type=\"radio\" name=\"t\"><span class=\"ds-tn\">Gold</span><span class=\"ds-tp\">Rp55 jt</span></label>",
-      "css": ".ds-tier{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;margin-bottom:8px;padding:12px 16px;border:1px solid oklch(86% 0.022 80);border-radius:2px;background:oklch(97.6% 0.011 85);cursor:pointer;font-family:Inter,system-ui,sans-serif;transition:border-color 220ms,background-color 220ms}.ds-tier:hover{border-color:oklch(38% 0.05 290)}.ds-tier input{appearance:none;width:18px;height:18px;margin:0;border:1.5px solid oklch(47% 0.035 290);border-radius:50%;display:grid;place-items:center}.ds-tier input::before{content:'';width:8px;height:8px;border-radius:50%;background:oklch(42% 0.095 300);transform:scale(0);transition:transform 120ms}.ds-tier input:checked{border-color:oklch(42% 0.095 300)}.ds-tier input:checked::before{transform:scale(1)}.ds-tier:has(input:checked){border-color:oklch(42% 0.095 300);background:oklch(95% 0.016 72)}.ds-tier:has(input:focus-visible){outline:2px solid oklch(48% 0.14 300);outline-offset:2px}.ds-tier input:focus-visible{outline:none}.ds-tn{font-weight:560;color:oklch(28% 0.045 290)}.ds-tp{font-family:'Libre Baskerville',Georgia,serif;color:oklch(28% 0.045 290);font-variant-numeric:lining-nums tabular-nums}"
+      "css": ".ds-tier{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;margin-bottom:8px;padding:12px 16px;border:1px solid oklch(88.5% 0.022 282);border-radius:12px;background:oklch(98.6% 0.005 285);cursor:pointer;font-family:Inter,system-ui,sans-serif;transition:border-color 220ms,background-color 220ms}.ds-tier:hover{border-color:oklch(32.9% 0.042 285)}.ds-tier input{appearance:none;width:18px;height:18px;margin:0;border:1.5px solid oklch(48% 0.05 284);border-radius:50%;display:grid;place-items:center}.ds-tier input::before{content:'';width:8px;height:8px;border-radius:50%;background:oklch(39.9% 0.044 286);transform:scale(0);transition:transform 120ms}.ds-tier input:checked{border-color:oklch(39.9% 0.044 286)}.ds-tier input:checked::before{transform:scale(1)}.ds-tier:has(input:checked){border-color:oklch(39.9% 0.044 286);background:oklch(96.3% 0.012 282)}.ds-tier:has(input:focus-visible){outline:2px solid oklch(54.3% 0.082 283);outline-offset:2px}.ds-tier input:focus-visible{outline:none}.ds-tn{font-weight:560;color:oklch(30% 0.042 285)}.ds-tp{font-family:'Libre Baskerville',Georgia,serif;color:oklch(30% 0.042 285);font-variant-numeric:lining-nums tabular-nums}"
     },
     {
       "name": "Closing Band",
@@ -435,7 +435,7 @@
       "refersTo": "closing-band",
       "description": "Night-violet band with the pale-gold lattice; the closing WhatsApp ask.",
       "html": "<section class=\"ds-cta\"><h2>Ceritakan rencana kalian, kami bantu susun</h2><p>Kirim tanggal, kota, dan perkiraan jumlah tamu.</p></section>",
-      "css": ".ds-cta{position:relative;padding:64px 40px;background:oklch(25% 0.055 295) repeating-linear-gradient(45deg,color-mix(in oklab,oklch(82% 0.07 85) 9%,transparent) 0 1px,transparent 1px 44px);color:oklch(96% 0.012 85)}.ds-cta h2{margin:0;max-width:18ch;font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:2.441rem;line-height:1.12;letter-spacing:-0.015em}.ds-cta p{margin:24px 0 0;max-width:40ch;color:oklch(84% 0.03 295);font-family:Inter,system-ui,sans-serif;font-size:1.25rem}"
+      "css": ".ds-cta{position:relative;padding:64px 40px;background:oklch(30% 0.045 285) repeating-linear-gradient(45deg,color-mix(in oklab,oklch(82% 0.07 85) 9%,transparent) 0 1px,transparent 1px 44px);color:oklch(97% 0.008 282)}.ds-cta h2{margin:0;max-width:18ch;font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:2.441rem;line-height:1.12;letter-spacing:-0.015em}.ds-cta p{margin:24px 0 0;max-width:40ch;color:oklch(86.1% 0.049 277);font-family:Inter,system-ui,sans-serif;font-size:1.25rem}"
     },
     {
       "name": "FAQ Row",
@@ -443,7 +443,7 @@
       "refersTo": null,
       "description": "Ruled disclosure; serif question, violet plus that turns to a cross.",
       "html": "<details class=\"ds-faq\"><summary>Apakah harga di website sudah final?<svg width=\"22\" height=\"22\" viewBox=\"0 -960 960 960\" fill=\"currentColor\"><path d=\"M440-440H240q-17 0-28.5-11.5T200-480q0-17 11.5-28.5T240-520h200v-200q0-17 11.5-28.5T480-760q17 0 28.5 11.5T520-720v200h200q17 0 28.5 11.5T760-480q0 17-11.5 28.5T720-440H520v200q0 17-11.5 28.5T480-200q-17 0-28.5-11.5T440-240v-200Z\"/></svg></summary><p>Harga di website adalah harga paket per tingkat.</p></details>",
-      "css": ".ds-faq{border-top:1px solid oklch(86% 0.022 80);border-bottom:1px solid oklch(86% 0.022 80)}.ds-faq summary{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:24px;cursor:pointer;list-style:none;font-family:'Libre Baskerville',Georgia,serif;font-size:1.25rem;line-height:1.35;color:oklch(28% 0.045 290)}.ds-faq summary::-webkit-details-marker{display:none}.ds-faq summary:hover{color:oklch(42% 0.095 300)}.ds-faq summary:focus-visible{outline:2px solid oklch(48% 0.14 300);outline-offset:3px}.ds-faq svg{flex:none;color:oklch(42% 0.095 300);transition:transform 220ms}.ds-faq[open] svg{transform:rotate(45deg)}.ds-faq p{margin:0;padding-bottom:24px;color:oklch(38% 0.05 290);font-family:Inter,system-ui,sans-serif;max-width:60ch}"
+      "css": ".ds-faq{border-top:1px solid oklch(88.5% 0.022 282);border-bottom:1px solid oklch(88.5% 0.022 282)}.ds-faq summary{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:24px;cursor:pointer;list-style:none;font-family:'Libre Baskerville',Georgia,serif;font-size:1.25rem;line-height:1.35;color:oklch(30% 0.042 285)}.ds-faq summary::-webkit-details-marker{display:none}.ds-faq summary:hover{color:oklch(39.9% 0.044 286)}.ds-faq summary:focus-visible{outline:2px solid oklch(54.3% 0.082 283);outline-offset:3px}.ds-faq svg{flex:none;color:oklch(39.9% 0.044 286);transition:transform 220ms}.ds-faq[open] svg{transform:rotate(45deg)}.ds-faq p{margin:0;padding-bottom:24px;color:oklch(32.9% 0.042 285);font-family:Inter,system-ui,sans-serif;max-width:60ch}"
     }
   ],
   "narrative": {
@@ -464,7 +464,7 @@
       },
       {
         "name": "The AA Pair Rule",
-        "body": "Every text pair in the system clears WCAG AA, computed from these tokens: ink on ivory 13.8:1, ink-soft 9.5:1, muted 6.4:1, violet 8.2:1, ivory on violet 8.4:1, night-ivory on night 14.4:1. A new pair is admitted only after its ratio is computed.",
+        "body": "Every text pair in the system clears WCAG AA, computed from these tokens: ink on ivory 13.8:1, ink-soft 9.5:1, muted 6.4:1, violet 8.2:1, ivory on violet 8.4:1, night-paper on night 14.4:1. A new pair is admitted only after its ratio is computed.",
         "section": "colors"
       },
       {
