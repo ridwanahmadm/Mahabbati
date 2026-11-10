@@ -1,0 +1,81 @@
+---
+// Packages as a centre-aligned carousel: the package in the middle is shown whole (photo, who it is for,
+// every tier with its price); its neighbours peek at either side, smaller and quieter, so the visitor sees
+// there is more to compare. Native horizontal scroll with snap: it works with no JS, touch and trackpad;
+// the script only adds the depth (scale and opacity), the name tabs and the arrow buttons.
+import { Image } from "astro:assets";
+import Icon from "../Icon.astro";
+import { photo } from "../../data/images";
+import { packagesFor } from "../../data/packages";
+import { PACKAGE_ORDER, V2 } from "../../data/v2";
+import { rupiahShort } from "../../data/site";
+
+const pkgs = PACKAGE_ORDER.map((s) => packagesFor("id").find((p) => p.slug === s)!);
+const start = Math.floor(pkgs.length / 2);
+const short = (name: string) => name.replace(/^Paket /, "").replace("Mahabbati ", "");
+---
+
+<div class="pc" data-carousel data-start={start}>
+  <div
+    class="pc__track"
+    id="pc-track"
+    data-carousel-track
+    tabindex="0"
+    role="region"
+    aria-roledescription="carousel"
+    aria-label="Paket Mahabbati, geser ke samping atau pakai tombol panah"
+  >
+    <ul>
+      {
+        pkgs.map((p, i) => (
+          <li class="pc__slide" data-slide aria-roledescription="slide" aria-label={`${i + 1} dari ${pkgs.length}: ${p.name}`}>
+            <article class="pc__card">
+              <div class="pc__photo">
+                <Image src={photo(p.photo)} alt="" widths={[480, 720, 960]} sizes="(max-width: 48rem) 86vw, 420px" />
+              </div>
+              <div class="pc__body">
+                <h3 class="pc__name">
+                  <a href={V2(`/layanan/${p.slug}/`)}>{p.name}</a>
+                </h3>
+                <p class="pc__for">{p.forWho}</p>
+                <ul class="pc__tiers" aria-label={`Tingkat ${p.name}`}>
+                  {p.variants.map((v) => (
+                    <li>
+                      <span>{v.name}</span>
+                      <b>{rupiahShort(v.price)}</b>
+                    </li>
+                  ))}
+                </ul>
+                <p class="pc__price">
+                  <span>mulai</span>
+                  <strong>{rupiahShort(p.priceFrom)}</strong>
+                </p>
+                <span class="pc__more" aria-hidden="true">Lihat isi paket</span>
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="pc__controls container">
+    <button type="button" class="round-btn" data-carousel-prev aria-controls="pc-track">
+      <Icon name="chevron_left" size={24} /><span class="visually-hidden">Paket sebelumnya</span>
+    </button>
+    <ol class="pc__tabs" aria-label="Pilih paket">
+      {
+        pkgs.map((p, i) => (
+          <li>
+            <button type="button" data-carousel-tab={i} aria-controls="pc-track" aria-current={i === start ? "true" : undefined}>
+              {short(p.name)}
+            </button>
+          </li>
+        ))
+      }
+    </ol>
+    <button type="button" class="round-btn" data-carousel-next aria-controls="pc-track">
+      <Icon name="chevron_right" size={24} /><span class="visually-hidden">Paket berikutnya</span>
+    </button>
+  </div>
+</div>
