@@ -2,7 +2,7 @@
 import V2Layout from "../../layouts/V2.astro";
 import Icon from "../../components/Icon.astro";
 import Logo from "../../components/Logo.astro";
-import PackageList from "../../components/v2/PackageList.astro";
+import PackageCarousel from "../../components/v2/PackageCarousel.astro";
 import CtaBand from "../../components/v2/CtaBand.astro";
 import Moments from "../../components/v2/Moments.astro";
 import { Image } from "astro:assets";
@@ -50,8 +50,8 @@ import { V2, WA_HREF, STANDARDS, PORTFOLIO, FAQ } from "../../data/v2";
         <h2 id="paket-title">Paket dan harga, tertulis sejak awal</h2>
         <p>Setiap paket punya beberapa tingkat. Pilih tingkatnya di halaman paket, lalu kirim lewat WhatsApp.</p>
       </div>
-      <PackageList />
     </div>
+    <PackageCarousel />
   </section>
 
   <section class="sec--l" id="kenapa" aria-labelledby="kenapa-title">
