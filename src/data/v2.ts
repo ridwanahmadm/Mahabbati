@@ -8,8 +8,8 @@ export const WA_HREF = waLink(WA.wo.number, woGreeting("id"));
 export const NAV = [
   { href: V2("/layanan/"), label: "Layanan & Paket", key: "layanan" },
   { href: V2("/#portofolio"), label: "Portofolio", key: "portofolio" },
+  { href: V2("/aplikasi/"), label: "Aplikasi Ta’aruf", key: "aplikasi" },
   { href: V2("/tentang/"), label: "Tentang Kami", key: "tentang" },
-  { href: V2("/#testimoni"), label: "Testimoni", key: "testimoni" },
   { href: V2("/#faq"), label: "FAQ", key: "faq" },
 ] as const;
 

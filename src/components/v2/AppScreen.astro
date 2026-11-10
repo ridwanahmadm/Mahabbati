@@ -1,0 +1,25 @@
+---
+// A real app screen (from the Mahabbati Figma file) in a paper device frame with a gold hairline.
+// The frame keeps each screenshot's own aspect ratio; the corner radius follows the corners baked into the screens.
+import { Image } from "astro:assets";
+import { screen } from "../../data/images";
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  width?: number;
+  loading?: "lazy" | "eager";
+}
+const { src, alt, class: cls, width = 300, loading = "lazy" } = Astro.props;
+const img = screen(src);
+const ratio = img.width / img.height;
+const corner = (pct: number) => `${pct}% / ${(pct * ratio).toFixed(2)}%`;
+---
+
+<figure
+  class:list={["app-screen", cls]}
+  style={`--w:${width}px; --ar:${img.width} / ${img.height}; --r-outer:${corner(16)}; --r-inner:${corner(14)}`}
+>
+  <Image src={img} alt={alt} widths={[width, width * 2]} sizes={`${width}px`} loading={loading} decoding="async" />
+</figure>
